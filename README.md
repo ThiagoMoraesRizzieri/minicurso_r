@@ -29,9 +29,9 @@ O minicurso tem como objetivo apresentar os fundamentos da Ciência de Dados uti
 
 ## 📂 Estrutura do repositório
 
-# Slides em PDF e fonte (.tex)
-# Tutorial interativo (com o pacote learnr)
-# Bases de dados utilizadas
-# Scripts R independentes para demonstrações
+- Slides em PDF e fonte (.tex)
+- Tutorial interativo (com o pacote learnr)
+- Bases de dados utilizadas
+- Scripts R independentes para demonstrações
 
 
