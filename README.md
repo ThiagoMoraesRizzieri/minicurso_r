@@ -1,4 +1,4 @@
-# 🌱 Minicurso: Ciência de Dados com R - Uma Introdução Prática
+# Minicurso: Ciência de Dados com R - Uma Introdução Prática
 
 Este repositório contém os materiais utilizados no minicurso **"Ciência de Dados com R: Uma Introdução Prática"**, ministrado durante a **Semana de Estudos da Matemática (SEMAT)**, no Instituto de Geociências e Ciências Exatas (IGCE) da **UNESP – Rio Claro**, em 22 de setembro de 2025.
 
