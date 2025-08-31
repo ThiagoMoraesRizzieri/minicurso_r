@@ -1,0 +1,148 @@
+---
+title: "Minicurso: Ciência de Dados com R - Uma Introdução Prática"
+author: "Fernando Andrade e Thiago Moraes Rizzieri"
+date: "`r Sys.Date()`"
+output: 
+  rmdformats::readthedown
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Pacotes utilizados
+
+Pacotes utilizados
+
+```{r}
+library("rmdformats")
+library(readr)
+library(ggplot2)
+library(dplyr)
+library(datasets)
+library(lubridate)
+library(stringr)
+options(tidyverse.quiet = TRUE)  # Suprime mensagens
+```
+
+# Operações Básicas com o R
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+
+```
+
+# Importação de dados
+
+Como podemos importar dados para podermos trabalhar?
+
+## Diretório de trabalho
+
+Para que você possa importar um arquivo contendo dados, é importante observar o diretório de trabalho no qual a sua sessão se encontra. Pode optar por alterar o diretório de trabalho para conseguir carregar seus arquivos.
+
+No caso, vamos importar um arquivo diretamente do github, então não nos preocuparemos com o diretório de trabalho.
+
+```{r dados, include=TRUE}
+dados <- read_csv("https://raw.githubusercontent.com/ThiagoMoraesRizzieri/minicurso_r/main/Pokemon_full.csv")
+```
+
+```{r}
+head(dados)
+```
+
+# Cabeçalho 1
+
+Este arquivo tem como objetivo principal mostrar o uso do ggplot2 para criação de gráficos e boas práticas.
+
+# Criação de gráficos: GGPLOT2
+
+Vamos carregar a biblioteca ggplot2 e outros pacotes
+
+## Lendo o conjunto de dados
+
+## Básico
+
+O ggplot2 funciona com construção de "camadas" (layers). O comando `{r addition} ggplot()` inicia um gráfico vazio.
+
+```{r plot1}
+ggplot()
+
+```
+
+A partir deste gráfico vazio, podemos adicionar camadas de pontos, linhas, barras, caixas, entre outros. Dê uma olhada no [manual de referência](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf). Outros como [tidyverse](https://ggplot2.tidyverse.org/), ou [Curso de R](https://livro.curso-r.com/8-1-o-pacote-ggplot2.html) podem ajudar bastante! Explore o máximo.
+
+### Adicionando layers
+
+De maneira geral, a sintaxe que vamos usar é `{r addition} geom_yyy(data = dados, aes(x = x, y = y))`, sendo "line" para linhas, "point" para pontos e assim por diante.
+
+Por exemplo, para criar um plot de peso x altura temos
+
+```{r plot2}
+ggplot() +
+  geom_point(data = dados, aes(x = height, y = weight))
+```
+
+Se quisermos que os pontos tenham uma cor em particular, usamos
+
+```{r plot3}
+ggplot() +
+  geom_point(data = dados, aes(x = height, y = weight), color = "blue")
+```
+
+# Classificação: Pinguins do arquipélago Palmer
+
+## **Conheça os pinguins** 🐧
+
+![](images/clipboard-3055016893.png)
+
+Os `palmerpenguins`dados contêm medições de tamanho de três espécies de pinguins observadas em três ilhas no Arquipélago Palmer, na Antártida.
+
+```{r}
+library(palmerpenguins)
+glimpse(penguins)
+
+```
+
+```{r}
+# Carregando os pacotes
+library(tidymodels)
+
+
+# Usar o dataset iris, disponível por padrão no R
+data(iris)
+
+# Criar um split treino/teste
+set.seed(123)
+split <- initial_split(iris, prop = 0.8)
+train <- training(split)
+test <- testing(split)
+
+# Definir o modelo (regressão logística multinomial)
+modelo <- multinom_reg() %>%
+  set_engine("nnet") %>%
+  set_mode("classification")
+
+# Criar o workflow
+workflow <- workflow() %>%
+  add_model(modelo) %>%
+  add_formula(Species ~ .)
+
+# Ajustar o modelo
+ajustado <- fit(workflow, data = train)
+
+# Previsão e avaliação
+pred <- predict(ajustado, new_data = test) %>%
+  bind_cols(test)
+
+# Métricas de desempenho
+metrics(pred, truth = Species, estimate = .pred_class)
+
+# Matriz de confusão
+conf_mat(pred, truth = Species, estimate = .pred_class)
+
+```
