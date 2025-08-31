@@ -15,6 +15,7 @@ Quarto enables you to weave together content and executable code into a finished
 Pacotes utilizados
 
 ```{r}
+#|echo: true
 library("rmdformats")
 library(readr)
 library(ggplot2)
@@ -55,19 +56,13 @@ dados <- read_csv("https://raw.githubusercontent.com/ThiagoMoraesRizzieri/minicu
 head(dados)
 ```
 
-# Cabeçalho 1
-
-Este arquivo tem como objetivo principal mostrar o uso do ggplot2 para criação de gráficos e boas práticas.
-
 # Criação de gráficos: GGPLOT2
+
+Essa seção tem como objetivo principal mostrar o uso do ggplot2 para criação de gráficos e boas práticas de uso.
 
 Vamos carregar a biblioteca ggplot2 e outros pacotes
 
-## Lendo o conjunto de dados
-
-## Básico
-
-O ggplot2 funciona com construção de "camadas" (layers). O comando `{r addition} ggplot()` inicia um gráfico vazio.
+O ggplot2 funciona com construção de "camadas" (layers). O comando `ggplot()` inicia um gráfico vazio.
 
 ```{r plot1}
 ggplot()
@@ -78,7 +73,7 @@ A partir deste gráfico vazio, podemos adicionar camadas de pontos, linhas, barr
 
 ### Adicionando layers
 
-De maneira geral, a sintaxe que vamos usar é `{r addition} geom_yyy(data = dados, aes(x = x, y = y))`, sendo "line" para linhas, "point" para pontos e assim por diante.
+De maneira geral, a sintaxe que vamos usar é `geom_yyy(data = dados, aes(x = x, y = y))`, sendo que iremos substituir yyy por "line" para linhas, "point" para pontos e assim por diante.
 
 Por exemplo, para criar um plot de peso x altura temos
 
@@ -92,13 +87,23 @@ Se quisermos que os pontos tenham uma cor em particular, usamos
 ```{r plot3}
 ggplot() +
   geom_point(data = dados, aes(x = height, y = weight), color = "blue")
+
 ```
+
+Se quisermos que a cor seja dependente de uma variável, por exemplo o tipo, precisamos colocar ela dentro do "aesthesic" e informar qual variável será responsável pela mudança de cor.
+
+```{r}
+ggplot()+
+  geom_point(data = dados, aes(x = height, y = weight, color = type))
+```
+
+...
 
 # Classificação: Pinguins do arquipélago Palmer
 
 ## **Conheça os pinguins** 🐧
 
-![](images/clipboard-3055016893.png)
+![Obra de \@allison_horst.](images/clipboard-3055016893.png)
 
 Os `palmerpenguins`dados contêm medições de tamanho de três espécies de pinguins observadas em três ilhas no Arquipélago Palmer, na Antártida.
 
@@ -108,9 +113,39 @@ glimpse(penguins)
 
 ```
 
+![](images/clipboard-1302732821.png){fig-align="center" width="445"}
+
+### Usando head()
+
+```{r}
+#|echo: true
+```
+
+Usar `head()` pode ser interessante para ter um primeiro olhar para os dados:
+
+```{r}
+head(penguins)
+
+```
+
+### Usando arrange()
+
+`arrange()` organiza nossos dados em ordem *crescente*, partindo do menor valor da variável de interesse até o maior (ou em caso da variável ver qualitativa, será apresentado em ordem alfabética).
+
+```{r}
+penguins %>%
+  arrange(bill_length_mm) %>%
+  head()
+```
+
+### Criando um subconjunto com `subset()`
+
+### Aplicação de um modelo de classificação
+
 ```{r}
 # Carregando os pacotes
 library(tidymodels)
+
 
 
 # Usar o dataset iris, disponível por padrão no R
