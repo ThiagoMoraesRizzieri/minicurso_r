@@ -1,0 +1,52 @@
+project:
+  type: book
+
+book:
+  title: "Minicurso: Ciência de Dados com R -- Uma Introdução Prática"
+  author: 
+    - name: Fernando Andrade
+      affiliations:
+        - IBB/UNESP
+      email: f.andrade@unesp.br
+    - name: Thiago Moraes Rizzieri
+      affiliations:
+        - IBB/UNESP
+      email: thiago.m.rizzieri@unesp.br
+  date: today
+  date-format: long
+  chapters:
+    - index.qmd
+    - 01-intro.qmd
+    - 02-fundamentos.qmd
+    - 03-tidyverse.qmd
+    - 04-pratica.qmd
+    - references.qmd
+
+bibliography: references.bib
+csl: abnt.csl
+
+lang: pt-br
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    toc-title: "Sumário"
+    number-sections: true
+    code-copy: true
+    
+  pdf:
+    documentclass: scrreprt
+    toc: true
+    toc-title: "Sumário"
+    mainfont: "Times New Roman"
+    fontsize: 12pt
+    number-sections: true
+    link-citations: true
+    colorlinks: true
+    include-in-header: header.tex
+    filters: 
+      - ambientes-latex.lua
+
+

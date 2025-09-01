@@ -1,0 +1,94 @@
+# Prática
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(tidymodels)
+```
+
+Neste capítulo será aplicaremos os conceitos vistos de ML e R para ....
+
+## Classificação: Pinguins do arquipélago Palmer
+
+### **Conheça os pinguins** 🐧
+
+![Obra de \@allison_horst.](images/clipboard-3055016893.png)
+
+Os `palmerpenguins`dados contêm medições de tamanho de três espécies de pinguins observadas em três ilhas no Arquipélago Palmer, na Antártida.
+
+```{r}
+library(palmerpenguins)
+glimpse(penguins)
+
+```
+
+![](images/clipboard-1302732821.png){fig-align="center" width="445"}
+
+### Usando head()
+
+```{r}
+#|echo: true
+```
+
+Usar `head()` pode ser interessante para ter um primeiro olhar para os dados:
+
+```{r}
+head(penguins)
+
+```
+
+### Usando arrange()
+
+`arrange()` organiza nossos dados em ordem *crescente*, partindo do menor valor da variável de interesse até o maior (ou em caso da variável ver qualitativa, será apresentado em ordem alfabética).
+
+```{r}
+penguins %>%
+  arrange(bill_length_mm) %>%
+  head()
+```
+
+### Criando um subconjunto com `subset()`
+
+### Aplicação de um modelo de classificação
+
+```{r}
+# Carregando os pacotes
+library(tidymodels)
+
+
+
+# Usar o dataset iris, disponível por padrão no R
+data(iris)
+
+# Criar um split treino/teste
+set.seed(123)
+split <- initial_split(iris, prop = 0.8)
+train <- training(split)
+test <- testing(split)
+
+# Definir o modelo (regressão logística multinomial)
+modelo <- multinom_reg() %>%
+  set_engine("nnet") %>%
+  set_mode("classification")
+
+# Criar o workflow
+workflow <- workflow() %>%
+  add_model(modelo) %>%
+  add_formula(Species ~ .)
+
+# Ajustar o modelo
+ajustado <- fit(workflow, data = train)
+
+# Previsão e avaliação
+pred <- predict(ajustado, new_data = test) %>%
+  bind_cols(test)
+
+# Métricas de desempenho
+metrics(pred, truth = Species, estimate = .pred_class)
+
+# Matriz de confusão
+conf_mat(pred, truth = Species, estimate = .pred_class)
+
+```

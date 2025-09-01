@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.21">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Tidyverse – Minicurso: Ciência de Dados com R -- Uma Introdução Prática</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04-pratica.html" rel="next">
+<link href="./02-fundamentos.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f2c6d6e2b784ddc5de38779acc06f37d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-tidyverse.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tidyverse</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Minicurso: Ciência de Dados com R – Uma Introdução Prática</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Procurar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefácio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-fundamentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentos de R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-tidyverse.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tidyverse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-pratica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Prática</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#manipulação-de-dados-com-o-pacote-dplyr" id="toc-manipulação-de-dados-com-o-pacote-dplyr" class="nav-link active" data-scroll-target="#manipulação-de-dados-com-o-pacote-dplyr"><span class="header-section-number">3.1</span> Manipulação de dados com o pacote <code>dplyr</code></a></li>
+  <li><a href="#visualização-de-dados-com-ggplot2" id="toc-visualização-de-dados-com-ggplot2" class="nav-link" data-scroll-target="#visualização-de-dados-com-ggplot2"><span class="header-section-number">3.2</span> Visualização de Dados com <code>ggplot2</code></a>
+  <ul class="collapse">
+  <li><a href="#estatística-descritiva" id="toc-estatística-descritiva" class="nav-link" data-scroll-target="#estatística-descritiva"><span class="header-section-number">3.2.1</span> Estatística descritiva</a></li>
+  <li><a href="#tipos-de-gráficos" id="toc-tipos-de-gráficos" class="nav-link" data-scroll-target="#tipos-de-gráficos"><span class="header-section-number">3.2.2</span> Tipos de gráficos</a></li>
+  <li><a href="#técnicas-avançadas-de-visualização-e-comunicação" id="toc-técnicas-avançadas-de-visualização-e-comunicação" class="nav-link" data-scroll-target="#técnicas-avançadas-de-visualização-e-comunicação"><span class="header-section-number">3.2.3</span> Técnicas avançadas de visualização e comunicação</a></li>
+  <li><a href="#sub-gráficos-com-facet_wrap" id="toc-sub-gráficos-com-facet_wrap" class="nav-link" data-scroll-target="#sub-gráficos-com-facet_wrap"><span class="header-section-number">3.2.4</span> Sub-gráficos com <code>facet_wrap()</code></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tidyverse</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>O <code>tidyverse</code> <span class="citation" data-cites="wickhamWelcomeTidyverse2019">(<a href="references.html#ref-wickhamWelcomeTidyverse2019" role="doc-biblioref">WICKHAM ET AL., 2019</a>)</span> é um ecossistema de pacotes R que reúne as tarefas essenciais de qualquer fluxo de trabalho em ciência de dados: importação, organização, manipulação, visualização e programação. Seu principal objetivo é criar uma sintaxe consistente e legível, facilitando a comunicação entre quem escreve o código e quem o executa. Note-se que, embora o tidyverse cubra grande parte do fluxo de trabalho, ele não inclui ferramentas específicas de modelagem estatística.</p>
+<p>Para facilitar essa integração, o <code>tidyverse</code> utiliza intensamente do operador pipe<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (<code>%&gt;%</code>) , que passa o resultado de uma etapa diretamente para a próxima, evitando aninhamentos confusos. Ao carregar o pacote, diversos módulos são automaticamente disponibilizados:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<pre class="text"><code>-- Attaching core tidyverse packages ------ tidyverse 2.0.0 --
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
+-- Conflicts ------------------------------ tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
+i Use the conflicted package (http://conflicted.r-lib.org/) 
+  to force all conflicts to become errors</code></pre>
+<p>Entre os principais estão:</p>
+<ul>
+<li><code>ggplot2</code> (visualização de dados);</li>
+<li><code>dplyr</code> (manipulação de dados);</li>
+<li><code>tidyr</code> (formatação “<em>long</em>”/“<em>wide</em>”);</li>
+<li><code>readr</code> (leitura eficiente de arquivos de texto);</li>
+<li><code>tibble</code> (versão moderna do <code>data.frame</code>);</li>
+<li><code>purrr</code> (programação funcional);</li>
+<li><code>stringr</code>, <code>forcats</code> e outros.</li>
+</ul>
+<p>Como dito, muitos pacotes definem funções com nomes idênticos, sendo costatumum que o console exiba nomes como:</p>
+<pre class="text"><code>The following objects are masked from ‘package:stats’:
+    filter, lag</code></pre>
+<p>Um pilar do <code>tidyverse</code> é a adoção do princípio <code>tidy</code> <span class="citation" data-cites="wickhamTidyData2014">(<a href="references.html#ref-wickhamTidyData2014" role="doc-biblioref">WICKHAM, 2014</a>)</span>, em que:</p>
+<ul>
+<li>Cada variável ocupa uma coluna;</li>
+<li>Cada observação ocupa uma linha;</li>
+<li>Cada tipo de entidade observacional fica em sua própria tabela.</li>
+</ul>
+<p>Nesse contexto, a <strong>entidade observacional</strong> é o conceito central que define o que uma linha representa. Pode ser um paciente em um estudo clínico, um país em dados econômicos ou, como nos exemplos a seguir:</p>
+<ul>
+<li><strong>Aves</strong>: Cada linha corresponde a uma única ave, registrando suas características (peso, envergadura, espécie, etc.).</li>
+<li><strong>Plantas</strong>: Cada linha representa um vaso de planta em um experimento (altura, número de folhas, tipo de solo, etc.).</li>
+</ul>
+<p>A estrutura de dados que implementa essa filosofia no <code>tidyverse</code> é o <code>tibble</code>. Ele é a versão moderna do <code>data.frame</code>, projetado para ser mais prático e informativo, exibindo resumos concisos dos dados e fornecendo diagnósticos mais úteis.</p>
+<p>Uma vez apresentada a filosofia e a estrutura de dados do <code>tidyverse</code>, o foco se volta para a aplicação prática. A seguir, a concentração do material residirá nos dois pacotes centrais do <code>tidyverse</code>: o <code>dplyr</code>, para manipulação de dados, e o <code>ggplot2</code>, para a criação de gráficos.</p>
+<section id="manipulação-de-dados-com-o-pacote-dplyr" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="manipulação-de-dados-com-o-pacote-dplyr"><span class="header-section-number">3.1</span> Manipulação de dados com o pacote <code>dplyr</code></h2>
+<p>O <code>dplyr</code> é um pacote do <code>tidyverse</code> que fornece um conjunto de ferramentas robustas e intuitivas para manipulação de dados. Os comandos oferecidos soam um tanto quanto intuitivos, correspondendo ações comuns na área de análise de dados. Para explorar as principais funções será utilizado o <em>dataset</em> <code>penguins</code>, focando em processos de filtragem, organização, transformação e resumos dos dados, permitindo responder a perguntas básicas sobre a biologia e ecologia dos pinguins.</p>
+<p>O primeiro passo a ser feito é instalar a biblioteca <code>palmerpenguins</code> e, em seguida, carregá-la no ambiente de trabalho, para que possamos realizar uma inspeção inicial na estrutura dos dados.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"palmerpenguins"</span>) <span class="co"># Realizar apenas uma única vez</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Para carregarmos os dados sobre pinguins no ambiente de trabalho, podemos utilizar a função <code>data()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"penguins"</span>, <span class="at">package =</span> <span class="st">"palmerpenguins"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Podemos observar que no painel <strong>Environment</strong> do RStudio, aparece o objeto <code>penguins</code>, isso significa que o conjunto de dados está carregado no ambiente de trabalho e podemos dar início nas inspeções. O primeiro comando que será visto é o <code>glimpse()</code>. Ele exibe, de maneira prática e rápida, a estrutura do <em>dataset</em> como: dimensão (número de linhas e colunas), o nome de cada coluna, o tipo de dado de cada coluna e as primeiras observações.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(penguins)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 344
+Columns: 8
+$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…
+$ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…
+$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …
+$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …
+$ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…
+$ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …
+$ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male…
+$ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…</code></pre>
+</div>
+</div>
+<p>A saída deste comando revela que existem 344 observações e 8 variáveis, sendo elas <code>species</code>, <code>island</code>, <code>bill_length_mm</code>, <code>flipper_length_mm</code>, <code>body_mass_g</code>, <code>sex</code> e <code>year</code>, com seus respectivos tipos, como <code>factor</code> para <code>species</code> e <code>numeric</code> para <code>bill_length_mm</code>. Além disso, é possível observar dados ausentes em algumas variáveis, representados por <code>NA</code>. Em geral, nos <em>datasets</em> disponíveis em pacotes R, é possível utilizar o comando <code>help(penguins)</code> para buscar informações sobre o conjunto de dados que será trabalhado.</p>
+<p>Executando o comando de ajuda, são obtidas as seguintes informações sobre as variáveis:</p>
+<ul>
+<li><code>species</code>: um fator que denota a espécie do pinguim (Adélie, Chinstrap ou Gentoo).</li>
+<li><code>island</code>: um fator que denota ilhas no Arquipélago Palmer na Antártica (Biscoe, Dream ou Torgersen).</li>
+<li><code>bill_length_mm</code>: um número que representa o comprimento do bico (em milímetros).</li>
+<li><code>bill_depth_mm</code>: um número que representa a profundidade do bico (em milímetros).</li>
+<li><code>flipper_length_mm</code>: um número que representa o comprimento da nadadeira (em milímetros).</li>
+<li><code>body_mass_g</code>: um número inteiro que representa a massa do animal (em gramas).</li>
+<li><code>sex</code>: um fator que representa o sexo do animal (feminino ou masculino).</li>
+<li><code>year</code>: um número inteiro que denota o ano de estudo (2007, 2008 ou 2009).</li>
+</ul>
+<p>Adicionalmente, também é informado que os dados foram originalmente publicados no estudo de <span class="citation" data-cites="gormanEcologicalSexualDimorphism2014">Gorman et al. (<a href="references.html#ref-gormanEcologicalSexualDimorphism2014" role="doc-biblioref">2014</a>)</span> e que essa pesquisa fez parte do programa <em>Palmer Station Long-Term Ecological Research</em> (LTER). Isso significa que o conjunto de dados que está sendo utilizado possui uma origem científica real, ligada a questões sobre como o ambiente e as diferenças entre sexos afetam a vida dessas aves.</p>
+<p>A segunda função que será vista é o <code>select()</code>. Frequentemente, um conjunto de dados contém mais informações do que o necessário para uma análise específica. Com isso em mente, a função <code>select()</code> permite-nos selecionar colunas de interesse. Em geral, os argumentos são os nomes das colunas.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, island, sex)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 3
+   species island    sex   
+   &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt; 
+ 1 Adelie  Torgersen male  
+ 2 Adelie  Torgersen female
+ 3 Adelie  Torgersen female
+ 4 Adelie  Torgersen &lt;NA&gt;  
+ 5 Adelie  Torgersen female
+ 6 Adelie  Torgersen male  
+ 7 Adelie  Torgersen female
+ 8 Adelie  Torgersen male  
+ 9 Adelie  Torgersen &lt;NA&gt;  
+10 Adelie  Torgersen &lt;NA&gt;  
+# ℹ 334 more rows</code></pre>
+</div>
+</div>
+<p>O <code>dplyr</code> também oferece “seletores auxiliares” que tornam a seleção mais poderosa e flexível. Por exemplo, caso desejarmos selecionar todas as medidas biométricas contidas no <em>dataset</em> que terminam com <code>_mm</code>, é possível usar a função-argumento <code>ends_with()</code> dentro de <code>select()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    body_mass_g, <span class="fu">ends_with</span>(<span class="st">"_mm"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 4
+   body_mass_g bill_length_mm bill_depth_mm flipper_length_mm
+         &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;
+ 1        3750           39.1          18.7               181
+ 2        3800           39.5          17.4               186
+ 3        3250           40.3          18                 195
+ 4          NA           NA            NA                  NA
+ 5        3450           36.7          19.3               193
+ 6        3650           39.3          20.6               190
+ 7        3625           38.9          17.8               181
+ 8        4675           39.2          19.6               195
+ 9        3475           34.1          18.1               193
+10        4250           42            20.2               190
+# ℹ 334 more rows</code></pre>
+</div>
+</div>
+<p>Outros seletores úteis incluem <code>starts_with()</code> e <code>contains()</code>. Para remover colunas, utiliza-se o sinal de menos (<code>-</code>). Por exemplo, deseja-se remover as colunas <code>ano</code> e <code>island</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>year, <span class="sc">-</span>island)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 6
+   species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g sex   
+   &lt;fct&gt;            &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt; &lt;fct&gt; 
+ 1 Adelie            39.1          18.7               181        3750 male  
+ 2 Adelie            39.5          17.4               186        3800 female
+ 3 Adelie            40.3          18                 195        3250 female
+ 4 Adelie            NA            NA                  NA          NA &lt;NA&gt;  
+ 5 Adelie            36.7          19.3               193        3450 female
+ 6 Adelie            39.3          20.6               190        3650 male  
+ 7 Adelie            38.9          17.8               181        3625 female
+ 8 Adelie            39.2          19.6               195        4675 male  
+ 9 Adelie            34.1          18.1               193        3475 &lt;NA&gt;  
+10 Adelie            42            20.2               190        4250 &lt;NA&gt;  
+# ℹ 334 more rows</code></pre>
+</div>
+</div>
+<p>Antes prosseguirmos para a próxima função, vale destacar que o conjunto de dados <code>penguins</code> é um objeto <code>tibble</code> dentro do R e, portanto, por mais que existam 344 observações, o <code>tibble</code> enxuga a visualização para somente 10, além de indicar quantas linhas ainda existem.</p>
+<p>A terceira função é o <code>filter()</code>. Enquanto <code>select()</code> trabalha nas colunas, o <code>filter()</code> trabalha nas linhas, permitindo-nos manter apenas as observações que satisfazem certas condições. É aqui que é possível responder perguntas investigadas com relação aos dados. Por exemplo, para encontrar todos os pinguins da espécie Adelie que vivem na ilha Torgersen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>      species <span class="sc">==</span> <span class="st">"Adelie"</span>, island <span class="sc">==</span> <span class="st">"Torgersen"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 52 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750
+ 2 Adelie  Torgersen           39.5          17.4               186        3800
+ 3 Adelie  Torgersen           40.3          18                 195        3250
+ 4 Adelie  Torgersen           NA            NA                  NA          NA
+ 5 Adelie  Torgersen           36.7          19.3               193        3450
+ 6 Adelie  Torgersen           39.3          20.6               190        3650
+ 7 Adelie  Torgersen           38.9          17.8               181        3625
+ 8 Adelie  Torgersen           39.2          19.6               195        4675
+ 9 Adelie  Torgersen           34.1          18.1               193        3475
+10 Adelie  Torgersen           42            20.2               190        4250
+# ℹ 42 more rows
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>Neste exemplo, as condições separadas por vírgula são unidas por um “E” lógico. Também é possível utilizar o “OU” lógico para determinar pinguins mais pesados (acima de 6000g) ou com bicos muito longos (mais de 55mm) através do conectivo <code>|</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    body_mass_g <span class="sc">&gt;</span> <span class="dv">6000</span> <span class="sc">|</span> bill_length_mm <span class="sc">&gt;</span> <span class="dv">55</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+  species   island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+  &lt;fct&gt;     &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+1 Gentoo    Biscoe           49.2          15.2               221        6300
+2 Gentoo    Biscoe           59.6          17                 230        6050
+3 Gentoo    Biscoe           55.9          17                 228        5600
+4 Gentoo    Biscoe           55.1          16                 230        5850
+5 Chinstrap Dream            58            17.8               181        3700
+6 Chinstrap Dream            55.8          19.8               207        4000
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>O <code>filter()</code> também permite encontrar valores ausentes (<code>NA</code>s) em conjunto da função <code>is.na()</code>. Por exemplo, deseja-se verificar quais pinguins não tiveram seu sexo registrado:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(sex))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torgersen           NA            NA                  NA          NA
+ 2 Adelie  Torgersen           34.1          18.1               193        3475
+ 3 Adelie  Torgersen           42            20.2               190        4250
+ 4 Adelie  Torgersen           37.8          17.1               186        3300
+ 5 Adelie  Torgersen           37.8          17.3               180        3700
+ 6 Adelie  Dream               37.5          18.9               179        2975
+ 7 Gentoo  Biscoe              44.5          14.3               216        4100
+ 8 Gentoo  Biscoe              46.2          14.4               214        4650
+ 9 Gentoo  Biscoe              47.3          13.8               216        4725
+10 Gentoo  Biscoe              44.5          15.7               217        4875
+11 Gentoo  Biscoe              NA            NA                  NA          NA
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>A interpretação do <code>NA</code> é relativa ao contexto dos dados. No caso das observações sobre os pinguins, os valores ausentes na variável <code>sex</code> permite identificar pinguins que não tiveram o sexo avaliado, tornando um provável erro frustrante de coleta de dados para um objeto de investigação. O pacote <code>tidyr</code>, também do <code>tidyverse</code>, oferece a função <code>drop_na()</code>, que remove quaisquer linhas que contenham <code>NA</code>s, permitindo a criação de um <em>dataset</em> auxiliar:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>penguins_completos <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A quarta função que será apresentada é <code>arrange()</code>, que permite reordenar as linhas do dataframe com base nos valores de uma ou mais colunas. Isso é útil para encontrar extremos ou simplesmente para organizar a saída de uma forma mais lógica. Para encontrar os pinguins mais leves, ordenamos pela massa corporal em ordem crescente (o padrão):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(body_mass_g)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 8
+   species   island   bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;fct&gt;     &lt;fct&gt;             &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+ 1 Chinstrap Dream              46.9          16.6               192        2700
+ 2 Adelie    Biscoe             36.5          16.6               181        2850
+ 3 Adelie    Biscoe             36.4          17.1               184        2850
+ 4 Adelie    Biscoe             34.5          18.1               187        2900
+ 5 Adelie    Dream              33.1          16.1               178        2900
+ 6 Adelie    Torgers…           38.6          17                 188        2900
+ 7 Chinstrap Dream              43.2          16.6               187        2900
+ 8 Adelie    Biscoe             37.9          18.6               193        2925
+ 9 Adelie    Dream              37.5          18.9               179        2975
+10 Adelie    Dream              37            16.9               185        3000
+# ℹ 334 more rows
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>Para ordenar os valores em ordem decrescente (do maior para o menor), utilizamos a função auxiliar <code>desc()</code>, desta maneira, encontramos os pinguins mais pesados:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(body_mass_g))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 8
+   species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+ 1 Gentoo  Biscoe           49.2          15.2               221        6300
+ 2 Gentoo  Biscoe           59.6          17                 230        6050
+ 3 Gentoo  Biscoe           51.1          16.3               220        6000
+ 4 Gentoo  Biscoe           48.8          16.2               222        6000
+ 5 Gentoo  Biscoe           45.2          16.4               223        5950
+ 6 Gentoo  Biscoe           49.8          15.9               229        5950
+ 7 Gentoo  Biscoe           48.4          14.6               213        5850
+ 8 Gentoo  Biscoe           49.3          15.7               217        5850
+ 9 Gentoo  Biscoe           55.1          16                 230        5850
+10 Gentoo  Biscoe           49.5          16.2               229        5800
+# ℹ 334 more rows
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>Também é possível ordenar múltiplas colunas. Por exemplo, para encontrar o pinguim mais pesado dentro de cada espécie:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    species, <span class="co"># Primeiro por espécie</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">desc</span>(body_mass_g) <span class="co"># Depois por massa decrescente</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Biscoe              43.2          19                 197        4775
+ 2 Adelie  Biscoe              41            20                 203        4725
+ 3 Adelie  Torgersen           42.9          17.6               196        4700
+ 4 Adelie  Torgersen           39.2          19.6               195        4675
+ 5 Adelie  Dream               39.8          19.1               184        4650
+ 6 Adelie  Dream               39.6          18.8               190        4600
+ 7 Adelie  Biscoe              45.6          20.3               191        4600
+ 8 Adelie  Torgersen           42.5          20.7               197        4500
+ 9 Adelie  Dream               37.5          18.5               199        4475
+10 Adelie  Torgersen           41.8          19.4               198        4450
+# ℹ 334 more rows
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>A quinta função e, com certeza, uma das mais funcionais é a <code>mutate()</code>. Ela permite criar novas colunas (variáveis) que são funções de colunas já existentes, sem modificar as originais. Por exemplo, suponha que desejamos mostrar somente as espécies e massas de pinguins em quilogramas (kg):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">body_mass_kg =</span> body_mass_g<span class="sc">/</span><span class="dv">1000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, body_mass_kg)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 2
+   species body_mass_kg
+   &lt;fct&gt;          &lt;dbl&gt;
+ 1 Adelie          3.75
+ 2 Adelie          3.8 
+ 3 Adelie          3.25
+ 4 Adelie         NA   
+ 5 Adelie          3.45
+ 6 Adelie          3.65
+ 7 Adelie          3.62
+ 8 Adelie          4.68
+ 9 Adelie          3.48
+10 Adelie          4.25
+# ℹ 334 more rows</code></pre>
+</div>
+</div>
+<p>Podemos usar <code>mutate()</code> para criar categorias. A função <code>case_when()</code> é extremamente útil para criar classificações baseadas em condições lógicas., Suponha que desejamos criar uma categoria de tamanho baseada na massa corporal:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">size_category =</span> <span class="fu">case_when</span>(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>      body_mass_g <span class="sc">&gt;</span> <span class="dv">4750</span> <span class="sc">~</span> <span class="st">"Grande"</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>      body_mass_g <span class="sc">&lt;</span> <span class="dv">3500</span> <span class="sc">~</span> <span class="st">"Pequeno"</span>,</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Médio"</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    species, body_mass_g, size_category</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 344 × 3
+   species body_mass_g size_category
+   &lt;fct&gt;         &lt;int&gt; &lt;chr&gt;        
+ 1 Adelie         3750 Médio        
+ 2 Adelie         3800 Médio        
+ 3 Adelie         3250 Pequeno      
+ 4 Adelie           NA Médio        
+ 5 Adelie         3450 Pequeno      
+ 6 Adelie         3650 Médio        
+ 7 Adelie         3625 Médio        
+ 8 Adelie         4675 Médio        
+ 9 Adelie         3475 Pequeno      
+10 Adelie         4250 Médio        
+# ℹ 334 more rows</code></pre>
+</div>
+</div>
+<p>As funções <code>group_by()</code> e <code>summarise()</code> formam uma dupla formidável para agrupar e resumir os dados, pertencendo ao coração da análise de dados. A função <code>summarise()</code> erve para calcular estatísticas resumidas (como média, total, mínimo etc.) e, quando usada em conjunto com <code>group_by()</code> permite gerar resumos por grupo.</p>
+<p>Inicialmente, vamos utilizar o <code>summarise()</code> no <em>dataset</em> completo para obter estatísticas globais. Não obstante, é bom frisar a utilização do argumento <code>na.rm = TRUE</code> para instruir a remoção dos valores <code>NA</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">massa_media =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">nadadeira_max =</span> <span class="fu">max</span>(flipper_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  massa_media nadadeira_max
+        &lt;dbl&gt;         &lt;int&gt;
+1       4202.           231</code></pre>
+</div>
+</div>
+<p>No entanto, essas métricas não fornecem informações com relação as espécies de pinguins. Para resolver isso e possibilitar que mais perguntas sejam respondidas, a função <code>group_by()</code> permite que o R faça operações em subconjuntos. Por exemplo, suponha que desejamos determinar qual é a massa corporal por espécie:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">massa_media_g =</span> <span class="fu">mean</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  species   massa_media_g
+  &lt;fct&gt;             &lt;dbl&gt;
+1 Adelie            3701.
+2 Chinstrap         3733.
+3 Gentoo            5076.</code></pre>
+</div>
+</div>
+<p>Podemos fazer agrupamentos por múltiplas variáveis para investigações mais profundas. Por exemplo, considere que um pesquisador deseja explorar o dimorfismo sexual. Para isso, estatísticas por espécie e sexo serão calculadas.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>tabela_resumo <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species, sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">contagem =</span> <span class="fu">n</span>(),</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">massa_media_g =</span> <span class="fu">mean</span>(body_mass_g),</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">massa_dp_g =</span> <span class="fu">sd</span>(body_mass_g),</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">comp_bico_medio_mm =</span> <span class="fu">mean</span>(bill_length_mm),</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>tabela_resumo</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-tbl-pos="H">
+<div id="tbl-tabela-resumo1" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-pos="H">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tabela-resumo1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;3.1: Estatísticas descritivas de características biométricas de pinguins, agrupadas por espécie e sexo.
+</figcaption>
+<div aria-describedby="tbl-tabela-resumo1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Vale reforçar que a <a href="#tbl-tabela-resumo1" class="quarto-xref">Tabela&nbsp;<span>3.1</span></a> foi gerada usando o <code>dplyr</code>, com as funções auxiliares <code>n()</code> para realizar a contagem de observações em cada grupo e <code>drop_na(sex)</code> para remover as observações onde o sexo é desconhecido, permitindo avaliar dimorfismo sexual em todas as três espécies, especialmente na massa corporal. O grande potencial dessa tabela é obter respostas como:</p>
+<ul>
+<li>Os pinguins Gentoo são, em média, os mais pesados.</li>
+<li>Dentro de cada espécie, os machos são consistentemente mais pesados e têm bicos mais longo que as fêmeas.</li>
+</ul>
+<p>Esses resultados permitem tirar conclusões sobre algumas hipóteses biológicas.</p>
+<p>Por fim, a última função que será abordada é a <code>recode()</code>. Muitas vezes, os nomes das categorias nos conjuntos de dados não são ideais para a análise ou apresentação em gráficos. Podem ser longos demais, estarem em outro idioma ou simplesmente não serem claros. Para isso, a função <code>recode()</code> permite renomear valores de uma variável categórica de forma simples e direta. Por exemplo, suponha que desejamos traduzir os termos da variável <code>sex</code> da <a href="#tbl-tabela-resumo1" class="quarto-xref">Tabela&nbsp;<span>3.1</span></a> para o português:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>tabela_resumo <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">sex =</span> <span class="fu">recode</span>(sex,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"female"</span> <span class="ot">=</span> <span class="st">"Fêmea"</span>,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"male"</span> <span class="ot">=</span> <span class="st">"Macho"</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  ) </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-tbl-pos="H">
+<div id="tbl-traduzida" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-pos="H">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-traduzida-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;3.2: Tradução da variável <code>sexo</code> da <a href="#tbl-tabela-resumo1" class="quarto-xref">Tabela&nbsp;<span>3.1</span></a>.
+</figcaption>
+<div aria-describedby="tbl-traduzida-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>As principais funções do pacote <code>dplyr</code> que foram vistas estão resumidas e descritas na Tabela <a href="#tbl-dplyr-fcts" class="quarto-xref">Tabela&nbsp;<span>3.3</span></a> e agora que aprendemos como manipular os dados com o <code>dplyr</code>, podemos avançar para a construção de gráficos com o pacote <code>ggplot2</code>.</p>
+<div class="cell" data-tbl-pos="b">
+<div id="tbl-dplyr-fcts" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-pos="b">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dplyr-fcts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;3.3: Descrição das principais funções do <code>tidyverse</code>.
+</figcaption>
+<div aria-describedby="tbl-dplyr-fcts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Função</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">glimpse()</td>
+<td style="text-align: left;">Inspecionar conjuntos de dados.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">select()</td>
+<td style="text-align: left;">Seleciona colunas pelo nome.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">filter()</td>
+<td style="text-align: left;">Filtra linhas com base em seus valores.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">arrange()</td>
+<td style="text-align: left;">Reordena as linhas.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mutate()</td>
+<td style="text-align: left;">Cria novas colunas (variáveis).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">group_by()</td>
+<td style="text-align: left;">Agrupa os dados por uma ou mais variáveis.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">summarise()</td>
+<td style="text-align: left;">Reduz múltiplos valores a um único resumo.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">recode()</td>
+<td style="text-align: left;">Renomeia categorias de variáveis.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">n()</td>
+<td style="text-align: left;">Conta o número de observações.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="visualização-de-dados-com-ggplot2" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="visualização-de-dados-com-ggplot2"><span class="header-section-number">3.2</span> Visualização de Dados com <code>ggplot2</code></h2>
+<p>Se o <code>dplyr</code> é a gramática da manipulação de dados, possuindo funções essenciais para esse trabalho, o <code>ggplot2</code> <span class="citation" data-cites="wickhamGgplot22016">(<a href="references.html#ref-wickhamGgplot22016" role="doc-biblioref">WICKHAM, 2016</a>)</span> é gramática dos gráficos, permitindo construir gráficos por meio de camadas e oferecendo um sistema robusto e flexível para visualização os dados. Nesta seção, continuaremos utilizando os dados dos pinguins para explorar alguns <em>insights</em> visuais, desde gráficos mais simples até os mais elaborados.</p>
+<p>Todo gráfico no <code>ggplot2</code> é constituído por três camadas essenciais:</p>
+<ol type="1">
+<li>Dados (<code>data</code>): O <em>dataframe</em> que contém as informações a serem plotadas.</li>
+<li>Mapeamento Estéticos (<code>aes</code>): A função <code>aes()</code> (de <em>aesthetics</em>) descreve como as variáveis do nosso <em>dataframe</em> são mapeadas para as propriedades visuais do gráfico. As estéticas mais comuns são <code>x</code> e <code>y</code> (os eixos), mas também incluem <code>color</code> (cor), <code>shape</code> (forma), <code>size</code> (tamanho) e <code>alpha</code> (transparência/opacidade).</li>
+<li>Objetos geométricos (<code>geom</code>): Os <code>geoms</code> definem como os dados são representados visualmente. Por exemplo, <code>geom_point()</code> cria um gráfico de dispersão, <code>geom_bar()</code> cria um gráfico de barras, <code>geom_line()</code> cria um gráfico de linhas, e assim por diante.</li>
+</ol>
+<section id="estatística-descritiva" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="estatística-descritiva"><span class="header-section-number">3.2.1</span> Estatística descritiva</h3>
+<p>Antes de explorar as relações gráficas, é útil enfatizar e entender alguns conceitos essenciais da Estatística Descritiva como os tipos de variáveis, normas para tabelas e as definições de frequências.</p>
+<!-- Antes de explorar as relações gráficas, é útil enfatizar e entender as diferenças entre os tipos de variáveis e suas distribuições individuais possíveis. Em geral, pode-se dizer que existem duas categorias de variáveis dentro da estatística: -->
+<p>Em geral, pode-se dizer que existem duas categorias de variáveis dentro da estatística:</p>
+<ol type="1">
+<li><strong>Variáveis Qualitativas</strong>: Também chamadas por variáveis categóricas e como o próprio nome diz, expressam qualidade e indicam categoria ou classificação a qual o objeto pertence. Se existir uma ordem entre as possíveis categorias, a variável é dita <strong>qualitativa ordinal</strong>. Caso contrário, é dita ser <strong>qualitativa nominal</strong>.</li>
+<li><strong>Variáveis Quantitativas</strong>: São variáveis que tomam valores numéricos e expressam quantidade. Podem ser especificadas por <strong>Variáveis Discretas</strong>, quando assumem valores dentro de um conjunto enumerável (quando é possível contá-las) ou por <strong>Variáveis Continuas</strong>, quando podem assumir infinitos valores de um intervalo não inumerável<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> (não é possível contar o número de valores dentro de um intervalo).</li>
+</ol>
+<p>Assim, para explorar e apresentar as informações contidas num conjunto de dados, precisamos resumir essas informações de forma que seja possível enxergá-las rapidamente e adquirir conhecimento sobre o assunto.</p>
+<p>O resumo pode ser feito por meio de tabelas, gráficos e cálculo de algumas quantidades representativas. O primeiro passo é identificar o tipo de cada variável para aplicarmos a técnica apropriada.</p>
+<p>No entanto, antes de explorarmos a organização dos dados em tabelas e gráficos, são necessários conceitos sobre algumas métricas essenciais denominadas por medidas resumo. Elas oferecem uma forma numérica e concisa de descrever as principais características das variáveis que serão trabalhadas. Em geral, são divididas em duas categorias essenciais: as medidas de tendência central, que informam onde o “centro” dos dados se localiza (como a média, mediana e moda), e as medidas de dispersão, que quantificam o quão espalhados os dados estão (como a amplitude, o desvio padrão e a variância).</p>
+<p>A <strong>média aritmética</strong> é definida como sendo a soma de todos os valores dividida pelo número de observações ou indivíduos, ou seja, denotando-se as <span class="math inline">\(n\)</span> observações de uma variável <span class="math inline">\(X\)</span> por <span class="math inline">\(x_1, x_2, \dots, x_n\)</span> e a média por <span class="math inline">\(\bar{x}\)</span> temos: <span class="math display">\[\bar{x} = \frac{1}{n}\sum_{i = 1}^{n} x_i\]</span> As principais propriedades da média são:</p>
+<ul>
+<li>É uma medidas simples e popular;</li>
+<li>É sensível aos valores e discrepantes ou extremos. Portanto, na presença destes, a média pode não ser uma representação de valores típicos;</li>
+<li>É o ponto de equilíbrio da distribuição;</li>
+<li>Para <span class="math inline">\(k\)</span> constante e <span class="math inline">\(X\)</span> variável, têm-se que a média de <span class="math inline">\((X + k)\)</span> é <span class="math inline">\((\bar{x} + k)\)</span> e, também, a média de <span class="math inline">\((kX)\)</span> é <span class="math inline">\((k\bar{x})\)</span>.</li>
+<li>Para <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span> variáveis independentes, a média de <span class="math inline">\((X\pm Y)\)</span> é <span class="math inline">\((\bar{x} \pm \bar{y})\)</span>.</li>
+</ul>
+<p>A <strong>mediana</strong> é o valor do meio de uma distribuição, ou seja, num histograma, é o valor que deixa exatamente 50% dos dados de cada lado. Para determinar o valor exato da mediana é necessário ordenar todos os valores, do menor para o maior. Se <span class="math inline">\(n\)</span>, o número de observações, é ímpar então a mediana é o valor que fica exatamente no centro; se <span class="math inline">\(n\)</span> é par, então é a média dos dois valores centrais.</p>
+<p>As principais propriedades da mediana são:</p>
+<ul>
+<li>Não é sensível a valores discrepantes e, portanto, é a mais apropriada para representar valores típicos quando a distribuição é assimétrica;</li>
+<li>Não apresenta as propriedades matemáticas convenientes que a média possui.</li>
+</ul>
+<p>Quando a distribuição é simétrica, média e mediana são iguais. No entanto, caso contrário, a média estará mais afastada do meio que a mediana no sentido de uma cauda mais longa.</p>
+<p>A <strong>moda</strong> é simplesmente o valor mais frequente da variável de estudo e para distribuições simétricas, média, mediana e moda possuem valores iguais.</p>
+<p>Uma vez reconhecido o centro da distribuição, é necessário ter uma ideia do quanto os valores estão distantes deste centro. Quanto mais heterogêneo forem os dados, maior a dispersão e vice-versa. Dentre as métricas que dão essa ideia, destacam-se:</p>
+<p>A <strong>amplitude</strong> definida pela diferença entre o maior e o menor valor. Além disso, é sensível a valores extremos. O <strong>primeiro quartil</strong> (<span class="math inline">\(q_1\)</span>) e <strong>terceiro quartil</strong> (<span class="math inline">\(q_3\)</span>), que dividem, respectivamente, o conjunto de dados em 25% e 75%. É válido ressaltar que todo conjunto de dados apresentam 3 quartis, dividindo o conjunto ordenado em quatro partes iguais, além disso, o segundo quartil (<span class="math inline">\(q_2\)</span>) é igual a mediana. Essas medidas são úteis na construção do gráfico de caixa (<em>boxplot</em>) que será visto em sequência.</p>
+<p>O <strong>desvio padrão</strong> (<span class="math inline">\(s\)</span>) é a medida de dispersão mais popular e mede a dispersão de todos os valores em relação à média. Para calculá-lo, primeiramente calcula-se a <strong>variância</strong>, denotada por <span class="math inline">\(s^2\)</span>, que é definida por: <span class="math display">\[s^2 = \mathbb{V}(X) = \frac{1}{n-1}\sum_{i = 1}^{n}(x_i - \bar{x})^2 = \frac{1}{n-1}\left(\sum_{i = 1}^{n}x_i^2 - \frac{\left(\sum_{i = 1}^{n} x_i\right)^2}{n}\right)\]</span> a diferença <span class="math inline">\((x_i - \bar{x})\)</span> é chamada de desvio, representando o quanto o indivíduo <span class="math inline">\(i\)</span> desviou da média geral. A variância representa a média dos quadrados dos desvios em relação à média. Além disso, observe que a unidade de medida da variância é a unidade da variável <span class="math inline">\(x\)</span> ao quadrado, dificultando sua interpretação e, para lidar com isso, utiliza-se o desvio-padrão, visto que é seu valor está na mesma escala de medida das observações, em que valores altos indica que os dados estão bastante dispersos e valores baixos, os indivíduos estão próximos da média, mostrando uma homogeneidade nos dados. As principais propriedades da variância (ou do desvio padrão) são:</p>
+<ul>
+<li>Para <span class="math inline">\(k\)</span> constante, <span class="math inline">\(\mathbb{V}(k) = 0\)</span>, <span class="math inline">\(\mathbb{V}(k + X) = \mathbb{V}(X)\)</span>, <span class="math inline">\(\mathbb{V}(kX) = k^2\mathbb{V}(X)\)</span>;</li>
+<li>Para <span class="math inline">\(X\)</span> e <span class="math inline">\(Y\)</span> variáveis independentes, <span class="math inline">\(\mathbb{V}(X \pm Y) = \mathbb{V}(X) + \mathbb{V}(Y)\)</span>;</li>
+<li>É sensível aos valores discrepantes e, portanto, só deve ser usada quando a distribuição é simétrica ou aproximadamente simétrica.</li>
+</ul>
+<p>Por fim, existe o <strong>coeficiente</strong> de varição (<span class="math inline">\(\text{cv}\)</span>), que é uma medida de dispersão em termos de porcentagem da média: <span class="math display">\[\text{cv} = \frac{s}{\bar{x}}\times 100,\]</span> em que não há unidade de medida e, portanto, serve como métrica de comparação na variação de variáveis diferentes.</p>
+<p>Dentro do R, a função <code>summary()</code> é a chave mestre que calcula quase todas as métricas que foram vistas. Para exemplificar, selecionaremos apenas a variável <code>bill_length</code> do conjunto de dados <code>penguins</code> (<a href="#tbl-summary" class="quarto-xref">Tabela&nbsp;<span>3.4</span></a>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-tbl-pos="H">
+<div id="tbl-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-pos="H">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;3.4: Saída da função <code>summary()</code>
+</figcaption>
+<div aria-describedby="tbl-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table table-striped do-not-create-environment cell caption-top table-sm small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Variável</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Min</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">1º Quad.</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Mediana</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Média</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">3º Quad.</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Max</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">NAs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">bill_length_mm</td>
+<td style="text-align: center;">32.1</td>
+<td style="text-align: center;">39.225</td>
+<td style="text-align: center;">44.45</td>
+<td style="text-align: center;">43.92193</td>
+<td style="text-align: center;">48.5</td>
+<td style="text-align: center;">59.6</td>
+<td style="text-align: center;">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Enquanto as medidas resumo nos fornecem valores pontuais para compreensão do centro e a dispersão, as tabelas oferecem uma visão panorâmica da distribuição dos dados. Organizar as informações de forma tabular é o primeiro para visualizar as frequências de cada categoria ou intervalo, complementando a análise numérica anterior.</p>
+<p>As normas gerais para construção de uma tabela envolvem:</p>
+<ul>
+<li>Devem ser auto-explicativas.</li>
+<li>Devem conter um título, que precisa ser simples e claro, indicando informações sobre os dados (do que, onde e quando foram coletados – se forem relevantes).</li>
+</ul>
+<p>Além das normas gerais, existem duas convenções importantes a serem seguidas com relação ao título de tabelas e gráficos:</p>
+<ul>
+<li>Em <strong>tabelas</strong> os títulos vem primeiro, em cima da tabela.</li>
+<li>Em <strong>gráficos</strong> os títulos vem por último, embaixo do gráfico.</li>
+</ul>
+<p>Se necessário, notas e fontes vêm embaixo, em ambos os casos. Uma tabela começa e termina com um traço horizontal e traços na vertical devem ser evitados, conforme visto na <a href="#tbl-tabela-resumo1" class="quarto-xref">Tabela&nbsp;<span>3.1</span></a> por exemplo.</p>
+<p>Uma forma adequada para resumir informações sobre uma variável numa tabela é através da construção de uma <strong>tabela de frequências</strong>, que informa quais valores ou categorias a variável pode tomar, com suas respectivas frequências. Quando a variável é qualitativa, as frequências vão revelar se temos categorias mais comuns (típicas) e categorias raras ou se a distribuição é uniforme/homogênea. Já quando a variável é quantitativa, as frequências revelarão os valores típicos e/ou a distribuição dos valores é simétricas ou assimétrica.</p>
+<p>Existem alguns tipos de frequência que podem ser utilizados para resumir as informações, dentre eles:</p>
+<ul>
+<li>Frequência absoluta ou simplesmente frequência (<span class="math inline">\(f\)</span>): é a contagem do número de vezes que um valor ou categoria aparece.</li>
+<li>Frequência relativa (<span class="math inline">\(\text{fr} = f/n\)</span>): quando esse valor é multiplicado por <span class="math inline">\(100\)</span>, informa a porcentagem do aparecimento de uma determinada categoria sobre o número total de contagem.</li>
+<li>Frequência acumulada (<span class="math inline">\(\text{fa}\)</span>): é a frequência acumulada até um valor específico.</li>
+<li>Frequência acumulada relativa (<span class="math inline">\(\text{far} = \text{fa}/n\)</span>): quando esse valor é multiplicado por <span class="math inline">\(100\)</span>, informa a porcentagem acumulada do aparecimento de uma determinada categoria sobre o número total de contagem.</li>
+</ul>
+<p>A <a href="#tbl-freq-pin" class="quarto-xref">Tabela&nbsp;<span>3.5</span></a> contém as informações sobre as frequências de cada espécie de pinguim existente no conjunto de dados <code>penguins</code>. As informações básicas que podem ser extraídas é que entre as espécies dentro do estudo sobre pinguins 44.2% são <em>Adelie</em>, 36% são <em>Gentoo</em> e 19.8% são <em>Chinstrap</em>.</p>
+<div class="cell" data-tbl-pos="H">
+<div id="tbl-freq-pin" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-pos="H">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-freq-pin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;3.5: Distribuição de frequências para as espécies de Pinguins.
+</figcaption>
+<div aria-describedby="tbl-freq-pin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Espécies</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Frequência</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Frequência absoluta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Porcentagem</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Adelie</td>
+<td style="text-align: center;">152</td>
+<td style="text-align: center;">0.442</td>
+<td style="text-align: center;">44.2\%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gentoo</td>
+<td style="text-align: center;">124</td>
+<td style="text-align: center;">0.360</td>
+<td style="text-align: center;">36\%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinstrap</td>
+<td style="text-align: center;">68</td>
+<td style="text-align: center;">0.198</td>
+<td style="text-align: center;">19.8\%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total</td>
+<td style="text-align: center;">344</td>
+<td style="text-align: center;">1.000</td>
+<td style="text-align: center;">100\%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Quando a variável é quantitativa e assume muitos valores distintos, para resumir e capturar o padrão da distribuição, esses valores devem ser agrupados em intervalos. A quantidade de intervalos é arbitrário, no entanto, não pode ser nem muito baixo e nem muito alto. O próximo passo é especificar os intervalos, contando quantos valores aparecem dentro de cada um deles.</p>
+<p>Para exemplificar, utilizaremos a variável <code>body_mass_g</code> de nosso conjunto de dados sobre os pinguins. Em geral, segue-se os passos:</p>
+<ol type="1">
+<li>Calcular a amplitude (<span class="math inline">\(A\)</span>) dos dados.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">maior =</span> <span class="fu">max</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">menor =</span> <span class="fu">min</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">amplitude =</span> <span class="fu">max</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">min</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  maior menor amplitude
+  &lt;int&gt; &lt;int&gt;     &lt;int&gt;
+1  6300  2700      3600</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ou ainda</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">amplitude =</span> <span class="fu">diff</span>(<span class="fu">range</span>(body_mass_g, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>Encontrar o comprimento aproximado de cada intervalo, dividindo <span class="math inline">\(A\)</span> pelo número de intervalos desejados.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>A<span class="sc">/</span><span class="dv">6</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  amplitude
+1       600</code></pre>
+</div>
+</div>
+<p>A partir da <a href="#tbl-freq-abs-pin" class="quarto-xref">Tabela&nbsp;<span>3.6</span></a> e pela coluna das frequências relativas, observa-se que a distribuição do peso é assimétrica. Em breve, isso será observado graficamente.</p>
+<div class="cell" data-tbl-pos="H">
+<div id="tbl-freq-abs-pin" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-pos="H">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-freq-abs-pin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;3.6: Distribuição de frequências para a massa corporal (g) dos pinguins.
+</figcaption>
+<div aria-describedby="tbl-freq-abs-pin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Massa corporal (g)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Frequência</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">f.r. (\%)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">f.a.r. (\%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2700 $\vdash$ 3300</td>
+<td style="text-align: center;">34</td>
+<td style="text-align: center;">9.94\%</td>
+<td style="text-align: center;">9.94\%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3300 $\vdash$ 3900</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">32.16\%</td>
+<td style="text-align: center;">42.11\%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3900 $\vdash$ 4500</td>
+<td style="text-align: center;">80</td>
+<td style="text-align: center;">23.39\%</td>
+<td style="text-align: center;">65.5\%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4500 $\vdash$ 5100</td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">17.54\%</td>
+<td style="text-align: center;">83.04\%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5100 $\vdash$ 5700</td>
+<td style="text-align: center;">41</td>
+<td style="text-align: center;">11.99\%</td>
+<td style="text-align: center;">95.03\%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5700 $\vdash$ 6300</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">4.97\%</td>
+<td style="text-align: center;">100\%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="tipos-de-gráficos" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="tipos-de-gráficos"><span class="header-section-number">3.2.2</span> Tipos de gráficos</h3>
+<p>As distribuições de frequências podem ser representadas em gráficos, que facilitam a interpretação visual do comportamento dos dados. Os gráficos mais comuns, segundo o tipo de variável, são:</p>
+<ul>
+<li>Barras ou colunas: apropriado para variáveis qualitativas e quantitativas discretas.</li>
+<li>Setores: qualitativas nominais com poucas categorias.</li>
+<li>Histograma: qualitativas contínuas.</li>
+<li>Box-plot: quantitativas.</li>
+<li>Diagrama de dispersão: relaciona duas quantitativas.</li>
+<li>Gráfico de linhas: evolução de quantitativa ao longo do tempo ou espaço.</li>
+</ul>
+<p>Com esse conhecimento em mente podemos prosseguir para as construções dos gráficos utilizando o <code>ggplot2</code></p>
+<section id="visualizando-uma-única-variável" class="level4" data-number="3.2.2.1">
+<h4 data-number="3.2.2.1" class="anchored" data-anchor-id="visualizando-uma-única-variável"><span class="header-section-number">3.2.2.1</span> Visualizando uma única variável</h4>
+<p>Para visualizar a distribuição de uma variável contínua como a massa corporal, utiliza-se o histograma com a função <code>geom_histogram()</code>. Como já foi visto, a escolha do número de colunas é arbitrário e pode afetar significativamente a aparência e a interpretação do gráfico.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g))<span class="sc">+</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2700</span>, <span class="dv">6300</span>, <span class="at">by =</span> <span class="dv">600</span>), </span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">closed =</span> <span class="st">"left"</span>)<span class="sc">+</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2700</span>, <span class="dv">6300</span>, <span class="at">by =</span> <span class="dv">600</span>),</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">2700</span>, <span class="dv">6300</span>, <span class="at">by =</span> <span class="dv">600</span>),</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">2700</span>, <span class="dv">6300</span>)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Massa corporal (g)"</span>,</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Contagem"</span></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>    ggthemes<span class="sc">::</span><span class="fu">theme_clean</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Distribuição da massa corporal (g) dos pinguins.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Observe que a biblioteca <code>ggthemes</code> foi utilizada para melhorar o aspecto estético do gráfico, fornecendo temas adicionais. Portanto, é recomendável instalá-la e carregá-la no espaço de trabalho.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggthemes")</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Para variáveis categóricas, como <code>species</code>, usamos o <code>geom_bar()</code> para criar um gráfico de barras que mostra a contagem de observações em cada categoria.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">fill =</span> species))<span class="sc">+</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Espécie"</span>,</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Número de Indivíduos"</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Massa corporal (g)"</span>,</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Contagem"</span>,</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">"Espécies"</span></span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>      )<span class="sc">+</span></span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_clean</span>()<span class="sc">+</span></span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Distribuição de Pinguins por Espécie.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="relações-entre-variáveis" class="level4" data-number="3.2.2.2">
+<h4 data-number="3.2.2.2" class="anchored" data-anchor-id="relações-entre-variáveis"><span class="header-section-number">3.2.2.2</span> Relações entre variáveis</h4>
+<p>O gráfico de dispersão é a ferramenta clássica para explorar relações entre duas variáveis numéricas. Investigaremos a relação existente entre o comprimento da nadadeira e a massa corporal. A hipótese é que pinguins com nadadeiras maiores também serão mais pesados, uma relação positiva e intuitiva que serve como um excelente parâmetro de partida.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g))<span class="sc">+</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Comprimento da Nadadeira (mm)"</span>,</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Mass corporal (g)"</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-dis-peso-nad" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dis-peso-nad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03-tidyverse_files/figure-html/fig-dis-peso-nad-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dis-peso-nad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.1: Relação entre o tamanho da nadadeira (mm) e o peso corporal (g) dos pinguins.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A <a href="#fig-dis-peso-nad" class="quarto-xref">Figura&nbsp;<span>3.1</span></a> informa uma clara tendência positiva entre a nadadeira e o peso corporal dos pinguins. Mas será que esse tendência é a mesma para todas as espécies? Para responder essa pergunta, através da função <code>aes()</code>, é possível adicionar estéticas adicionais como <code>shape</code>, <code>color</code> ou <code>size</code> para distinguir as espécies no gráfico. O argumento a ser utilizado dependerá onde a imagem será utilizada. Por exemplo, em uma revista científica, que solicita gráficos em preto e branco, é aconselhável utilizar <code>shape</code> ou <code>size</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g, <span class="at">color =</span> species))<span class="sc">+</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Comprimento da Nadadeira (mm)"</span>,</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Massa corporal (g)"</span>,</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">"Espécies"</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_clean</span>()<span class="sc">+</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-dis-esp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dis-esp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03-tidyverse_files/figure-html/fig-dis-esp-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dis-esp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.2: Relação entre o tamanho da nadadeira (mm) e o peso corporal (g) por espécie dos pinguins.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A <a href="#fig-dis-esp" class="quarto-xref">Figura&nbsp;<span>3.2</span></a> revela detalhes mais pertinentes, mostrando que a relação entre massa corporal e comprimento da nadadeira mantêm-se positiva (nível de grupo).</p>
+<p>Para comparar a distribuição de uma variável numérica entre diferentes categorias, o boxplot<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> (<code>geom_boxplot()</code>) é uma excelente ferramenta. Para isso, vamos comparar a distribuição da massa corporal entre as três espécies.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Espécies"</span>,</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Massa corporal (g)"</span>,</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"Espécies"</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_clean</span>()<span class="sc">+</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Boxplot para a massa corporal (g) por espécies de pinguins.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Uma alternativa ao <code>geom_boxplot()</code> é o <code>geom_violin()</code>, que traz um detalhamento sobre os dados de uma maneira mais simples. Adicionalmente, podemos utilizar o <code>geom_jitter()</code> para evitar a sobreposição dos dados, enriquecendo o visual do gráfico.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Espécie"</span>,</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Massa corporal (g)"</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_clean</span>()<span class="sc">+</span></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="técnicas-avançadas-de-visualização-e-comunicação" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="técnicas-avançadas-de-visualização-e-comunicação"><span class="header-section-number">3.2.3</span> Técnicas avançadas de visualização e comunicação</h3>
+<p>Com a base da construção de gráficos vista anteriormente, é possível explorar técnicas para criar gráficos mais ricos e informativos, complementando informações descobertas de forma eficaz.</p>
+</section>
+<section id="sub-gráficos-com-facet_wrap" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="sub-gráficos-com-facet_wrap"><span class="header-section-number">3.2.4</span> Sub-gráficos com <code>facet_wrap()</code></h3>
+<p>As facetas permitem criar uma matriz de gráficos, dividindo os dados com uma base em uma ou mais variáveis categóricas. Isso é extremamente útil para comparações. Para exemplificar, vamos utilizar o gráfico de dispersão e segmentá-lo para a variável <code>sex</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex =</span> <span class="fu">recode</span>(sex,</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"female"</span> <span class="ot">=</span> <span class="st">"Fêmea"</span>,</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">"male"</span> <span class="ot">=</span> <span class="st">"Macho"</span>)</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g, <span class="at">color =</span> species))<span class="sc">+</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> sex)<span class="sc">+</span></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Comprimento da nadadeira (mm)"</span>,</span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Massa corporal (g)"</span>,</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">"Espécies"</span></span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_clean</span>()<span class="sc">+</span></span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Distribuição de massa corporal (g) por espécie.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Neste gráfico, fica evidente que os pinguins fêmeas possuem menos massa corporal que os machos e, quanto as espécies, <code>Gentoo</code> é que concentra a maior massa. Contudo, pode ser do interesse do pesquisador além de verificar a massa corporal por sexo, também incluir a variável <code>island</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex)) <span class="sc">%&gt;%</span> </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex =</span> <span class="fu">recode</span>(sex,</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"female"</span> <span class="ot">=</span> <span class="st">"Fêmea"</span>,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">"male"</span> <span class="ot">=</span> <span class="st">"Macho"</span>)</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g, <span class="at">color =</span> species))<span class="sc">+</span></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(island <span class="sc">~</span> sex)<span class="sc">+</span></span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Comprimento da nadadeira (mm)"</span>,</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Massa corporal (g)"</span>,</span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">"Espécies"</span></span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_clean</span>()<span class="sc">+</span></span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-massa-ilha" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-massa-ilha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="03-tidyverse_files/figure-html/fig-massa-ilha-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-massa-ilha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.3: Distribuição de massa corporal (g) nas ilhas por espécie.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A partir da <a href="#fig-massa-ilha" class="quarto-xref">Figura&nbsp;<span>3.3</span></a> é possível reparar que nem todas as espécies estão presentes nas três ilhas simultaneamente. Além disso, a ilha de <code>Biscoe</code> é a que apresenta o maior percentual de massa corporal dos pinguins, isto é, a espécie <code>Gentoo</code> é a predominante.</p>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="1" role="list" style="display: none">
+<div id="ref-gormanEcologicalSexualDimorphism2014" class="csl-entry" role="listitem">
+GORMAN, Kristen B. <em>et al.</em> <a href="https://doi.org/10.1371/journal.pone.0090081">Ecological <span>Sexual Dimorphism</span> and <span>Environmental Variability</span> within a <span>Community</span> of <span>Antarctic Penguins</span> (<span>Genus Pygoscelis</span>)</a>. <strong>PLOS ONE</strong>, v. 9, n. 3, p. e90081, 2014.
+</div>
+<div id="ref-wickhamTidyData2014" class="csl-entry" role="listitem">
+WICKHAM, Hadley. <a href="https://doi.org/10.18637/jss.v059.i10">Tidy <span>Data</span></a>. <strong>Journal of Statistical Software</strong>, v. 59, p. 1–23, set. 2014.
+</div>
+<div id="ref-wickhamGgplot22016" class="csl-entry" role="listitem">
+WICKHAM, Hadley. <strong><a href="https://doi.org/10.1007/978-3-319-24277-4">Ggplot2</a></strong>. Cham: Springer International Publishing, 2016.
+</div>
+<div id="ref-wickhamWelcomeTidyverse2019" class="csl-entry" role="listitem">
+WICKHAM, Hadley <em>et al.</em> <a href="https://doi.org/10.21105/joss.01686">Welcome to the <span>Tidyverse</span></a>. <strong>Journal of Open Source Software</strong>, v. 4, n. 43, p. 1686, nov. 2019.
+</div>
+</div>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>A partir da versão 4.1 do R, existe também o operador pipe nativo <code>|&gt;</code>. No entanto, nesta apostila manteremos o uso de <code>%&gt;%</code>, amplamente adotado no contexto do tidyverse.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Tente contar os números do conjunto <span class="math inline">\(A = \{1,2,3,4\}\)</span> e, também, de <span class="math inline">\(B = [1,4]\)</span>. Observe que no conjunto <span class="math inline">\(A\)</span> há 4 elementos, enquanto em <span class="math inline">\(B\)</span> há infinitos valores de 1 a 4.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Também chamado por gráfico de caixas.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-fundamentos.html" class="pagination-link" aria-label="Fundamentos de R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentos de R</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04-pratica.html" class="pagination-link" aria-label="Prática">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Prática</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
