@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -70,7 +105,40 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Procurar"
   }
 }</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -151,8 +219,31 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#o-que-são-r-e-rstudio" id="toc-o-que-são-r-e-rstudio" class="nav-link active" data-scroll-target="#o-que-são-r-e-rstudio"><span class="header-section-number">2.1</span> O que são R e RStudio?</a></li>
+  <li><a href="#instalação-passo-a-passo" id="toc-instalação-passo-a-passo" class="nav-link" data-scroll-target="#instalação-passo-a-passo"><span class="header-section-number">2.2</span> Instalação passo a passo</a></li>
+  <li><a href="#navegando-na-interface-do-rstudio" id="toc-navegando-na-interface-do-rstudio" class="nav-link" data-scroll-target="#navegando-na-interface-do-rstudio"><span class="header-section-number">2.3</span> Navegando na interface do RStudio</a></li>
+  <li><a href="#o-conceito-de-pacotes" id="toc-o-conceito-de-pacotes" class="nav-link" data-scroll-target="#o-conceito-de-pacotes"><span class="header-section-number">2.4</span> O conceito de pacotes</a>
+  <ul class="collapse">
+  <li><a href="#instalando-e-carregando-pacotes-essenciais" id="toc-instalando-e-carregando-pacotes-essenciais" class="nav-link" data-scroll-target="#instalando-e-carregando-pacotes-essenciais"><span class="header-section-number">2.4.1</span> Instalando e Carregando Pacotes Essenciais</a></li>
+  </ul></li>
+  <li><a href="#diretório-de-trabalho-e-projetos-rstudio" id="toc-diretório-de-trabalho-e-projetos-rstudio" class="nav-link" data-scroll-target="#diretório-de-trabalho-e-projetos-rstudio"><span class="header-section-number">2.5</span> Diretório de Trabalho e Projetos RStudio</a></li>
+  <li><a href="#r-básico" id="toc-r-básico" class="nav-link" data-scroll-target="#r-básico"><span class="header-section-number">2.6</span> R Básico</a>
+  <ul class="collapse">
+  <li><a href="#operadores-matemáticos" id="toc-operadores-matemáticos" class="nav-link" data-scroll-target="#operadores-matemáticos"><span class="header-section-number">2.6.1</span> Operadores Matemáticos</a></li>
+  <li><a href="#objetos-e-funções" id="toc-objetos-e-funções" class="nav-link" data-scroll-target="#objetos-e-funções"><span class="header-section-number">2.6.2</span> Objetos e funções</a></li>
+  <li><a href="#importanto-dados" id="toc-importanto-dados" class="nav-link" data-scroll-target="#importanto-dados"><span class="header-section-number">2.6.3</span> Importanto dados</a></li>
+  <li><a href="#vetores-e-data-frames" id="toc-vetores-e-data-frames" class="nav-link" data-scroll-target="#vetores-e-data-frames"><span class="header-section-number">2.6.4</span> Vetores e <em>Data frames</em></a></li>
+  <li><a href="#fatores" id="toc-fatores" class="nav-link" data-scroll-target="#fatores"><span class="header-section-number">2.6.5</span> Fatores</a></li>
+  <li><a href="#valores-especiais" id="toc-valores-especiais" class="nav-link" data-scroll-target="#valores-especiais"><span class="header-section-number">2.6.6</span> Valores especiais</a></li>
+  <li><a href="#pedindo-ajuda" id="toc-pedindo-ajuda" class="nav-link" data-scroll-target="#pedindo-ajuda"><span class="header-section-number">2.6.7</span> Pedindo ajuda</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -176,9 +267,335 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In summary, this book has no content whatsoever.</p>
+<p>Para começar essa jornada, o primeiro passo é configurar o ambiente de trabalho. Isso envolve a instalação de dois <em>softwares</em> distintos, mas que trabalham juntos: R e RStudio. Compreender o funcionamento de cada um e como eles se interagem é fundamental para as próximas etapas.</p>
+<section id="o-que-são-r-e-rstudio" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="o-que-são-r-e-rstudio"><span class="header-section-number">2.1</span> O que são R e RStudio?</h2>
+<p>É comum que iniciantes confundam R e RStudio, mas esta distinção é crucial para o processo.</p>
+<ul>
+<li><strong>R</strong> é a linguagem de programação e o ambiente de software para computação estatística e gráficos. Pode-se pensar que é o “motor” que executa todos os cálculos, análises e gera os gráficos. Além de tudo, é um projeto de código aberto, gratuito e mantido por uma vasta comunidade de desenvolvedores e estatísticos ao redor do mundo.</li>
+<li><strong>RStudio</strong> é um Ambiente de Desenvolvimento Integrado (IDE, do inglês <em>Integrated Development Environment</em>). Se o R é o motor do carro, o RStudio<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> é o painel, o volante, e todo o interior que torna a condução do carro uma experiência agradável e gerenciável. O RStudio fornece uma interface gráfica e amigável que organiza o trabalho em R, facilitando a escrita de <em>scripts</em> (arquivos de códigos), a visualização de gráficos, o gerenciamento de pacotes (bibliotecas) e muito mais. Embora seja possível utilizar o R sem o RStudio, a utilização do RStudio é fortemente recomendada, pois deixa o processo de análise muito mais interativo e organizado.</li>
+</ul>
+</section>
+<section id="instalação-passo-a-passo" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="instalação-passo-a-passo"><span class="header-section-number">2.2</span> Instalação passo a passo</h2>
+<p>A instalação adequada dos programas é um pré-requisito crucial. A ordem de instalação é importante: <strong>R deve ser instalado antes do RStudio</strong>.</p>
+<ol type="1">
+<li>Instalando o R:</li>
+</ol>
+<ul>
+<li>Acesse o <a href="https://cran.r-project.org/">site</a> do <em>Comprehensive R Archive Network</em> (CRAN)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, que é o repositório oficial para o R e seus pacotes.</li>
+<li>Na página inicial, selecione o link de download para o seu sistema operacional (Linux, macOS ou Windows).</li>
+<li>Siga as instruções para baixar a versão mais recente (“base”). É crucial baixar a versão diretamente do CRAN, pois os gerenciadores de pacotes de alguns sistemas operacionais (como o <code>get-apt</code> do Ubuntu) podem fornecer versões desatualizadas.</li>
+<li>Execute o arquivo de instalação baixado e siga as instruções padrão, aceitando as configurações padrão.</li>
+</ul>
+<ol start="2" type="1">
+<li>Instalando o RStudio:</li>
+</ol>
+<ul>
+<li>Após a instalação do R, acesse o <a href="https://posit.co/download/rstudio-desktop/">site da Posit</a> e clique para baixar a versão gratuita do RStudio Desktop.</li>
+<li>Baixe o instalador apropriado para o seu sistema operacional.</li>
+<li>Execute o arquivo de instalação. O RStudio detectará automaticamente a instalação do R existente.</li>
+</ul>
+</section>
+<section id="navegando-na-interface-do-rstudio" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="navegando-na-interface-do-rstudio"><span class="header-section-number">2.3</span> Navegando na interface do RStudio</h2>
+<p>Ao abrir o RStudio pela primeira vez, a interface se apresenta dividida em quatro painéis ou quadrantes principais, cada um com uma função específica:</p>
+<ol type="1">
+<li><strong>Editor de <em>scripts</em></strong> (Superior esquerdo): Este é o seu principal espaço de trabalho. Aqui, você escreverá e salvará seus <em>scripts</em> R (arquivos com extensão <code>.R</code>). Trabalhar em um <em>script</em>, em vez de digitar comandos diretamente no console, é a base da ciência reprodutível, pois permite salvar, comentar e reutilizar seu código.</li>
+<li><strong>Console</strong> (Inferior esquerdo): O console é o código R é efetivamente executado. Você pode digitar os comandos diretamente nele para testes rápidos ou executar linhas de códigos do seu <em>script</em> (utilizando o atalho <code>Ctrl+Enter</code>). A saída dos comandos também aparecerá aqui.</li>
+<li><strong>Ambiente e Histórico</strong> (Superior direito): A aba <em>Environment</em> mostra todos os objetos (como <em>datasets</em>, variáveis, etc.) que foram criadas na sessão atual do R. Já a aba <em>History</em> mantém um registro de todos os comandos utilizados.</li>
+<li><strong>Arquivos, Gráficos, Pacotes e Ajuda</strong> (Inferior direita): Este painel multifuncional permite navegar pelos arquivos do seu computador (<em>Files</em>) , visualizar gráficos gerados (<em>Plots</em>), gerenciar pacotes instalados (<em>Packages</em>), e acessar documentações de ajuda do R (<em>Help</em>).</li>
+</ol>
+<p>É importante salientar que o RStudio permite customizações, como a alteração das posições dos painéis.</p>
+</section>
+<section id="o-conceito-de-pacotes" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="o-conceito-de-pacotes"><span class="header-section-number">2.4</span> O conceito de pacotes</h2>
+<p>A grande força do R reside em seu ecossistema de pacotes. Um pacote é a coleção de funções, dados e documentação que estende as capacidades iniciais do R. Para qualquer tarefa estatística ou de manipulação de dados que se possa imaginar, provavelmente existe algum pacote que a facilita.</p>
+<section id="instalando-e-carregando-pacotes-essenciais" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="instalando-e-carregando-pacotes-essenciais"><span class="header-section-number">2.4.1</span> Instalando e Carregando Pacotes Essenciais</h3>
+<p>Existe uma distinção básica a ser realizada entre instalar e carregar um pacote.</p>
+<ul>
+<li><strong>Instalação</strong>: É o ato de baixar o pacote do CRAN e instalá-lo no computador. Isso é realizado apenas uma vez para cada pacote.</li>
+<li><strong>Carregamento</strong>: É o ato de carregar o pacote instalado em sua sessão do R de forma que as funções adicionais fiquem disponíveis para uso. Isso precisa ser feito toda vez que uma sessão no R é iniciada.</li>
+</ul>
+<p>Para este material, os pacotes centrais são: <code>tidyverse</code>, <code>lme4</code>, <code>lmerTest</code> e <code>nlme</code>. Um dos métodos para instalar pacotes R no computador é por meio da função <code>install.packages()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instala o pacote tidyverse, que inclui dplyr, ggplot2 e outros</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Instala o pacote para modelos lineares mistos</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lme4"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Instala outros pacotes para modelos mistos</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lmerTest"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"nlme"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Após a instalação, para usar as funções de um pacote, é preciso carregá-lo com a função <code>library()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Cabe ressaltar que, ao longo do uso de diversos pacotes, podem ocorrer conflitos de funções com o mesmo nome. Nesses casos, a solução mais prática é utilizar a notação <code>pacote::funcao</code> para indicar explicitamente ao R de qual biblioteca desejamos chamar a função.</p>
+</section>
+</section>
+<section id="diretório-de-trabalho-e-projetos-rstudio" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="diretório-de-trabalho-e-projetos-rstudio"><span class="header-section-number">2.5</span> Diretório de Trabalho e Projetos RStudio</h2>
+<p>O diretório de trabalho é a pasta no seu computador onde o R irá procurar por arquivos para ler e onde, também, salvará os arquivos criados (como gráficos, <em>scripts</em> e <em>datasets</em> modificados). É possível identificar o diretório atual através do comando <code>getwd()</code> e, embora também seja possível defini-la manualmente com a função <code>setwd("caminho/para/sua/pasta")</code>, essa prática não é aconselhável, visto que o uso de caminhos de arquivos absolutos torna o código não portável; ou seja, ele não irá funcionar se você mover a pasta do projeto ou tentá-la executá-lo em outro computador.</p>
+<p>A solução moderna e robusta para esse problema é a utilização de <strong>Projetos RStudio</strong>. Um projeto RStudio (extensão <code>.Rproj</code>) é um arquivo que você cria dentro de uma pasta do seu projeto de pesquisa. Ao abrir um projeto, o RStudio automaticamente define o diretório de trabalho para aquela pasta. Isso garante que todos os caminhos de arquivo do seu código possam ser relativos à raiz do projeto, tornando sua análise totalmente reprodutível e compartilhável de forma eficaz. Outra maneira de criar projetos é através do próprio RStudio, através das seguintes instruções <code>File &gt; New Project &gt; New Directory &gt; New Project</code> e nesta última etapa, você escolherá um nome para o projeto e a pasta de sua pesquisa, finalizando em <code>Create Project</code>. A criação de um projeto para cada análise de pesquisa é uma prática fundamental para a organização e a reprodutibilidade científica.</p>
+</section>
+<section id="r-básico" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="r-básico"><span class="header-section-number">2.6</span> R Básico</h2>
+<p>A leitura desta sessão é aconselhada para o leitor que nunca teve contato com o R. Os tópicos introduzidos são especiais para a compreensão do que é um <em>dataframe</em>, a estrutura dos <em>datasets</em> dentro do R, e quais operações estarão sendo realizadas quando estivermos efetuando filtragens e modificações de suas colunas. Também são importantes para a compreensão do que é uma função no R.</p>
+<section id="operadores-matemáticos" class="level3" data-number="2.6.1">
+<h3 data-number="2.6.1" class="anchored" data-anchor-id="operadores-matemáticos"><span class="header-section-number">2.6.1</span> Operadores Matemáticos</h3>
+<p>Os operadores matemáticos, também conhecidos por operadores binários, dentro do ambiente R soam como familiares. A <a href="#tbl-op-mat" class="quarto-xref">Tabela&nbsp;<span>2.1</span></a> exibe os operadores mais básicos utilizados.</p>
+<p>Para exemplificar como efetuar cálculos de expressões matemáticas no R, suponha que desenhamos calcular o valor de: <span class="math display">\[2\times 2 + \frac{4 + 4}{2}.\]</span> Para isso, escrevemos <code>2*2 + (4+4)/2</code> no console para determinarmos o resultado</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="dv">2</span> <span class="sc">+</span> (<span class="dv">4</span><span class="sc">+</span><span class="dv">4</span>)<span class="sc">/</span><span class="dv">2</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-op-mat" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-op-mat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;2.1: Operadores matemáticos básicos.
+</figcaption>
+<div aria-describedby="tbl-op-mat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Operadores</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">+</td>
+<td style="text-align: left;">Adição</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">Subtração</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">*</td>
+<td style="text-align: left;">Multiplicação</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">/</td>
+<td style="text-align: left;">Divisão</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">^</td>
+<td style="text-align: left;">Exponenciação</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="objetos-e-funções" class="level3" data-number="2.6.2">
+<h3 data-number="2.6.2" class="anchored" data-anchor-id="objetos-e-funções"><span class="header-section-number">2.6.2</span> Objetos e funções</h3>
+<p>O R permite guardar valores dentro de um <strong>objeto</strong>. Um objeto é simplesmente um nome que guarda uma determinada informação na memória do computador, que é criado por meio do operador <code>&lt;-</code>. Veja que no código a seguir</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># Salvando "10" em "x"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x       <span class="co"># Avaliando o objeto "x"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+</div>
+<p>foi salvo que a informação que <code>x</code> carrega é o valor <code>10</code>. Portanto, toda vez que o objeto <code>x</code> for avaliado, o R irá devolver o valor <code>10</code>.</p>
+<p>É importante ressaltar que há regras para a nomeação dos objetos, dentre elas, não começar com números. Assim, todos os seguintes exemplos são permitidos: <code>x &lt;- 1</code>, <code>x1 &lt;- 1</code>, <code>meu_objeto &lt;- 1</code>, <code>meu.objeto &lt;- 1</code>. Ainda, o R diferencia letras minúsculas de maiúsculas, então objetos como <code>y</code> e <code>Y</code> são diferentes.</p>
+<p>Enquanto que os objetos são nomes que salvam informações de valores, <strong>funções</strong> são nomes que guardam informações de um código R, retornando algum resultado programado. A sintaxe básica de uma função é <code>nome_funcao(arg1, arg2, ...)</code>. Os valores dentro dos parênteses são chamados por <strong>argumentos</strong>, que são informações necessárias para o bom funcionamento de uma função. Às vezes, uma função não necessita do fornecimento de argumentos específicos.</p>
+<p>Uma função simples, porém útil, é a <code>sum()</code>. Ela consiste em somar os valores passados em seu argumento. Suponha que desejamos somar <code>1+2+3+4+5</code>. Assim,</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+</div>
+<p>é possível reparar que o resultado é 15.</p>
+<p>A classe de um objeto é muito importante na programação em R. É a partir disso que as funções e operadores conseguem entender o que fazer com cada objeto. Há uma infinidade de classes, dentre as mais conhecidas são: <code>numeric</code>, <code>character</code>, <code>data.frame</code>, <code>logical</code> e <code>factor</code>. Para averiguar o tipo de classe, a função <code>class()</code> retorna exatamente a classe do objeto.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="st">"a"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mtcars)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="cn">TRUE</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+</section>
+<section id="importanto-dados" class="level3" data-number="2.6.3">
+<h3 data-number="2.6.3" class="anchored" data-anchor-id="importanto-dados"><span class="header-section-number">2.6.3</span> Importanto dados</h3>
+<p>Uma atividade importante para qualquer análise estatística que vier ser feita no R é importante importar os dados para o ambiente de trabalho, que ficarão guardados dentro de um objeto no projeto RStudio – afinal, como faríamos as análises sem os dados? No contexto da Biologia, isso costuma significar ler arquivos com medidas de peso, contagens de indivíduos, medidas de comprimento etc., geralmente armazenados em formatos de texto (<code>.csv</code> ou <code>.tsv</code>) ou planilhas (<code>.xlsx</code>). As principais funções para cada ocasião de arquivo são:</p>
+<ul>
+<li>CSV com cabeçalho:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"dados.csv"</span>,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="co"># indica que há cabeçalho</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep    =</span> <span class="st">","</span>,  <span class="co"># separador vírgula</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span> <span class="co"># evita conversão automática em fatores</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>TXT ou TSV com tabulação:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"dadostsv"</span>, </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep    =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>Planilhas no Excel (arquivos <code>.xlsx</code>):</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"dados.xlsx"</span>,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">"Planilha1"</span> <span class="co"># aqui você escolhe a planilha a ser lida</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Ressaltamos, neste caso, a necessidade da utilização da biblioteca <code>readxl</code> para que seja possível lermos planilhas no R.</p>
+</section>
+<section id="vetores-e-data-frames" class="level3" data-number="2.6.4">
+<h3 data-number="2.6.4" class="anchored" data-anchor-id="vetores-e-data-frames"><span class="header-section-number">2.6.4</span> Vetores e <em>Data frames</em></h3>
+<p>Vetores são uma estrutura fundamental dentro do R, em especial, é a partir deles que os <em>data frames</em> são construídos. Por definição, são conjuntos indexados de valores e para criá-los, basta utilizar a função <code>c()</code> com valores separados por vírgula (ex.: <code>c(1,2,4,10)</code>). Para acessar um valor dentro de um determinado vetor, utiliza-se os colchetes <code>[]</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>vetor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Acessando valor "b"</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>vetor[<span class="dv">2</span>]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "b"</code></pre>
+</div>
+</div>
+<p>Um vetor só pode guardar um tipo de objeto e ele terá sempre a mesma classe dos objetos que guarda. Caso tentarmos misturar duas classes, o R vai apresentar o comportamento conhecido como <strong>coerção</strong>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(vetor)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="st">"a"</span>,<span class="st">"b"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<p>Neste caso, todos os elementos do vetor se transformaram em texto.</p>
+<p>Assim, também, <em>data frames</em> são de extrema importância no R, visto que são os objetos que guardam os dados e são equivalentes a uma planilha do Excel. A principal característica é possuir linha e colunas. Em geral, as colunas são vetores de mesmo tamanho (ou dimensão). Um valor específico de um <em>data frame</em> pode ser acessado, também, via colchetes <code>[]</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mtcars)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mtcars[<span class="dv">1</span>,<span class="dv">2</span>]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+<p><code>mtcars</code> é um conjunto de dados muito conhecido na comunidade R.</p>
+</section>
+<section id="fatores" class="level3" data-number="2.6.5">
+<h3 data-number="2.6.5" class="anchored" data-anchor-id="fatores"><span class="header-section-number">2.6.5</span> Fatores</h3>
+<p>Fatores são uma classe de objetos no R criada para representar variáveis categóricas numericamente. A característica que define essa classe é o atributo <code>levels</code>, que representam as possíveis categorias de uma variável categórica.</p>
+<p>A título de exemplificação, considere o objeto <code>sexo</code> que contém as informações do sexo de uma pessoa. As possibilidades são: <code>F</code> (feminino) e <code>M</code> (masculino). Por padrão, o R interpreta essa variável como texto (<em>character</em>), no entanto, é possível transformá-la em fator por meio da função <code>as.factor()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>sexo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"F"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(sexo)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformando em fator</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">as.factor</span>(sexo))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "factor"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(sexo)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] F F M M F
+Levels: F M</code></pre>
+</div>
+</div>
+<p>Observa-se que a linha adicional <code>Levels: F M</code> indicam as categorias. Por padrão, o R ordena esses níveis em ordem alfabética. Para facilitar os cálculos e análises, o R interpreta os níveis categóricos como sendo números distintos, sendo assim, dentro do nosso exemplo <code>F</code> representaria o número <code>0</code> e <code>M</code> representaria o <code>1</code>.</p>
+</section>
+<section id="valores-especiais" class="level3" data-number="2.6.6">
+<h3 data-number="2.6.6" class="anchored" data-anchor-id="valores-especiais"><span class="header-section-number">2.6.6</span> Valores especiais</h3>
+<p>Valores como <code>NA</code>, <code>NaN</code>, <code>Inf</code> e <code>NULL</code> ocorrem frequentemente dentro do mundo da programação estatística no R. Em resumo:</p>
+<ul>
+<li><code>NA</code> representa a Ausência de Informação. Suponha que o vetor <code>idades</code> que representa a idade de três pessoas. Uma situação que pode ocorrer é <code>idades &lt;- c(10, NA, NA)</code>. Portanto, não é sabido a idade das pessoas 2 e 3.</li>
+<li><code>NaN</code> representa indefinições matemáticas. Um exemplo típico é o valor <span class="math inline">\(\log{-1}\)</span>, do qual <span class="math inline">\(x = -1\)</span> não pertence aos possíveis valores de saída da função logarítmica, gerando um <code>NaN</code> (<em>Not a number</em>).</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in log(-1): NaNs produzidos</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NaN</code></pre>
+</div>
+</div>
+<ul>
+<li><code>Inf</code> representa um número muito grande ou um limite matemático. Exemplos:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Número muito grande</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">^</span><span class="dv">510</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Inf</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Limite matemático</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span><span class="dv">0</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Inf</code></pre>
+</div>
+</div>
+<ul>
+<li><code>NULL</code> representa a ausência de um objeto. Muitas vezes define-se um objeto como nulo para dizer ao R que não desejamos atribuir valores a ele.</li>
+</ul>
+</section>
+<section id="pedindo-ajuda" class="level3" data-number="2.6.7">
+<h3 data-number="2.6.7" class="anchored" data-anchor-id="pedindo-ajuda"><span class="header-section-number">2.6.7</span> Pedindo ajuda</h3>
+<p>Uma das coisas que intimidam novos programadores, independente da linguagem utilizada, é a ocorrência de erros. Neste sentido, o R pode ser um grande aliado, pois ele relata mensagens, erros e avisos sobre o código no console, como se fosse uma espécie de resposta e/ou comunicação. As situações são:</p>
+<ul>
+<li><code>Error</code>: em situações de erro legítimo aparecerá mensagens do tipo <code>Error in ...</code> e tentará explicar o que há de errado. Nestas situações o código, geralmente, não é executado. Por exemplo: <code>Error in ggplot(...) : could not find function "ggplot"</code>.</li>
+<li><code>Warning</code>: em situações de avisos, o R exibirá uma mensagem do tipo <code>Warning: ...</code> e tentará explicar o motivo do aviso. Geralmente, o código será executado, mas com algumas ressalvas. Por exemplo: <code>Warning: Removed 2 rows containing missing values (geom_point)</code>.</li>
+<li><code>Message</code>: quando o texto exibido não se enquadra nas duas opções anteriores, dizemos que é apenas uma mensagem. Pense, nessa situação, que tudo está acontecendo como o esperado e está tudo bem.</li>
+</ul>
+<p>Quando surgir qualquer uma dessas saídas, não estaremos perdidos, pois o R oferece mecanismos para encontrarmos respostas. Afinal, nem todo mundo decorou todas as funções ou argumentos. Os principais mecanismos são:</p>
+<ul>
+<li><code>?função</code> ou <code>help(função)</code> para consultar a documentação oficial.</li>
+<li><code>??termo</code> e <code>help.search("termo")</code> para buscas por palavras-chave.</li>
+</ul>
+<p>Além disso, o RStudio oferece alguns <a href="https://rstudio.com/resources/cheatsheets/"><em>Cheatsheets</em></a> (resumo de códigos) que podem ajudar com determinados pacotes. E, por fim, existem grandes comunidade online, tais como: <a href="https://stackoverflow.com/collectives/r-language">Stack Overflow</a> e <a href="https://forum.posit.co/">RStudio Community</a> dos quais também podem serem úteis.</p>
 
 
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Existem outras IDEs que podem ser utilizadas no lugar do RStudio, como o Visual Studio Code. No entanto, focaremos nosso estudo utilizando o RStudio.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Um outro repositório conhecido na comunidade científica para pacotes com o intuítuo de modelagem na biologia, em especial na genética, é o <a href="https://www.bioconductor.org/">Bioconductor</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
