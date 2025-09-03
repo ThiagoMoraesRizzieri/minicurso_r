@@ -7,14 +7,19 @@
 library(kableExtra)
 library(tidyverse)
 ```
+
 Para começar essa jornada, o primeiro passo é configurar o ambiente de trabalho. Isso envolve a instalação de dois *softwares* distintos, mas que trabalham juntos: R e RStudio. Compreender o funcionamento de cada um e como eles se interagem é fundamental para as próximas etapas.
 
 ## O que são R e RStudio?
 
 É comum que iniciantes confundam R e RStudio, mas esta distinção é crucial para o processo.
 
-- **R** é a linguagem de programação e o ambiente de software para computação estatística e gráficos. Pode-se pensar que é o "motor" que executa todos os cálculos, análises e gera os gráficos. Além de tudo, é um projeto de código aberto, gratuito e mantido por uma vasta comunidade de desenvolvedores e estatísticos ao redor do mundo.
-- **RStudio** é um Ambiente de Desenvolvimento Integrado (IDE, do inglês *Integrated Development Environment*). Se o R é o motor do carro, o RStudio^[Existem outras IDEs que podem ser utilizadas no lugar do RStudio, como o Visual Studio Code. No entanto, focaremos nosso estudo utilizando o RStudio.] é o painel, o volante, e todo o interior que torna a condução do carro uma experiência agradável e gerenciável. O RStudio fornece uma interface gráfica e amigável que organiza o trabalho em R, facilitando a escrita de *scripts* (arquivos de códigos), a visualização de gráficos, o gerenciamento de pacotes (bibliotecas) e muito mais. Embora seja possível utilizar o R sem o RStudio, a utilização do RStudio é fortemente recomendada, pois deixa o processo de análise muito mais interativo e organizado.
+-   **R** é a linguagem de programação e o ambiente de software para computação estatística e gráficos. Pode-se pensar que é o "motor" que executa todos os cálculos, análises e gera os gráficos. Além de tudo, é um projeto de código aberto, gratuito e mantido por uma vasta comunidade de desenvolvedores e estatísticos ao redor do mundo.
+-   **RStudio** é um Ambiente de Desenvolvimento Integrado (IDE, do inglês *Integrated Development Environment*). Se o R é o motor do carro, o RStudio[^02-fundamentos-1] é o painel, o volante, e todo o interior que torna a condução do carro uma experiência agradável e gerenciável. O RStudio fornece uma interface gráfica e amigável que organiza o trabalho em R, facilitando a escrita de *scripts* (arquivos de códigos), a visualização de gráficos, o gerenciamento de pacotes (bibliotecas) e muito mais. Embora seja possível utilizar o R sem o RStudio, a utilização do RStudio é fortemente recomendada, pois deixa o processo de análise muito mais interativo e organizado.
+
+[^02-fundamentos-1]: Existem outras IDEs que podem ser utilizadas no lugar do RStudio, como o Visual Studio Code. No entanto, focaremos nosso estudo utilizando o RStudio.
+
+![](images/rstudio.png){fig-align="center" width="464"}
 
 ## Instalação passo a passo
 
@@ -22,16 +27,22 @@ A instalação adequada dos programas é um pré-requisito crucial. A ordem de i
 
 1.  Instalando o R:
 
--   Acesse o [site](https://cran.r-project.org/) do *Comprehensive R Archive Network* (CRAN)^[Um outro repositório conhecido na comunidade científica para pacotes com o intuítuo de modelagem na biologia, em especial na genética, é o [Bioconductor](https://www.bioconductor.org/).], que é o repositório oficial para o R e seus pacotes.
+-   Acesse o [site](https://cran.r-project.org/) do *Comprehensive R Archive Network* (CRAN)[^02-fundamentos-2], que é o repositório oficial para o R e seus pacotes.
 -   Na página inicial, selecione o link de download para o seu sistema operacional (Linux, macOS ou Windows).
 -   Siga as instruções para baixar a versão mais recente ("base"). É crucial baixar a versão diretamente do CRAN, pois os gerenciadores de pacotes de alguns sistemas operacionais (como o `get-apt` do Ubuntu) podem fornecer versões desatualizadas.
 -   Execute o arquivo de instalação baixado e siga as instruções padrão, aceitando as configurações padrão.
+
+[^02-fundamentos-2]: Um outro repositório conhecido na comunidade científica para pacotes com o intuítuo de modelagem na biologia, em especial na genética, é o [Bioconductor](https://www.bioconductor.org/).
+
+![](images/clipboard-2887599601.png)
 
 2.  Instalando o RStudio:
 
 -   Após a instalação do R, acesse o [site da Posit](https://posit.co/download/rstudio-desktop/) e clique para baixar a versão gratuita do RStudio Desktop.
 -   Baixe o instalador apropriado para o seu sistema operacional.
 -   Execute o arquivo de instalação. O RStudio detectará automaticamente a instalação do R existente.
+
+![](images/clipboard-386187942.png)
 
 ## Navegando na interface do RStudio
 
@@ -56,6 +67,8 @@ Existe uma distinção básica a ser realizada entre instalar e carregar um paco
 -   **Carregamento**: É o ato de carregar o pacote instalado em sua sessão do R de forma que as funções adicionais fiquem disponíveis para uso. Isso precisa ser feito toda vez que uma sessão no R é iniciada.
 
 Para este material, os pacotes centrais são: `tidyverse`, `lme4`, `lmerTest` e `nlme`. Um dos métodos para instalar pacotes R no computador é por meio da função `install.packages()`:
+
+<!-- Retirar os pacotes de modelos mistos e substituir por ggplot2? -->
 
 ```{r instal-pkg}
 #| eval: false
@@ -275,4 +288,3 @@ Quando surgir qualquer uma dessas saídas, não estaremos perdidos, pois o R ofe
 -   `??termo` e `help.search("termo")` para buscas por palavras-chave.
 
 Além disso, o RStudio oferece alguns [*Cheatsheets*](https://rstudio.com/resources/cheatsheets/) (resumo de códigos) que podem ajudar com determinados pacotes. E, por fim, existem grandes comunidade online, tais como: [Stack Overflow](https://stackoverflow.com/collectives/r-language) e [RStudio Community](https://forum.posit.co/) dos quais também podem serem úteis.
-
