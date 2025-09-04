@@ -57,14 +57,9 @@ penguins %>%
 # Carregando os pacotes
 library(tidymodels)
 
-
-
-# Usar o dataset iris, disponível por padrão no R
-data(iris)
-
 # Criar um split treino/teste
 set.seed(123)
-split <- initial_split(iris, prop = 0.8)
+split <- initial_split(penguins, prop = 0.7)
 train <- training(split)
 test <- testing(split)
 
@@ -76,7 +71,7 @@ modelo <- multinom_reg() %>%
 # Criar o workflow
 workflow <- workflow() %>%
   add_model(modelo) %>%
-  add_formula(Species ~ .)
+  add_formula(species ~ .)
 
 # Ajustar o modelo
 ajustado <- fit(workflow, data = train)
@@ -86,9 +81,9 @@ pred <- predict(ajustado, new_data = test) %>%
   bind_cols(test)
 
 # Métricas de desempenho
-metrics(pred, truth = Species, estimate = .pred_class)
+metrics(pred, truth = species, estimate = .pred_class)
 
 # Matriz de confusão
-conf_mat(pred, truth = Species, estimate = .pred_class)
+conf_mat(pred, truth = species, estimate = .pred_class)
 
 ```
