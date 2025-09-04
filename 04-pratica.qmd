@@ -10,6 +10,85 @@ library(tidymodels)
 
 Neste capítulo será aplicaremos os conceitos vistos de ML e R para ....
 
+# Classificação em dados simples
+
+```{r}
+# 1. Gerar dados sintéticos para duas classes
+# O modelo será: y = -2 * x + 5 (com algum ruído)
+set.seed(42)
+n_obs <- 100
+
+data_class_a <- tibble(
+  x = rnorm(n_obs, mean = 2, sd = 1),
+  y = -2 * x + 5 + rnorm(n_obs, mean = 0, sd = 1)
+) %>%
+  mutate(classe = "A")
+
+data_class_b <- tibble(
+  x = rnorm(n_obs, mean = 4, sd = 1),
+  y = -2 * x + 5 + rnorm(n_obs, mean = 2, sd = 1)
+) %>%
+  mutate(classe = "B")
+
+# Unir os dataframes e misturar
+dados_simulados <- bind_rows(data_class_a, data_class_b) %>%
+  sample_frac(1)
+
+head(dados_simulados)
+```
+
+```{r}
+ggplot(dados_simulados, aes(x = x, y = y, color = classe)) +
+  geom_point(size = 3, alpha = 0.7) 
+```
+
+
+
+
+
+
+```{r}
+# 2. Treinar um modelo de regressão logística
+dados_simulados$classe <- as.factor(dados_simulados$classe)
+
+modelo_logistico_simples <- logistic_reg() %>%
+  set_engine("glm") %>%
+  set_mode("classification") %>%
+  fit(classe ~ x + y, data = dados_simulados)
+
+# 3. Extrair os coeficientes para a reta de classificação
+intercept <- modelo_logistico_simples$fit$coefficients["(Intercept)"]
+coef_x <- modelo_logistico_simples$fit$coefficients["x"]
+coef_y <- modelo_logistico_simples$fit$coefficients["y"]
+
+# A reta de decisão é onde a probabilidade é 0.5, ou seja, -intercept = coef_x*x + coef_y*y
+# Isolamos 'y' para plotar a reta: y = (-coef_x/coef_y)*x - (intercept/coef_y)
+slope <- -coef_x / coef_y
+intercept_line <- -intercept / coef_y
+
+# 4. Visualizar os dados e a reta de classificação
+ggplot(dados_simulados, aes(x = x, y = y, color = classe)) +
+  geom_point(size = 3, alpha = 0.7) +
+  geom_abline(intercept = intercept_line, slope = slope, linetype = "dashed", size = 1, color = "black") +
+  labs(
+    title = "Classificação Linear com Regressão Logística",
+    subtitle = "A reta pontilhada é a fronteira de decisão do modelo",
+    x = "Variável X",
+    y = "Variável Y",
+    color = "Classe"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+
+
+(colocar um exemplo em 3D tb)
+
+
+
+
+
+
 ## Classificação: Pinguins do arquipélago Palmer
 
 ### **Conheça os pinguins** 🐧
@@ -59,7 +138,7 @@ library(tidymodels)
 
 # Criar um split treino/teste
 set.seed(123)
-split <- initial_split(penguins, prop = 0.7)
+split <- initial_split(penguins, prop = 0.7, strata = species)
 train <- training(split)
 test <- testing(split)
 
@@ -87,3 +166,95 @@ metrics(pred, truth = species, estimate = .pred_class)
 conf_mat(pred, truth = species, estimate = .pred_class)
 
 ```
+
+```{r}
+# Exemplo com Árvore de Decisão (mais visual para iniciantes)
+
+# 1. Definir o modelo de árvore de decisão (rpart)
+tree_model <- decision_tree() %>%
+  set_engine("rpart") %>%
+  set_mode("classification")
+
+# 2. Criar o workflow
+tree_workflow <- workflow() %>%
+  add_model(tree_model) %>%
+  add_formula(species ~ .)
+
+# 3. Ajustar (treinar) o modelo
+tree_fit <- fit(tree_workflow, data = train)
+
+# 4. Fazer previsões
+tree_pred <- predict(tree_fit, new_data = test) %>%
+  bind_cols(test)
+
+# 5. Gerar a matriz de confusão
+conf_mat(tree_pred, truth = species, estimate = .pred_class)
+
+# O pacote rpart.plot ajuda a visualizar a árvore
+# install.packages("rpart.plot")
+library(rpart.plot)
+rpart.plot(tree_fit$fit$fit, roundint = FALSE)
+```
+
+
+
+```{r}
+penguins_completo <- penguins %>%
+  drop_na()
+
+
+# Realizando a PCA
+# Usamos apenas as colunas numéricas que serão usadas para a modelagem
+pca_fit <- prcomp(penguins_completo %>% select(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g),
+                  scale = TRUE)
+
+# Adicionando os componentes principais ao dataframe
+penguins_pca <- penguins_completo %>%
+  mutate(PC1 = pca_fit$x[,1], PC2 = pca_fit$x[,2])
+```
+
+```{r}
+# Definindo o modelo de regressão logística
+linear_model_spec <- logistic_reg() %>%
+  set_engine("glm") %>%
+  set_mode("classification")
+
+# Criando o workflow e ajustando o modelo
+linear_wf <- workflow() %>%
+  add_formula(species ~ PC1 + PC2) %>% # Usamos apenas os 2 componentes principais
+  add_model(linear_model_spec)
+
+linear_fit <- fit(linear_wf, data = penguins_pca)
+```
+
+```{r}
+# Criando uma grade de pontos para o plano 2D (PC1 e PC2)
+grid <- expand.grid(
+  PC1 = seq(min(penguins_pca$PC1) - 1, max(penguins_pca$PC1) + 1, length.out = 100),
+  PC2 = seq(min(penguins_pca$PC2) - 1, max(penguins_pca$PC2) + 1, length.out = 100)
+)
+
+# Fazendo as previsões para cada ponto na grade
+grid_preds <- predict(linear_fit, new_data = grid, type = "class") %>%
+  bind_cols(grid)
+
+# Plotando as fronteiras de decisão e os dados originais
+ggplot() +
+  # Camada para as fronteiras de decisão
+  geom_raster(data = grid_preds, aes(x = PC1, y = PC2, fill = .pred_class), alpha = 0.5) +
+  # Camada para os pontos de dados originais
+  geom_point(data = penguins_pca, aes(x = PC1, y = PC2, color = species), size = 2) +
+  # Adicionando rótulos e título
+  labs(
+    title = "Fronteiras de Decisão do Modelo Linear (PCA + Regressão Logística)",
+    x = "Componente Principal 1",
+    y = "Componente Principal 2",
+    fill = "Classe Prevista",
+    color = "Espécie Real"
+  ) +
+  theme_minimal()
+```
+
+
+
+
