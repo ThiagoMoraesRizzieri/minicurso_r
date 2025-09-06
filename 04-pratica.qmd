@@ -16,7 +16,7 @@ Neste capítulo será aplicaremos os conceitos vistos de ML e R para ....
 # 1. Gerar dados sintéticos para duas classes
 # O modelo será: y = -2 * x + 5 (com algum ruído)
 set.seed(42)
-n_obs <- 100
+n_obs <- 1000
 
 data_class_a <- tibble(
   x = rnorm(n_obs, mean = 2, sd = 1),
@@ -26,7 +26,7 @@ data_class_a <- tibble(
 
 data_class_b <- tibble(
   x = rnorm(n_obs, mean = 4, sd = 1),
-  y = -2 * x + 5 + rnorm(n_obs, mean = 2, sd = 1)
+  y = -2 * x + 6 + rnorm(n_obs, mean = 2, sd = 1)
 ) %>%
   mutate(classe = "B")
 
@@ -36,6 +36,12 @@ dados_simulados <- bind_rows(data_class_a, data_class_b) %>%
 
 head(dados_simulados)
 ```
+
+```{r}
+ggplot(dados_simulados, aes(x = x, y = y)) +
+  geom_point(size = 3, alpha = 0.7) 
+```
+
 
 ```{r}
 ggplot(dados_simulados, aes(x = x, y = y, color = classe)) +
@@ -53,10 +59,38 @@ dados_simulados$classe <- as.factor(dados_simulados$classe)
 
 modelo_logistico_simples <- logistic_reg() %>%
   set_engine("glm") %>%
-  set_mode("classification") %>%
-  fit(classe ~ x + y, data = dados_simulados)
+  set_mode("classification")
+  
 
-# 3. Extrair os coeficientes para a reta de classificação
+# 3. Dividir os dados em treino e teste
+split_simulado <- initial_split(dados_simulados, prop = 0.7, strata = classe)
+train_simulado <- training(split_simulado)
+test_simulado <- testing(split_simulado)
+```
+
+```{r}
+dim(train_simulado)
+dim(test_simulado)
+```
+
+
+```{r}
+# 4. Treinar o modelo de regressão logística nos dados de TREINO
+modelo_logistico_simples <- logistic_reg() %>%
+  set_engine("glm") %>%
+  set_mode("classification") %>%
+  fit(classe ~ x + y, data = train_simulado)
+
+# Fazer previsões nos dados de TREINO
+preds_train <- predict(modelo_logistico_simples, new_data = train_simulado) %>%
+  bind_cols(train_simulado)
+
+# 5. Fazer previsões nos dados de TESTE
+preds_test <- predict(modelo_logistico_simples, new_data = test_simulado) %>%
+  bind_cols(test_simulado)
+
+
+# 6. Extrair os coeficientes para a reta de classificação
 intercept <- modelo_logistico_simples$fit$coefficients["(Intercept)"]
 coef_x <- modelo_logistico_simples$fit$coefficients["x"]
 coef_y <- modelo_logistico_simples$fit$coefficients["y"]
@@ -66,7 +100,7 @@ coef_y <- modelo_logistico_simples$fit$coefficients["y"]
 slope <- -coef_x / coef_y
 intercept_line <- -intercept / coef_y
 
-# 4. Visualizar os dados e a reta de classificação
+# 7. Visualizar os dados e a reta de classificação
 ggplot(dados_simulados, aes(x = x, y = y, color = classe)) +
   geom_point(size = 3, alpha = 0.7) +
   geom_abline(intercept = intercept_line, slope = slope, linetype = "dashed", size = 1, color = "black") +
@@ -82,7 +116,23 @@ ggplot(dados_simulados, aes(x = x, y = y, color = classe)) +
 ```
 
 
-(colocar um exemplo em 3D tb)
+```{r}
+# 8. Calcular a matriz de confusão
+
+matriz_confusao <- conf_mat(preds_train, truth = classe, estimate = .pred_class)
+matriz_confusao
+
+matriz_confusao <- conf_mat(preds_test, truth = classe, estimate = .pred_class)
+matriz_confusao
+
+```
+
+```{r}
+autoplot(matriz_confusao, type = "heatmap")
+```
+
+
+(colocar um exemplo em 3D tb ?)
 
 
 
@@ -96,6 +146,10 @@ ggplot(dados_simulados, aes(x = x, y = y, color = classe)) +
 ![Obra de \@allison_horst.](images/clipboard-3055016893.png)
 
 Os `palmerpenguins`dados contêm medições de tamanho de três espécies de pinguins observadas em três ilhas no Arquipélago Palmer, na Antártida.
+
+Esses dados foram coletados entre 2007 e 2009 pela Dra. Kristen Gorman com o Programa de Pesquisa Ecológica de Longo Prazo da Estação Palmer , parte da Rede de Pesquisa Ecológica de Longo Prazo dos EUA . Os dados foram importados diretamente do Portal de Dados da Iniciativa de Dados Ambientais (EDI) e estão disponíveis para uso sob licença CC0 (“Sem Direitos Reservados”), de acordo com a Política de Dados da Estação Palmer.
+
+Podemos acessar esses dados instalando a versão lançada do palmerpenguins do CRAN com:
 
 ```{r}
 library(palmerpenguins)
@@ -193,7 +247,7 @@ conf_mat(tree_pred, truth = species, estimate = .pred_class)
 # O pacote rpart.plot ajuda a visualizar a árvore
 # install.packages("rpart.plot")
 library(rpart.plot)
-rpart.plot(tree_fit$fit$fit, roundint = FALSE)
+rpart.plot(extract_fit_engine(tree_fit$fit$fit, roundint = FALSE))
 ```
 
 
