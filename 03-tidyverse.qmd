@@ -160,7 +160,7 @@ penguins %>%
 A interpretação do `NA` é relativa ao contexto dos dados. No caso das observações sobre os pinguins, os valores ausentes na variável `sex` permite identificar pinguins que não tiveram o sexo avaliado, tornando um provável erro frustrante de coleta de dados para um objeto de investigação. O pacote `tidyr`, também do `tidyverse`, oferece a função `drop_na()`, que remove quaisquer linhas que contenham `NA`s, permitindo a criação de um *dataset* auxiliar:
 
 ```{r}
-penguins_completos <- penguins %>% 
+penguins_completo <- penguins %>% 
   drop_na()
 ```
 
@@ -590,9 +590,61 @@ As distribuições de frequências podem ser representadas em gráficos, que fac
 
 Com esse conhecimento em mente podemos prosseguir para as construções dos gráficos utilizando o `ggplot2`
 
+O ggplot2 funciona com construção de "camadas" (layers). O comando `ggplot()` inicia um gráfico vazio.
+
+```{r}
+ggplot()
+```
+
+A partir deste gráfico vazio, podemos adicionar camadas de pontos, linhas, barras, caixas, entre outros. Dê uma olhada no [manual de referência](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf). Outros como [tidyverse](https://ggplot2.tidyverse.org/), ou [Curso de R](https://livro.curso-r.com/8-1-o-pacote-ggplot2.html) podem ajudar bastante! Explore o máximo.
+
+![](images/ggplot2.png){fig-align="center" width="452"}
+
+#### Adicionando layers
+
+De maneira geral, a sintaxe que vamos usar é `geom_yyy(data = dados, aes(x = x, y = y))`, sendo que iremos substituir `yyy` por "line" para linhas, "point" para pontos e assim por diante.
+
+Por exemplo, para criar um plot da massa corporal x e comprimento da nadadeira
+
+```{r plot2, exercise=TRUE}
+ggplot() +
+  geom_point(data = penguins_completo, aes(x = body_mass_g, y = flipper_length_mm))
+```
+
+Se quisermos que os pontos tenham uma cor em particular, usamos
+
+```{r plot3, exercise=TRUE}
+ggplot() +
+  geom_point(data = penguins_completo, aes(x = body_mass_g, y = flipper_length_mm), color = "blue")
+```
+
+Ou ainda, podemos utilizar a lógica do tidyverse e aplicar um pipe para criar nosso gráfico.
+
+```{r}
+penguins_completo %>% 
+  ggplot() +
+  geom_point(aes(x = body_mass_g, y = flipper_length_mm), color = "blue")
+```
+
+Veremos mais sobre esse tipo de gráfico depois.
+
 #### Visualizando uma única variável
 
 Para visualizar a distribuição de uma variável contínua como a massa corporal, utiliza-se o histograma com a função `geom_histogram()`. Como já foi visto, a escolha do número de colunas é arbitrário e pode afetar significativamente a aparência e a interpretação do gráfico.
+
+```{r}
+#| warning: false
+#| fig-cap: "Distribuição da massa corporal (g) dos pinguins."
+#| fig-width: 6
+#| fig-height: 2.75
+
+penguins %>% 
+  ggplot(mapping = aes(x = body_mass_g))+
+    geom_histogram()
+
+```
+
+Mas esse gráfico é muito feio, vamos ver como melhorar.
 
 ```{r}
 #| warning: false
