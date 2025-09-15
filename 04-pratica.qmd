@@ -1,4 +1,5 @@
-# Prática
+# Modelo de Classificação
+
 ```{r}
 #| echo: false
 #| message: false
@@ -8,13 +9,17 @@ library(tidyverse)
 library(tidymodels)
 ```
 
-Neste capítulo será aplicaremos os conceitos vistos de ML e R para ....
+Neste capítulo, vamos aplicar os conceitos de Machine Learning (ML) em R usando o ecossistema `tidymodels`. Começaremos com dados simples e sintéticos para entender a lógica por trás dos modelos de classificação, e depois aplicaremos esses mesmos conceitos a um conjunto de dados mais realista.
 
-# Classificação em dados simples
+## Classificação em dados simples
+
+Vamos começar gerando um conjunto de dados bidimensional simples que pode ser separado por uma linha reta. Isso nos permitirá visualizar claramente como um modelo de regressão logística funciona.
 
 ```{r}
 # 1. Gerar dados sintéticos para duas classes
-# O modelo será: y = -2 * x + 5 (com algum ruído)
+
+# Os dados da classe A são gerados por: y = -2 * x + 5 (com algum ruído)
+# Os dados da classe B são gerados por: y = -2 * x + 6 (com algum ruído)
 set.seed(42)
 n_obs <- 1000
 
@@ -37,21 +42,27 @@ dados_simulados <- bind_rows(data_class_a, data_class_b) %>%
 head(dados_simulados)
 ```
 
+Para entender melhor os dados que acabamos de criar, vamos visualizá-los. O gráfico a seguir mostra a distribuição dos pontos no plano cartesiano. Podemos ver que as duas classes formam dois "aglomerados" distintos.
+
 ```{r}
 ggplot(dados_simulados, aes(x = x, y = y)) +
   geom_point(size = 3, alpha = 0.7) 
 ```
 
+Nesse próximo gráfico, podemos observar cada uma das classes sendo representadas por uma cor. De fato, a diferença de aglomerados visto no gráfico anterior sugere a diferença entre os dois grupos.
 
 ```{r}
 ggplot(dados_simulados, aes(x = x, y = y, color = classe)) +
   geom_point(size = 3, alpha = 0.7) 
 ```
 
+### Preparando os Dados para o Modelo
 
+Antes de treinar o modelo, é uma prática essencial dividir o nosso conjunto de dados em dois subconjuntos: **treino** e **teste**.
 
+-   O conjunto de **treino** é usado para "ensinar" o modelo a identificar padrões.
 
-
+-   O conjunto de **teste** é usado para avaliar o desempenho do modelo em dados que ele **nunca viu antes**, garantindo uma avaliação mais realista.
 
 ```{r}
 # 2. Treinar um modelo de regressão logística
@@ -73,6 +84,9 @@ dim(train_simulado)
 dim(test_simulado)
 ```
 
+### Treinando e Avaliando o Modelo de Regressão Logística
+
+Agora, vamos usar a biblioteca `tidymodels` para construir, treinar e avaliar o nosso modelo de **Regressão Logística**, que é um algoritmo de classificação linear.
 
 ```{r}
 # 4. Treinar o modelo de regressão logística nos dados de TREINO
@@ -85,7 +99,14 @@ modelo_logistico_simples <- logistic_reg() %>%
 preds_train <- predict(modelo_logistico_simples, new_data = train_simulado) %>%
   bind_cols(train_simulado)
 
-# 5. Fazer previsões nos dados de TESTE
+```
+
+### Visualizando a Fronteira de Decisão
+
+A grande vantagem de usar dados sintéticos é que podemos visualizar a "fronteira de decisão" que o modelo encontrou para separar as duas classes. A **Regressão Logística** sempre encontrará uma linha reta para fazer essa separação.
+
+```{r}
+# 5. Fazer previsões nos dados de TESTE}
 preds_test <- predict(modelo_logistico_simples, new_data = test_simulado) %>%
   bind_cols(test_simulado)
 
@@ -115,6 +136,17 @@ ggplot(dados_simulados, aes(x = x, y = y, color = classe)) +
   theme(legend.position = "bottom")
 ```
 
+### Avaliando o Desempenho do Modelo
+
+Uma das ferramentas mais importantes para avaliar um modelo de classificação é a **Matriz de Confusão**. Ela mostra o quão bem o modelo classificou as amostras, comparando as classes previstas com as classes reais.
+
+-   **Verdadeiros Positivos (TP):** Predições corretas da classe positiva.
+
+-   **Verdadeiros Negativos (TN):** Predições corretas da classe negativa.
+
+-   **Falsos Positivos (FP):** Erro tipo I. Predições incorretas da classe positiva.
+
+-   **Falsos Negativos (FN):** Erro tipo II. Predições incorretas da classe negativa.
 
 ```{r}
 # 8. Calcular a matriz de confusão
@@ -122,14 +154,25 @@ ggplot(dados_simulados, aes(x = x, y = y, color = classe)) +
 matriz_confusao <- conf_mat(preds_train, truth = classe, estimate = .pred_class)
 matriz_confusao
 
-matriz_confusao <- conf_mat(preds_test, truth = classe, estimate = .pred_class)
-matriz_confusao
+matriz_confusao_teste <- conf_mat(preds_test, truth = classe, estimate = .pred_class)
+matriz_confusao_teste
 
 ```
 
 ```{r}
-autoplot(matriz_confusao, type = "heatmap")
+autoplot(matriz_confusao_teste, type = "heatmap") +
+  labs(title = "Matriz de Confusão (Dados de Teste)")
 ```
+
+Além da matriz de confusão, podemos usar outras métricas para uma avaliação mais completa:
+
+-   **Acurácia (Accuracy):** Proporção de predições corretas em relação ao total.
+
+-   **Precisão (Precision):** A proporção de predições positivas que estavam corretas.
+
+-   **Recall (Sensibilidade):** A proporção de casos positivos reais que foram identificados corretamente.
+
+-   **F1-Score:** Média harmônica de Precisão e Recall.
 
 ```{r}
 accuracy(preds_test, truth = classe, estimate = .pred_class)
@@ -141,89 +184,15 @@ recall(preds_test, truth = classe, estimate = .pred_class, event_level = "second
 f_meas(preds_test, truth = classe, estimate = .pred_class, event_level = "second")
 ```
 
-```{r}
+## 2. Classificação com Dados Não-Lineares (Árvore de Decisão)
 
-# 1. Definir o modelo de árvore de decisão (rpart)
-tree_model <- decision_tree() %>%
-  set_engine("rpart") %>%
-  set_mode("classification")
+E se os dados não puderem ser separados por uma linha reta? Vamos gerar um novo conjunto de dados onde as classes se "cruzam" e testar a Regressão Logística novamente, para então compará-la com um modelo mais flexível: a **Árvore de Decisão**.
 
-# 2. Criar o workflow
-tree_workflow <- workflow() %>%
-  add_model(tree_model) %>%
-  add_formula(classe ~ .)
-
-# 3. Ajustar (treinar) o modelo
-tree_fit <- fit(tree_workflow, data = train_simulado)
-
-# 4. Fazer previsões
-tree_pred <- predict(tree_fit, new_data = test_simulado) %>%
-  bind_cols(test_simulado)
-
-# 5. Gerar a matriz de confusão
-conf_mat(tree_pred, truth = classe, estimate = .pred_class)
-
-# O pacote rpart.plot ajuda a visualizar a árvore
-# install.packages("rpart.plot")
-library(rpart.plot)
-rpart.plot(extract_fit_engine(tree_fit$fit$fit, roundint = FALSE))
-
-```
-
-```{r}
-# 4. Fazer previsões nos dados de TREINO
-tree_pred_train <- predict(tree_fit, new_data = train_simulado) %>%
-  bind_cols(train_simulado)
-
-# 5. Gerar a matriz de confusão para os dados de TREINO
-conf_mat(tree_pred_train, truth = classe, estimate = .pred_class)
-```
-
-
-
-```{r}
-#| echo: true
-# 1. Criar uma grade de pontos para o plano 2D (x e y)
-# Definimos os limites da grade com base nos valores mínimos e máximos dos dados
-grid <- expand.grid(
-  x = seq(min(dados_simulados$x) - 1, max(dados_simulados$x) + 1, length.out = 100),
-  y = seq(min(dados_simulados$y) - 1, max(dados_simulados$y) + 1, length.out = 100)
-)
-
-# 2. Fazer as previsões para cada ponto na grade usando o modelo de árvore
-grid_preds_tree <- predict(tree_fit, new_data = grid, type = "class") %>%
-  bind_cols(grid)
-
-# 3. Plotar as fronteiras de decisão e os dados originais
-ggplot() +
-  # Camada para as fronteiras de decisão
-  geom_raster(data = grid_preds_tree, aes(x = x, y = y, fill = .pred_class), alpha = 0.5) +
-  # Camada para os pontos de dados originais
-  geom_point(data = dados_simulados, aes(x = x, y = y, color = classe), size = 2) +
-  # Adicionando rótulos e título
-  labs(
-    title = "Fronteiras de Decisão da Árvore de Decisão",
-    subtitle = "Regiões de previsão do modelo de árvore",
-    x = "Variável X",
-    y = "Variável Y",
-    fill = "Classe Prevista",
-    color = "Classe Real"
-  ) +
-  theme_minimal() +
-  theme(legend.position = "bottom")
-```
-
-
-
-
-
-(colocar um exemplo em 3D tb ?)
-
-Exemplo de dados se cruzando:
+### Gerando Dados Não-Lineares
 
 ```{r}
 # 1. Gerar dados sintéticos para duas classes
-# O modelo será: y = -2 * x + 5 (com algum ruído)
+
 set.seed(42)
 n_obs <- 1000
 
@@ -246,30 +215,29 @@ dados_simulados <- bind_rows(data_class_a, data_class_b) %>%
 head(dados_simulados)
 ```
 
+Vamos plotar esses novos dados.
+
 ```{r}
 ggplot(dados_simulados, aes(x = x, y = y)) +
   geom_point(size = 3, alpha = 0.7) 
 ```
 
+Agora colorindo cada uma das classes.
 
 ```{r}
 ggplot(dados_simulados, aes(x = x, y = y, color = classe)) +
   geom_point(size = 3, alpha = 0.7) 
 ```
 
+Perceba que as classes A e B não são separáveis por uma única linha reta.
 
+### Regressão Logística em Dados Não-Lineares
 
-
-
+Agora, vamos tentar aplicar o mesmo modelo de Regressão Logística. A fronteira de decisão será uma linha reta, mas veremos que ela não conseguirá separar bem as classes.
 
 ```{r}
 # 2. Treinar um modelo de regressão logística
 dados_simulados$classe <- as.factor(dados_simulados$classe)
-
-modelo_logistico_simples <- logistic_reg() %>%
-  set_engine("glm") %>%
-  set_mode("classification")
-  
 
 # 3. Dividir os dados em treino e teste
 split_simulado <- initial_split(dados_simulados, prop = 0.7, strata = classe)
@@ -281,7 +249,6 @@ test_simulado <- testing(split_simulado)
 dim(train_simulado)
 dim(test_simulado)
 ```
-
 
 ```{r}
 # 4. Treinar o modelo de regressão logística nos dados de TREINO
@@ -323,7 +290,6 @@ ggplot(dados_simulados, aes(x = x, y = y, color = classe)) +
   theme_minimal() +
   theme(legend.position = "bottom")
 ```
-
 
 ```{r}
 # 8. Calcular a matriz de confusão
@@ -352,12 +318,11 @@ recall(preds_test, truth = classe, estimate = .pred_class, event_level = "second
 f_meas(preds_test, truth = classe, estimate = .pred_class, event_level = "second")
 ```
 
-Ou em uma tabela:
+Como esperado, a matriz de confusão e as métricas de desempenho mostram que o modelo teve dificuldade em separar os dados.
 
-```{r}
+### Árvore de Decisão em Dados Não-Lineares
 
-```
-
+Agora, vamos usar uma **Árvore de Decisão**, um modelo de classificação que não é restrito a fronteiras lineares.
 
 ```{r}
 
@@ -381,11 +346,6 @@ tree_pred <- predict(tree_fit, new_data = test_simulado) %>%
 # 5. Gerar a matriz de confusão
 conf_mat(tree_pred, truth = classe, estimate = .pred_class)
 
-# O pacote rpart.plot ajuda a visualizar a árvore
-# install.packages("rpart.plot")
-library(rpart.plot)
-rpart.plot(extract_fit_engine(tree_fit$fit$fit, roundint = FALSE))
-
 ```
 
 ```{r}
@@ -407,8 +367,11 @@ recall(tree_pred, truth = classe, estimate = .pred_class, event_level = "second"
 f_meas(tree_pred, truth = classe, estimate = .pred_class, event_level = "second")
 ```
 
+Perceba que a acurácia do modelo de Árvore de Decisão foi significativamente maior! Isso acontece porque ele pode criar fronteiras de decisão complexas, que não são apenas linhas retas.
 
+### Visualizando as Fronteiras de Decisão da Árvore
 
+Para entender como a Árvore de Decisão classificou os dados, vamos plotar as regiões de decisão. O resultado é uma área segmentada em retângulos, onde cada retângulo representa a previsão de uma classe.
 
 ```{r}
 #| echo: true
@@ -442,10 +405,18 @@ ggplot() +
   theme(legend.position = "bottom")
 ```
 
-(ver o Statquest)
+Podemos visualizar a árvore com as perguntas feitas.
 
+```{r}
+# O pacote rpart.plot ajuda a visualizar a árvore
+# install.packages("rpart.plot")
+library(rpart.plot)
+rpart.plot(extract_fit_engine(tree_fit$fit$fit, roundint = FALSE))
+```
 
 ## Classificação: Pinguins do arquipélago Palmer
+
+Agora que você entendeu os conceitos básicos, vamos aplicar o mesmo fluxo de trabalho em um conjunto de dados real: as medições dos pinguins da Antártida. Nosso objetivo será classificar a **espécie** do pinguim com base em suas características físicas.
 
 ### **Conheça os pinguins** 🐧
 
@@ -463,69 +434,77 @@ glimpse(penguins)
 
 ```
 
-![](images/clipboard-1302732821.png){fig-align="center" width="445"}
+![](images/clipboard-786638237.png){fig-align="center"}
 
-### Usando head()
+Nosso objetivo será classificar a **espécie** do pinguim com base em suas características físicas.
 
-```{r}
-#|echo: true
-```
+### Preparando os Dados
 
-Usar `head()` pode ser interessante para ter um primeiro olhar para os dados:
-
-```{r}
-head(penguins)
-
-```
-
-### Usando arrange()
-
-`arrange()` organiza nossos dados em ordem *crescente*, partindo do menor valor da variável de interesse até o maior (ou em caso da variável ver qualitativa, será apresentado em ordem alfabética).
-
-```{r}
-penguins %>%
-  arrange(bill_length_mm) %>%
-  head()
-```
-
-### Criando um subconjunto com `subset()`
+Antes de modelar, precisamos tratar os valores ausentes (`NA`) e dividir os dados.
 
 ### Aplicação de um modelo de classificação
 
 ```{r}
-# Carregando os pacotes
-library(tidymodels)
-
 # Criar um split treino/teste
 set.seed(123)
 split <- initial_split(penguins, prop = 0.7, strata = species)
 train <- training(split)
 test <- testing(split)
+```
 
-# Definir o modelo (regressão logística multinomial)
-modelo <- multinom_reg() %>%
+```{r}
+dim(train)
+dim(test)
+```
+
+### **Aplicação de um modelo de classificação: Regressão Logística Multinomial**
+
+Vamos agora aplicar a **regressão logística multinomial** aos dados dos pinguins. Este modelo é uma extensão da regressão logística binária, que permite classificar dados em três ou mais categorias.
+
+```{r}
+#| echo: true
+# 1. Definir o modelo de regressão logística multinomial
+# O 'set_engine("nnet")' especifica o pacote que será usado para o cálculo
+modelo_multinomial <- multinom_reg() %>%
   set_engine("nnet") %>%
   set_mode("classification")
 
-# Criar o workflow
-workflow <- workflow() %>%
-  add_model(modelo) %>%
+# 2. Criar o workflow (fluxo de trabalho)
+# O 'add_formula(species ~ .)' diz ao modelo para usar todas as outras variáveis
+# para prever a espécie (species)
+workflow_multinomial <- workflow() %>%
+  add_model(modelo_multinomial) %>%
   add_formula(species ~ .)
 
-# Ajustar o modelo
-ajustado <- fit(workflow, data = train)
+# 3. Ajustar (treinar) o modelo com os dados de TREINO
+# O 'fit()' executa o treinamento do modelo
+ajustado_multinomial <- fit(workflow_multinomial, data = train)
 
-# Previsão e avaliação
-pred <- predict(ajustado, new_data = test) %>%
+# 4. Fazer previsões nos dados de TESTE
+# O 'predict()' usa o modelo treinado para prever a espécie nos dados de teste
+pred_multinomial <- predict(ajustado_multinomial, new_data = test) %>%
   bind_cols(test)
 
-# Métricas de desempenho
-metrics(pred, truth = species, estimate = .pred_class)
-
-# Matriz de confusão
-conf_mat(pred, truth = species, estimate = .pred_class)
+# 5. Avaliar o desempenho com a Matriz de Confusão
+# A 'conf_mat()' compara as previsões (.pred_class) com a realidade (species)
+matriz_confusao_multinomial <- conf_mat(pred_multinomial, truth = species, estimate = .pred_class)
+matriz_confusao_multinomial
 
 ```
+
+A matriz de confusão acima mostra o desempenho do modelo em prever a espécie de pinguim. Cada linha representa a espécie real, e cada coluna representa a espécie prevista. Os valores na diagonal mostram o número de acertos do modelo para cada espécie.
+
+Para uma avaliação mais completa, também podemos verificar as principais métricas de classificação.
+
+```{r}
+#| echo: true
+# Métricas de desempenho
+metrics(pred_multinomial, truth = species, estimate = .pred_class)
+```
+
+### Treinando e Avaliando o Modelo de Árvore de Decisão
+
+Vamos usar uma **Árvore de Decisão** para este exemplo, pois ela é intuitiva e a visualização da árvore ajuda a entender o processo de tomada de decisão.
 
 ```{r}
 # Exemplo com Árvore de Decisão (mais visual para iniciantes)
@@ -550,12 +529,26 @@ tree_pred <- predict(tree_fit, new_data = test) %>%
 # 5. Gerar a matriz de confusão
 conf_mat(tree_pred, truth = species, estimate = .pred_class)
 
+
+```
+
+Você também pode extrair as métricas de desempenho:
+
+```{r}
+metrics(tree_pred, truth = species, estimate = .pred_class)
+```
+
+### Visualizando a Árvore de Decisão
+
+A beleza da Árvore de Decisão é que podemos visualizar o conjunto de regras que ela aprendeu. Cada nó representa uma decisão baseada em uma variável (por exemplo, `flipper_length_mm`).
+
+```{r}
 # O pacote rpart.plot ajuda a visualizar a árvore
 # install.packages("rpart.plot")
 library(rpart.plot)
 rpart.plot(extract_fit_engine(tree_fit$fit$fit, roundint = FALSE))
 ```
 
+A visualização da árvore mostra o caminho que o modelo segue para classificar cada pinguim. Por exemplo, se o comprimento da nadadeira (`flipper_length_mm`) for maior ou igual a 207 mm e a profundidade do bico (`bill_depth_mm`) for maior ou igual a 17 mm, o pinguim será classificado como `Chistrap`.
 
-
-
+Este exemplo ilustra como modelos de classificação podem ser usados para resolver problemas práticos e como a visualização pode ser uma ferramenta poderosa para interpretar os resultados.

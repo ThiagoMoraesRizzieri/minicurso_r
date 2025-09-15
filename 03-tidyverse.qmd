@@ -212,7 +212,7 @@ penguins %>%
   )
 ```
 
-As funções `group_by()` e `summarise()` formam uma dupla formidável para agrupar e resumir os dados, pertencendo ao coração da análise de dados. A função `summarise()` erve para calcular estatísticas resumidas (como média, total, mínimo etc.) e, quando usada em conjunto com `group_by()` permite gerar resumos por grupo.
+As funções `group_by()` e `summarise()` formam uma dupla formidável para agrupar e resumir os dados, pertencendo ao coração da análise de dados. A função `summarise()` serve para calcular estatísticas resumidas (como média, total, mínimo etc.) e, quando usada em conjunto com `group_by()` permite gerar resumos por grupo.
 
 Inicialmente, vamos utilizar o `summarise()` no *dataset* completo para obter estatísticas globais. Não obstante, é bom frisar a utilização do argumento `na.rm = TRUE` para instruir a remoção dos valores `NA`.
 
@@ -363,6 +363,8 @@ Todo gráfico no `ggplot2` é constituído por três camadas essenciais:
 2.  Mapeamento Estéticos (`aes`): A função `aes()` (de *aesthetics*) descreve como as variáveis do nosso *dataframe* são mapeadas para as propriedades visuais do gráfico. As estéticas mais comuns são `x` e `y` (os eixos), mas também incluem `color` (cor), `shape` (forma), `size` (tamanho) e `alpha` (transparência/opacidade).
 3.  Objetos geométricos (`geom`): Os `geoms` definem como os dados são representados visualmente. Por exemplo, `geom_point()` cria um gráfico de dispersão, `geom_bar()` cria um gráfico de barras, `geom_line()` cria um gráfico de linhas, e assim por diante.
 
+![](images/ggplot2.png){fig-align="center" width="452"}
+
 ### Estatística descritiva
 
 Antes de explorar as relações gráficas, é útil enfatizar e entender alguns conceitos essenciais da Estatística Descritiva como os tipos de variáveis, normas para tabelas e as definições de frequências.
@@ -372,7 +374,7 @@ Antes de explorar as relações gráficas, é útil enfatizar e entender alguns 
 Em geral, pode-se dizer que existem duas categorias de variáveis dentro da estatística:
 
 1.  **Variáveis Qualitativas**: Também chamadas por variáveis categóricas e como o próprio nome diz, expressam qualidade e indicam categoria ou classificação a qual o objeto pertence. Se existir uma ordem entre as possíveis categorias, a variável é dita **qualitativa ordinal**. Caso contrário, é dita ser **qualitativa nominal**.
-2.  **Variáveis Quantitativas**: São variáveis que tomam valores numéricos e expressam quantidade. Podem ser especificadas por **Variáveis Discretas**, quando assumem valores dentro de um conjunto enumerável (quando é possível contá-las) ou por **Variáveis Continuas**, quando podem assumir infinitos valores de um intervalo não inumerável[^03-tidyverse-2] (não é possível contar o número de valores dentro de um intervalo).
+2.  **Variáveis Quantitativas**: São variáveis que tomam valores numéricos e expressam quantidade. Podem ser especificadas por **Variáveis Discretas**, quando assumem valores dentro de um conjunto enumerável (quando é possível contá-las) ou por **Variáveis Continuas**, quando podem assumir infinitos valores de um intervalo não numerável[^03-tidyverse-2] (não é possível contar o número de valores dentro de um intervalo).
 
 [^03-tidyverse-2]: Tente contar os números do conjunto $A = \{1,2,3,4\}$ e, também, de $B = [1,4]$. Observe que no conjunto $A$ há 4 elementos, enquanto em $B$ há infinitos valores de 1 a 4.
 
@@ -597,8 +599,6 @@ ggplot()
 ```
 
 A partir deste gráfico vazio, podemos adicionar camadas de pontos, linhas, barras, caixas, entre outros. Dê uma olhada no [manual de referência](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf). Outros como [tidyverse](https://ggplot2.tidyverse.org/), ou [Curso de R](https://livro.curso-r.com/8-1-o-pacote-ggplot2.html) podem ajudar bastante! Explore o máximo.
-
-![](images/ggplot2.png){fig-align="center" width="452"}
 
 #### Adicionando layers
 
