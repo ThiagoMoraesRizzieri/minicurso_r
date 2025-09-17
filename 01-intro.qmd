@@ -1,5 +1,18 @@
 # Introduction
 
-This is a book created from markdown and executable code.
+introduzir
 
-See @knuth84 for additional discussion of literate programming.
+## O que é ciência de dados?
+
+A Ciência de Dados é a área que combina estatística, programação e conhecimento de domínio para extrair valor de dados.  
+  O cientista de dados atua em todo o processo: coleta, limpeza, exploração, modelagem e comunicação dos resultados.  
+  Fontes comuns incluem bases públicas (IBGE), competições (Kaggle) e repositórios colaborativos (Base dos Dados). 
+  
+  
+(falar dos diferentes tipos de carreiras)
+
+O que é aprendizado de máquina.
+
+        \item Construção de modelos capazes de aprender padrões a partir de dados.
+        \item Esses modelos superam limitações de regras fixas da computação clássica, pois generalizam a partir de exemplos.
+        \item Resultam em decisões automáticas baseadas nos padrões aprendidos.
