@@ -11,8 +11,13 @@ A Ciência de Dados é a área que combina estatística, programação e conheci
   
 (falar dos diferentes tipos de carreiras)
 
-O que é aprendizado de máquina.
+## IA, Aprendizado de Máquina e Aprendizado Profundo
+
+diferenças entre esses termos
+
+## O que é aprendizado de máquina.
 
         \item Construção de modelos capazes de aprender padrões a partir de dados.
         \item Esses modelos superam limitações de regras fixas da computação clássica, pois generalizam a partir de exemplos.
         \item Resultam em decisões automáticas baseadas nos padrões aprendidos.
+
