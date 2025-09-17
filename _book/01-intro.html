@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Introduction – Minicurso: Ciência de Dados com R -- Uma Introdução Prática</title>
+<title>1&nbsp; Introdução – Minicurso: Ciência de Dados com R -- Uma Introdução Prática</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -37,10 +37,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-542cf50e1f395a1c6267587cc8cc3ecf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -115,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-intro.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -133,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pratica.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Prática</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modelo de Classificação</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -147,15 +147,29 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#o-que-é-ciência-de-dados" id="toc-o-que-é-ciência-de-dados" class="nav-link active" data-scroll-target="#o-que-é-ciência-de-dados"><span class="header-section-number">1.1</span> O que é ciência de dados?</a></li>
+  <li><a href="#inteligência-artificial-aprendizado-de-máquina-e-aprendizado-profundo" id="toc-inteligência-artificial-aprendizado-de-máquina-e-aprendizado-profundo" class="nav-link" data-scroll-target="#inteligência-artificial-aprendizado-de-máquina-e-aprendizado-profundo"><span class="header-section-number">1.2</span> Inteligência Artificial, Aprendizado de Máquina e Aprendizado Profundo</a></li>
+  <li><a href="#o-que-é-aprendizado-de-máquina" id="toc-o-que-é-aprendizado-de-máquina" class="nav-link" data-scroll-target="#o-que-é-aprendizado-de-máquina"><span class="header-section-number">1.3</span> O que é aprendizado de máquina?</a>
+  <ul class="collapse">
+  <li><a href="#por-que-o-ml-é-importante" id="toc-por-que-o-ml-é-importante" class="nav-link" data-scroll-target="#por-que-o-ml-é-importante"><span class="header-section-number">1.3.1</span> Por que o ML é importante?</a></li>
+  <li><a href="#tipos-de-aprendizado-de-máquina" id="toc-tipos-de-aprendizado-de-máquina" class="nav-link" data-scroll-target="#tipos-de-aprendizado-de-máquina"><span class="header-section-number">1.3.2</span> Tipos de Aprendizado de Máquina</a></li>
+  <li><a href="#conceitos-importantes-ao-aplicar-um-modelo-de-aprendizado-de-máquina" id="toc-conceitos-importantes-ao-aplicar-um-modelo-de-aprendizado-de-máquina" class="nav-link" data-scroll-target="#conceitos-importantes-ao-aplicar-um-modelo-de-aprendizado-de-máquina"><span class="header-section-number">1.3.3</span> Conceitos importantes ao aplicar um modelo de Aprendizado de Máquina</a></li>
+  <li><a href="#boas-práticas-para-a-carreira-de-ciência-de-dados" id="toc-boas-práticas-para-a-carreira-de-ciência-de-dados" class="nav-link" data-scroll-target="#boas-práticas-para-a-carreira-de-ciência-de-dados"><span class="header-section-number">1.3.4</span> Boas práticas para a carreira de Ciência de Dados</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></h1>
 </div>
 
 
@@ -172,10 +186,74 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is a book created from markdown and executable code.</p>
-<p>See <span class="citation" data-cites="knuth84">(<a href="references.html#ref-knuth84" role="doc-biblioref"><strong>KNUTH84?</strong></a>)</span> for additional discussion of literate programming.</p>
+<p>Neste primeiro capítulo, vamos mergulhar em alguns aspectos fundamentais para adentrarmos ao mundo da <strong>Ciência de Dados</strong>.</p>
+<p>Antes de colocarmos a mão na massa com o <strong>R</strong> e o <strong>RStudio</strong> nos próximos capítulos, é importante entendermos o que está por trás dessa área. Vamos explorar alguns conceitos principais, como <strong>inteligência artificial</strong> e <strong>aprendizado de máquina</strong>, e explorar os diferentes papéis e caminhos que uma carreira em dados pode oferecer. Ao final, você terá uma base sólida para dar os primeiros passos e se preparar para a jornada prática que nos aguarda.</p>
+<section id="o-que-é-ciência-de-dados" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="o-que-é-ciência-de-dados"><span class="header-section-number">1.1</span> O que é ciência de dados?</h2>
+<p>A Ciência de Dados é uma área interdisciplinar que utiliza métodos científicos, processos e algoritmos para extrair conhecimento e padrões de dados, tanto estruturados (organizados em planilhas) quanto não estruturados (imagens, sons, sites, etc.). Em essência, é a combinação de estatística, programação e conhecimento de domínio para solucionar problemas e guiar a tomada de decisões.</p>
+<p>O trabalho de um cientista de dados abrange todo o ciclo de vida dos dados, desde a coleta e a limpeza, passando pela análise exploratória e a modelagem, até a comunicação dos resultados. Essa jornada pode envolver a busca por dados em bases públicas (como as do IBGE), a participação em competições (como no Kaggle) ou a utilização de repositórios colaborativos (como a Base dos Dados).</p>
+<p>Dentro da área, existem diferentes carreiras:</p>
+<ul>
+<li><p>Cientista de Dados: Foca na análise e na modelagem de dados para extrair informações, usando conhecimentos de estatística e algoritmos de machine learning.</p></li>
+<li><p>Engenheiro de Dados (Data Engineer): Responsável por construir e manter a infraestrutura (bancos de dados, pipelines) que permite que os dados sejam coletados, processados e acessados de forma eficiente.</p></li>
+<li><p>Analista de Dados (Data Analyst): Focado em explorar e visualizar dados para responder a perguntas de negócio, geralmente usando ferramentas como o Power BI ou o Tableau.</p></li>
+</ul>
+<p><img src="images/clipboard-1032179354.png" class="img-fluid"></p>
+</section>
+<section id="inteligência-artificial-aprendizado-de-máquina-e-aprendizado-profundo" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="inteligência-artificial-aprendizado-de-máquina-e-aprendizado-profundo"><span class="header-section-number">1.2</span> Inteligência Artificial, Aprendizado de Máquina e Aprendizado Profundo</h2>
+<p>Esses termos são frequentemente usados de forma intercambiável, mas têm significados distintos. Para sermos mais precisos, cada termo a seguir engloba o próximo termo como um subconjunto:</p>
+<ul>
+<li><p><strong>Inteligência Artificial (IA):</strong> O conceito mais amplo. É a ciência de criar máquinas ou programas que podem simular a inteligência humana, resolvendo problemas, tomando decisões e interagindo com o ambiente.</p></li>
+<li><p><strong>Aprendizado de Máquina (Machine Learning - ML):</strong> Um subcampo da IA. Trata-se da construção de modelos que <strong>aprendem padrões a partir de dados</strong>, sem serem explicitamente programados para cada tarefa. Em vez de seguir um conjunto de regras fixas, o modelo aprende e se ajusta com base nos exemplos que recebe.</p></li>
+<li><p><strong>Aprendizado Profundo (Deep Learning - DL):</strong> Um subcampo do ML. Utiliza <strong>redes neurais artificiais</strong> com múltiplas camadas (por isso o “profundo”) para analisar dados. É especialmente eficaz em tarefas complexas, como reconhecimento de imagem e processamento de linguagem natural.</p></li>
+</ul>
+</section>
+<section id="o-que-é-aprendizado-de-máquina" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="o-que-é-aprendizado-de-máquina"><span class="header-section-number">1.3</span> O que é aprendizado de máquina?</h2>
+<p>O <strong>Aprendizado de Máquina (em inglês Machine Learning, ML)</strong> é a capacidade de um sistema computacional aprender e melhorar a partir da <strong>experiência</strong>, ou seja, a partir dos dados. Ao invés de escrever regras manuais e inflexíveis para cada situação, você “treina” um modelo para que ele descubra e generalize os padrões presentes nos dados.</p>
+<p>Imagine que você quer criar um filtro de spam para e-mails. A abordagem clássica seria escrever uma regra: “Se o e-mail contiver as palavras ‘ganhar dinheiro’, ‘milionário’ e ‘clique aqui’, marque-o como spam”. A abordagem de machine learning é diferente: você alimenta o modelo com milhares de e-mails já classificados como “spam” ou “não spam” e deixa que ele aprenda quais características são mais importantes para fazer essa distinção. O modelo pode descobrir padrões muito mais sutis e complexos que um humano não conseguiria definir em regras.</p>
+<section id="por-que-o-ml-é-importante" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="por-que-o-ml-é-importante"><span class="header-section-number">1.3.1</span> Por que o ML é importante?</h3>
+<p>O machine learning impulsiona muitas das tecnologias que usamos diariamente, como:</p>
+<ul>
+<li><p><strong>Sistemas de recomendação:</strong> A Netflix sugere filmes e o Spotify recomenda músicas baseados no que você já consumiu.</p></li>
+<li><p><strong>Detecção de fraude:</strong> Bancos usam modelos de ML para identificar transações suspeitas em tempo real.</p></li>
+<li><p><strong>Carros autônomos:</strong> Veículos que usam ML para reconhecer objetos, pedestres e sinais de trânsito, tomando decisões instantâneas.</p></li>
+<li><p><strong>Avanços científicos:</strong> O <strong>AlphaFold 2</strong>, por exemplo, usou aprendizado profundo para prever a estrutura de proteínas com uma precisão incrível, acelerando a pesquisa em biologia e medicina.</p></li>
+</ul>
+</section>
+<section id="tipos-de-aprendizado-de-máquina" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="tipos-de-aprendizado-de-máquina"><span class="header-section-number">1.3.2</span> Tipos de Aprendizado de Máquina</h3>
+<ul>
+<li><p><strong>Aprendizado Supervisionado:</strong> O modelo aprende a partir de dados que já possuem um “rótulo” ou “resposta” correta. O objetivo é prever essa resposta para novos dados. É o caso do filtro de spam, onde você sabe quais e-mails são spam e quais não são.</p></li>
+<li><p><strong>Aprendizado Não Supervisionado:</strong> O modelo trabalha com dados que não têm rótulos. O objetivo é encontrar padrões e estruturas ocultas. Um exemplo é a <strong>segmentação de clientes</strong>, onde você agrupa clientes com comportamentos parecidos, sem saber de antemão qual é o “grupo” correto.</p></li>
+<li><p><strong>Aprendizado Semi-Supervisionado:</strong> Uma combinação dos dois anteriores. O modelo usa um conjunto pequeno de dados rotulados e um grande conjunto de dados não rotulados para aprender padrões. Útil quando rotular dados é caro ou demorado.</p></li>
+<li><p><strong>Aprendizado por Reforço:</strong> O modelo aprende através de tentativa e erro, interagindo com um ambiente para maximizar uma recompensa. É a técnica por trás de robôs que aprendem a andar ou de sistemas de IA que jogam xadrez.</p></li>
+</ul>
+</section>
+<section id="conceitos-importantes-ao-aplicar-um-modelo-de-aprendizado-de-máquina" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="conceitos-importantes-ao-aplicar-um-modelo-de-aprendizado-de-máquina"><span class="header-section-number">1.3.3</span> Conceitos importantes ao aplicar um modelo de Aprendizado de Máquina</h3>
+<ul>
+<li><p><strong>Sobreajuste (Overfitting) e Subajuste (Underfitting):</strong> O <strong>sobreajuste</strong> acontece quando o modelo “memoriza” os dados de treinamento em vez de aprender a generalizar os padrões, falhando em novos dados. O <strong>subajuste</strong> acontece quando o modelo é muito simples e não consegue capturar nem mesmo os padrões básicos nos dados.</p></li>
+<li><p><strong>Dados de treino e dados de teste:</strong> Para avaliar se o modelo está generalizando bem, a base de dados é dividida. O modelo é <strong>treinado</strong> com a maior parte dos dados (dados de treino) e depois é avaliado em uma porção que ele nunca viu antes (dados de teste).</p></li>
+<li><p><strong>Viés versus variância:</strong> O <strong>viés</strong> é o erro que o modelo comete por ser muito simples (subajuste). A <strong>variância</strong> é o erro do modelo por ser muito complexo e sensível a pequenas variações nos dados de treinamento (sobreajuste). Encontrar o equilíbrio entre os dois é crucial.</p></li>
+<li><p><strong>Métricas de avaliação:</strong> São usadas para medir o desempenho do modelo nos dados de teste. Dependendo do problema, podem ser usadas métricas como <strong>acurácia</strong> (a proporção de previsões corretas), <strong>precisão</strong> e <strong>revocação</strong>.</p></li>
+</ul>
+</section>
+<section id="boas-práticas-para-a-carreira-de-ciência-de-dados" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="boas-práticas-para-a-carreira-de-ciência-de-dados"><span class="header-section-number">1.3.4</span> Boas práticas para a carreira de Ciência de Dados</h3>
+<p>Para quem está começando, algumas atitudes podem fazer toda a diferença no mercado de trabalho:</p>
+<ul>
+<li><p><strong>Olhe os requisitos das vagas:</strong> Analise as descrições de vagas de ciência de dados para entender quais são as <strong>habilidades mais demandadas</strong>, como linguagens de programação (R ou Python), conhecimento de SQL, ferramentas de visualização e frameworks de machine learning.</p></li>
+<li><p><strong>Crie e mantenha um portfólio no GitHub:</strong> O <strong>GitHub</strong> é essencial para cientistas de dados. Crie um perfil e use-o para mostrar projetos pessoais, códigos e análises. Ter um portfólio demonstra suas habilidades na prática, muito além do que um currículo pode dizer.</p></li>
+<li><p><strong>Mantenha seu LinkedIn atualizado:</strong> O <strong>LinkedIn</strong> é a principal rede para conexões profissionais. Mantenha seu perfil completo, compartilhe seu portfólio, publique artigos ou insights sobre a área e conecte-se com outros profissionais para construir sua rede de contatos.<br>
+</p></li>
+</ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -260,8 +338,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -372,7 +448,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

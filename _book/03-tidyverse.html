@@ -202,7 +202,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -614,7 +614,7 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 # ℹ 334 more rows</code></pre>
 </div>
 </div>
-<p>As funções <code>group_by()</code> e <code>summarise()</code> formam uma dupla formidável para agrupar e resumir os dados, pertencendo ao coração da análise de dados. A função <code>summarise()</code> erve para calcular estatísticas resumidas (como média, total, mínimo etc.) e, quando usada em conjunto com <code>group_by()</code> permite gerar resumos por grupo.</p>
+<p>As funções <code>group_by()</code> e <code>summarise()</code> formam uma dupla formidável para agrupar e resumir os dados, pertencendo ao coração da análise de dados. A função <code>summarise()</code> serve para calcular estatísticas resumidas (como média, total, mínimo etc.) e, quando usada em conjunto com <code>group_by()</code> permite gerar resumos por grupo.</p>
 <p>Inicialmente, vamos utilizar o <code>summarise()</code> no <em>dataset</em> completo para obter estatísticas globais. Não obstante, é bom frisar a utilização do argumento <code>na.rm = TRUE</code> para instruir a remoção dos valores <code>NA</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
@@ -774,6 +774,11 @@ Tabela&nbsp;3.3: Descrição das principais funções do <code>tidyverse</code>.
 <li>Mapeamento Estéticos (<code>aes</code>): A função <code>aes()</code> (de <em>aesthetics</em>) descreve como as variáveis do nosso <em>dataframe</em> são mapeadas para as propriedades visuais do gráfico. As estéticas mais comuns são <code>x</code> e <code>y</code> (os eixos), mas também incluem <code>color</code> (cor), <code>shape</code> (forma), <code>size</code> (tamanho) e <code>alpha</code> (transparência/opacidade).</li>
 <li>Objetos geométricos (<code>geom</code>): Os <code>geoms</code> definem como os dados são representados visualmente. Por exemplo, <code>geom_point()</code> cria um gráfico de dispersão, <code>geom_bar()</code> cria um gráfico de barras, <code>geom_line()</code> cria um gráfico de linhas, e assim por diante.</li>
 </ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ggplot2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="452"></p>
+</figure>
+</div>
 <section id="estatística-descritiva" class="level3" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="estatística-descritiva"><span class="header-section-number">3.2.1</span> Estatística descritiva</h3>
 <p>Antes de explorar as relações gráficas, é útil enfatizar e entender alguns conceitos essenciais da Estatística Descritiva como os tipos de variáveis, normas para tabelas e as definições de frequências.</p>
@@ -781,7 +786,7 @@ Tabela&nbsp;3.3: Descrição das principais funções do <code>tidyverse</code>.
 <p>Em geral, pode-se dizer que existem duas categorias de variáveis dentro da estatística:</p>
 <ol type="1">
 <li><strong>Variáveis Qualitativas</strong>: Também chamadas por variáveis categóricas e como o próprio nome diz, expressam qualidade e indicam categoria ou classificação a qual o objeto pertence. Se existir uma ordem entre as possíveis categorias, a variável é dita <strong>qualitativa ordinal</strong>. Caso contrário, é dita ser <strong>qualitativa nominal</strong>.</li>
-<li><strong>Variáveis Quantitativas</strong>: São variáveis que tomam valores numéricos e expressam quantidade. Podem ser especificadas por <strong>Variáveis Discretas</strong>, quando assumem valores dentro de um conjunto enumerável (quando é possível contá-las) ou por <strong>Variáveis Continuas</strong>, quando podem assumir infinitos valores de um intervalo não inumerável<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> (não é possível contar o número de valores dentro de um intervalo).</li>
+<li><strong>Variáveis Quantitativas</strong>: São variáveis que tomam valores numéricos e expressam quantidade. Podem ser especificadas por <strong>Variáveis Discretas</strong>, quando assumem valores dentro de um conjunto enumerável (quando é possível contá-las) ou por <strong>Variáveis Continuas</strong>, quando podem assumir infinitos valores de um intervalo não numerável<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> (não é possível contar o número de valores dentro de um intervalo).</li>
 </ol>
 <p>Assim, para explorar e apresentar as informações contidas num conjunto de dados, precisamos resumir essas informações de forma que seja possível enxergá-las rapidamente e adquirir conhecimento sobre o assunto.</p>
 <p>O resumo pode ser feito por meio de tabelas, gráficos e cálculo de algumas quantidades representativas. O primeiro passo é identificar o tipo de cada variável para aplicarmos a técnica apropriada.</p>
@@ -1052,11 +1057,6 @@ Tabela&nbsp;3.6: Distribuição de frequências para a massa corporal (g) dos pi
 </div>
 </div>
 <p>A partir deste gráfico vazio, podemos adicionar camadas de pontos, linhas, barras, caixas, entre outros. Dê uma olhada no <a href="https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf">manual de referência</a>. Outros como <a href="https://ggplot2.tidyverse.org/">tidyverse</a>, ou <a href="https://livro.curso-r.com/8-1-o-pacote-ggplot2.html">Curso de R</a> podem ajudar bastante! Explore o máximo.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/ggplot2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="452"></p>
-</figure>
-</div>
 <section id="adicionando-layers" class="level4" data-number="3.2.2.1">
 <h4 data-number="3.2.2.1" class="anchored" data-anchor-id="adicionando-layers"><span class="header-section-number">3.2.2.1</span> Adicionando layers</h4>
 <p>De maneira geral, a sintaxe que vamos usar é <code>geom_yyy(data = dados, aes(x = x, y = y))</code>, sendo que iremos substituir <code>yyy</code> por “line” para linhas, “point” para pontos e assim por diante.</p>
