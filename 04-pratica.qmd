@@ -11,6 +11,20 @@ library(tidymodels)
 
 Neste capítulo, vamos aplicar os conceitos de Machine Learning (ML) em R usando o ecossistema `tidymodels`. Começaremos com dados simples e sintéticos para entender a lógica por trás dos modelos de classificação, e depois aplicaremos esses mesmos conceitos a um conjunto de dados mais realista.
 
+## Como funcionam os modelos de classificação?
+
+Explicar um pouco mais sobre a ideia da modelagem no geral
+
+Retomar alguns conceitos explicados no cap 1
+
+### Modelo Logístico
+
+Explicar que trata-se de um modelo de regressão linear generalizado
+
+### Árvore de decisão
+
+Falar sobre o modelo
+
 ## Classificação em dados simples
 
 Vamos começar gerando um conjunto de dados bidimensional simples que pode ser separado por uma linha reta. Isso nos permitirá visualizar claramente como um modelo de regressão logística funciona.
