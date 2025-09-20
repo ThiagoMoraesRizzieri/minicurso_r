@@ -1,5 +1,15 @@
-# Prefácio {.unnumbered}
+# Prefácio
 
-This is a Quarto book.
+O universo da Ciência de Dados se expande rapidamente, e com ele, a necessidade de ferramentas acessíveis e eficazes para análise e modelagem. O R se destaca nesse cenário por sua comunidade ativa e um ecossistema de pacotes em constante evolução, como o tidyverse.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+Este minicurso foi elaborado para ser uma introdução prática à ciência de dados com R. Em vez de nos aprofundarmos em teorias complexas, focamos na aplicação, guiando você por um fluxo de trabalho completo, desde a manipulação e visualização de dados até a construção e avaliação de modelos de machine learning.
+
+Nosso percurso inclui:
+
+-   Fundamentos do R: Uma breve revisão dos conceitos essenciais da linguagem.
+
+-   Tidyverse: A filosofia por trás de um dos ecossistemas mais populares do R, que simplifica a organização e transformação de dados com uma sintaxe limpa e intuitiva.
+
+-   Modelagem de Machine Learning: Uma introdução prática aos modelos de classificação, usando dados sintéticos e reais para ilustrar como eles funcionam e para que servem.
+
+Ao final deste material, você terá as bases necessárias para iniciar seus próprios projetos de análise de dados, entendendo não apenas como o código funciona, mas também o porquê de cada passo. Esperamos que este possa ser o ponto de partida para sua jornada na área de ciência de dados.

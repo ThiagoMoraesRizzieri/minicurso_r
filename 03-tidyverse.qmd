@@ -68,6 +68,14 @@ Uma vez apresentada a filosofia e a estrutura de dados do `tidyverse`, o foco se
 
 O `dplyr` é um pacote do `tidyverse` que fornece um conjunto de ferramentas robustas e intuitivas para manipulação de dados. Os comandos oferecidos soam um tanto quanto intuitivos, correspondendo ações comuns na área de análise de dados. Para explorar as principais funções será utilizado o *dataset* `penguins`, focando em processos de filtragem, organização, transformação e resumos dos dados, permitindo responder a perguntas básicas sobre a biologia e ecologia dos pinguins.
 
+### **Conheça os pinguins** 🐧
+
+![Obra de \@allison_horst.](images/clipboard-3055016893.png)
+
+Os dados `palmerpenguins` contêm medições de tamanho de três espécies de pinguins observadas em três ilhas no arquipélago Palmer, na Antártida.
+
+Esses dados foram coletados entre 2007 e 2009 pela Dra. Kristen Gorman com o Programa de Pesquisa Ecológica de Longo Prazo da Estação Palmer , parte da Rede de Pesquisa Ecológica de Longo Prazo dos EUA . Os dados foram importados diretamente do Portal de Dados da Iniciativa de Dados Ambientais (EDI) e estão disponíveis para uso sob licença CC0 (“Sem Direitos Reservados”), de acordo com a Política de Dados da Estação Palmer.
+
 O primeiro passo a ser feito é instalar a biblioteca `palmerpenguins` e, em seguida, carregá-la no ambiente de trabalho, para que possamos realizar uma inspeção inicial na estrutura dos dados.
 
 ```{r dataset-ins}
@@ -79,6 +87,8 @@ install.packages("palmerpenguins") # Realizar apenas uma única vez
 #| warning: false
 library(palmerpenguins)
 ```
+
+![Terminologia das partes do corpo de um pinguim.](images/clipboard-786638237.png){fig-align="center"}
 
 \noindent Para carregarmos os dados sobre pinguins no ambiente de trabalho, podemos utilizar a função `data()`:
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Tidyverse – Minicurso: Ciência de Dados com R -- Uma Introdução Prática</title>
+<title>4&nbsp; Tidyverse – Minicurso: Ciência de Dados com R -- Uma Introdução Prática</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -168,7 +168,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-tidyverse.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tidyverse</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-tidyverse.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tidyverse</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -196,31 +196,31 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Prefácio</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Prefácio</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-fundamentos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentos de R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fundamentos de R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-tidyverse.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tidyverse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tidyverse</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pratica.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modelo de Classificação</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modelo de Classificação</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -239,13 +239,16 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#manipulação-de-dados-com-o-pacote-dplyr" id="toc-manipulação-de-dados-com-o-pacote-dplyr" class="nav-link active" data-scroll-target="#manipulação-de-dados-com-o-pacote-dplyr"><span class="header-section-number">3.1</span> Manipulação de dados com o pacote <code>dplyr</code></a></li>
-  <li><a href="#visualização-de-dados-com-ggplot2" id="toc-visualização-de-dados-com-ggplot2" class="nav-link" data-scroll-target="#visualização-de-dados-com-ggplot2"><span class="header-section-number">3.2</span> Visualização de Dados com <code>ggplot2</code></a>
+  <li><a href="#manipulação-de-dados-com-o-pacote-dplyr" id="toc-manipulação-de-dados-com-o-pacote-dplyr" class="nav-link active" data-scroll-target="#manipulação-de-dados-com-o-pacote-dplyr"><span class="header-section-number">4.1</span> Manipulação de dados com o pacote <code>dplyr</code></a>
   <ul class="collapse">
-  <li><a href="#estatística-descritiva" id="toc-estatística-descritiva" class="nav-link" data-scroll-target="#estatística-descritiva"><span class="header-section-number">3.2.1</span> Estatística descritiva</a></li>
-  <li><a href="#tipos-de-gráficos" id="toc-tipos-de-gráficos" class="nav-link" data-scroll-target="#tipos-de-gráficos"><span class="header-section-number">3.2.2</span> Tipos de gráficos</a></li>
-  <li><a href="#técnicas-avançadas-de-visualização-e-comunicação" id="toc-técnicas-avançadas-de-visualização-e-comunicação" class="nav-link" data-scroll-target="#técnicas-avançadas-de-visualização-e-comunicação"><span class="header-section-number">3.2.3</span> Técnicas avançadas de visualização e comunicação</a></li>
-  <li><a href="#sub-gráficos-com-facet_wrap" id="toc-sub-gráficos-com-facet_wrap" class="nav-link" data-scroll-target="#sub-gráficos-com-facet_wrap"><span class="header-section-number">3.2.4</span> Sub-gráficos com <code>facet_wrap()</code></a></li>
+  <li><a href="#conheça-os-pinguins" id="toc-conheça-os-pinguins" class="nav-link" data-scroll-target="#conheça-os-pinguins"><span class="header-section-number">4.1.1</span> <strong>Conheça os pinguins</strong> 🐧</a></li>
+  </ul></li>
+  <li><a href="#visualização-de-dados-com-ggplot2" id="toc-visualização-de-dados-com-ggplot2" class="nav-link" data-scroll-target="#visualização-de-dados-com-ggplot2"><span class="header-section-number">4.2</span> Visualização de Dados com <code>ggplot2</code></a>
+  <ul class="collapse">
+  <li><a href="#estatística-descritiva" id="toc-estatística-descritiva" class="nav-link" data-scroll-target="#estatística-descritiva"><span class="header-section-number">4.2.1</span> Estatística descritiva</a></li>
+  <li><a href="#tipos-de-gráficos" id="toc-tipos-de-gráficos" class="nav-link" data-scroll-target="#tipos-de-gráficos"><span class="header-section-number">4.2.2</span> Tipos de gráficos</a></li>
+  <li><a href="#técnicas-avançadas-de-visualização-e-comunicação" id="toc-técnicas-avançadas-de-visualização-e-comunicação" class="nav-link" data-scroll-target="#técnicas-avançadas-de-visualização-e-comunicação"><span class="header-section-number">4.2.3</span> Técnicas avançadas de visualização e comunicação</a></li>
+  <li><a href="#sub-gráficos-com-facet_wrap" id="toc-sub-gráficos-com-facet_wrap" class="nav-link" data-scroll-target="#sub-gráficos-com-facet_wrap"><span class="header-section-number">4.2.4</span> Sub-gráficos com <code>facet_wrap()</code></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -255,7 +258,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tidyverse</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tidyverse</span></h1>
 </div>
 
 
@@ -314,15 +317,31 @@ i Use the conflicted package (http://conflicted.r-lib.org/)
 </ul>
 <p>A estrutura de dados que implementa essa filosofia no <code>tidyverse</code> é o <code>tibble</code>. Ele é a versão moderna do <code>data.frame</code>, projetado para ser mais prático e informativo, exibindo resumos concisos dos dados e fornecendo diagnósticos mais úteis.</p>
 <p>Uma vez apresentada a filosofia e a estrutura de dados do <code>tidyverse</code>, o foco se volta para a aplicação prática. A seguir, a concentração do material residirá nos dois pacotes centrais do <code>tidyverse</code>: o <code>dplyr</code>, para manipulação de dados, e o <code>ggplot2</code>, para a criação de gráficos.</p>
-<section id="manipulação-de-dados-com-o-pacote-dplyr" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="manipulação-de-dados-com-o-pacote-dplyr"><span class="header-section-number">3.1</span> Manipulação de dados com o pacote <code>dplyr</code></h2>
+<section id="manipulação-de-dados-com-o-pacote-dplyr" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="manipulação-de-dados-com-o-pacote-dplyr"><span class="header-section-number">4.1</span> Manipulação de dados com o pacote <code>dplyr</code></h2>
 <p>O <code>dplyr</code> é um pacote do <code>tidyverse</code> que fornece um conjunto de ferramentas robustas e intuitivas para manipulação de dados. Os comandos oferecidos soam um tanto quanto intuitivos, correspondendo ações comuns na área de análise de dados. Para explorar as principais funções será utilizado o <em>dataset</em> <code>penguins</code>, focando em processos de filtragem, organização, transformação e resumos dos dados, permitindo responder a perguntas básicas sobre a biologia e ecologia dos pinguins.</p>
+<section id="conheça-os-pinguins" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="conheça-os-pinguins"><span class="header-section-number">4.1.1</span> <strong>Conheça os pinguins</strong> 🐧</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-3055016893.png" class="img-fluid figure-img"></p>
+<figcaption>Obra de&nbsp;@allison_horst.</figcaption>
+</figure>
+</div>
+<p>Os dados <code>palmerpenguins</code> contêm medições de tamanho de três espécies de pinguins observadas em três ilhas no arquipélago Palmer, na Antártida.</p>
+<p>Esses dados foram coletados entre 2007 e 2009 pela Dra. Kristen Gorman com o Programa de Pesquisa Ecológica de Longo Prazo da Estação Palmer , parte da Rede de Pesquisa Ecológica de Longo Prazo dos EUA . Os dados foram importados diretamente do Portal de Dados da Iniciativa de Dados Ambientais (EDI) e estão disponíveis para uso sob licença CC0 (“Sem Direitos Reservados”), de acordo com a Política de Dados da Estação Palmer.</p>
 <p>O primeiro passo a ser feito é instalar a biblioteca <code>palmerpenguins</code> e, em seguida, carregá-la no ambiente de trabalho, para que possamos realizar uma inspeção inicial na estrutura dos dados.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"palmerpenguins"</span>) <span class="co"># Realizar apenas uma única vez</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-786638237.png" class="img-fluid figure-img"></p>
+<figcaption>Terminologia das partes do corpo de um pinguim.</figcaption>
+</figure>
 </div>
 <p>Para carregarmos os dados sobre pinguins no ambiente de trabalho, podemos utilizar a função <code>data()</code>:</p>
 <div class="cell">
@@ -663,7 +682,7 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 <div id="tbl-tabela-resumo1" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-pos="H">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tabela-resumo1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabela&nbsp;3.1: Estatísticas descritivas de características biométricas de pinguins, agrupadas por espécie e sexo.
+Tabela&nbsp;4.1: Estatísticas descritivas de características biométricas de pinguins, agrupadas por espécie e sexo.
 </figcaption>
 <div aria-describedby="tbl-tabela-resumo1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -673,13 +692,13 @@ Tabela&nbsp;3.1: Estatísticas descritivas de características biométricas de p
 </figure>
 </div>
 </div>
-<p>Vale reforçar que a <a href="#tbl-tabela-resumo1" class="quarto-xref">Tabela&nbsp;<span>3.1</span></a> foi gerada usando o <code>dplyr</code>, com as funções auxiliares <code>n()</code> para realizar a contagem de observações em cada grupo e <code>drop_na(sex)</code> para remover as observações onde o sexo é desconhecido, permitindo avaliar dimorfismo sexual em todas as três espécies, especialmente na massa corporal. O grande potencial dessa tabela é obter respostas como:</p>
+<p>Vale reforçar que a <a href="#tbl-tabela-resumo1" class="quarto-xref">Tabela&nbsp;<span>4.1</span></a> foi gerada usando o <code>dplyr</code>, com as funções auxiliares <code>n()</code> para realizar a contagem de observações em cada grupo e <code>drop_na(sex)</code> para remover as observações onde o sexo é desconhecido, permitindo avaliar dimorfismo sexual em todas as três espécies, especialmente na massa corporal. O grande potencial dessa tabela é obter respostas como:</p>
 <ul>
 <li>Os pinguins Gentoo são, em média, os mais pesados.</li>
 <li>Dentro de cada espécie, os machos são consistentemente mais pesados e têm bicos mais longo que as fêmeas.</li>
 </ul>
 <p>Esses resultados permitem tirar conclusões sobre algumas hipóteses biológicas.</p>
-<p>Por fim, a última função que será abordada é a <code>recode()</code>. Muitas vezes, os nomes das categorias nos conjuntos de dados não são ideais para a análise ou apresentação em gráficos. Podem ser longos demais, estarem em outro idioma ou simplesmente não serem claros. Para isso, a função <code>recode()</code> permite renomear valores de uma variável categórica de forma simples e direta. Por exemplo, suponha que desejamos traduzir os termos da variável <code>sex</code> da <a href="#tbl-tabela-resumo1" class="quarto-xref">Tabela&nbsp;<span>3.1</span></a> para o português:</p>
+<p>Por fim, a última função que será abordada é a <code>recode()</code>. Muitas vezes, os nomes das categorias nos conjuntos de dados não são ideais para a análise ou apresentação em gráficos. Podem ser longos demais, estarem em outro idioma ou simplesmente não serem claros. Para isso, a função <code>recode()</code> permite renomear valores de uma variável categórica de forma simples e direta. Por exemplo, suponha que desejamos traduzir os termos da variável <code>sex</code> da <a href="#tbl-tabela-resumo1" class="quarto-xref">Tabela&nbsp;<span>4.1</span></a> para o português:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>tabela_resumo <span class="sc">%&gt;%</span> </span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -692,7 +711,7 @@ Tabela&nbsp;3.1: Estatísticas descritivas de características biométricas de p
 <div id="tbl-traduzida" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-pos="H">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-traduzida-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabela&nbsp;3.2: Tradução da variável <code>sexo</code> da <a href="#tbl-tabela-resumo1" class="quarto-xref">Tabela&nbsp;<span>3.1</span></a>.
+Tabela&nbsp;4.2: Tradução da variável <code>sexo</code> da <a href="#tbl-tabela-resumo1" class="quarto-xref">Tabela&nbsp;<span>4.1</span></a>.
 </figcaption>
 <div aria-describedby="tbl-traduzida-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -702,12 +721,12 @@ Tabela&nbsp;3.2: Tradução da variável <code>sexo</code> da <a href="#tbl-tabe
 </figure>
 </div>
 </div>
-<p>As principais funções do pacote <code>dplyr</code> que foram vistas estão resumidas e descritas na Tabela <a href="#tbl-dplyr-fcts" class="quarto-xref">Tabela&nbsp;<span>3.3</span></a> e agora que aprendemos como manipular os dados com o <code>dplyr</code>, podemos avançar para a construção de gráficos com o pacote <code>ggplot2</code>.</p>
+<p>As principais funções do pacote <code>dplyr</code> que foram vistas estão resumidas e descritas na Tabela <a href="#tbl-dplyr-fcts" class="quarto-xref">Tabela&nbsp;<span>4.3</span></a> e agora que aprendemos como manipular os dados com o <code>dplyr</code>, podemos avançar para a construção de gráficos com o pacote <code>ggplot2</code>.</p>
 <div class="cell" data-tbl-pos="b">
 <div id="tbl-dplyr-fcts" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-pos="b">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dplyr-fcts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabela&nbsp;3.3: Descrição das principais funções do <code>tidyverse</code>.
+Tabela&nbsp;4.3: Descrição das principais funções do <code>tidyverse</code>.
 </figcaption>
 <div aria-describedby="tbl-dplyr-fcts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -765,8 +784,9 @@ Tabela&nbsp;3.3: Descrição das principais funções do <code>tidyverse</code>.
 </div>
 </div>
 </section>
-<section id="visualização-de-dados-com-ggplot2" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="visualização-de-dados-com-ggplot2"><span class="header-section-number">3.2</span> Visualização de Dados com <code>ggplot2</code></h2>
+</section>
+<section id="visualização-de-dados-com-ggplot2" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="visualização-de-dados-com-ggplot2"><span class="header-section-number">4.2</span> Visualização de Dados com <code>ggplot2</code></h2>
 <p>Se o <code>dplyr</code> é a gramática da manipulação de dados, possuindo funções essenciais para esse trabalho, o <code>ggplot2</code> <span class="citation" data-cites="wickhamGgplot22016">(<a href="references.html#ref-wickhamGgplot22016" role="doc-biblioref">WICKHAM, 2016</a>)</span> é gramática dos gráficos, permitindo construir gráficos por meio de camadas e oferecendo um sistema robusto e flexível para visualização os dados. Nesta seção, continuaremos utilizando os dados dos pinguins para explorar alguns <em>insights</em> visuais, desde gráficos mais simples até os mais elaborados.</p>
 <p>Todo gráfico no <code>ggplot2</code> é constituído por três camadas essenciais:</p>
 <ol type="1">
@@ -774,13 +794,14 @@ Tabela&nbsp;3.3: Descrição das principais funções do <code>tidyverse</code>.
 <li>Mapeamento Estéticos (<code>aes</code>): A função <code>aes()</code> (de <em>aesthetics</em>) descreve como as variáveis do nosso <em>dataframe</em> são mapeadas para as propriedades visuais do gráfico. As estéticas mais comuns são <code>x</code> e <code>y</code> (os eixos), mas também incluem <code>color</code> (cor), <code>shape</code> (forma), <code>size</code> (tamanho) e <code>alpha</code> (transparência/opacidade).</li>
 <li>Objetos geométricos (<code>geom</code>): Os <code>geoms</code> definem como os dados são representados visualmente. Por exemplo, <code>geom_point()</code> cria um gráfico de dispersão, <code>geom_bar()</code> cria um gráfico de barras, <code>geom_line()</code> cria um gráfico de linhas, e assim por diante.</li>
 </ol>
+<p>Na imagem, temos todas as camadas que são utilizadas pelo ggplot2, seguindo a ordem debaixo para cima. Além das 3 mais importantes, ainda temos a cama da escala…</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/ggplot2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="452"></p>
 </figure>
 </div>
-<section id="estatística-descritiva" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="estatística-descritiva"><span class="header-section-number">3.2.1</span> Estatística descritiva</h3>
+<section id="estatística-descritiva" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="estatística-descritiva"><span class="header-section-number">4.2.1</span> Estatística descritiva</h3>
 <p>Antes de explorar as relações gráficas, é útil enfatizar e entender alguns conceitos essenciais da Estatística Descritiva como os tipos de variáveis, normas para tabelas e as definições de frequências.</p>
 <!-- Antes de explorar as relações gráficas, é útil enfatizar e entender as diferenças entre os tipos de variáveis e suas distribuições individuais possíveis. Em geral, pode-se dizer que existem duas categorias de variáveis dentro da estatística: -->
 <p>Em geral, pode-se dizer que existem duas categorias de variáveis dentro da estatística:</p>
@@ -816,7 +837,7 @@ Tabela&nbsp;3.3: Descrição das principais funções do <code>tidyverse</code>.
 <li>É sensível aos valores discrepantes e, portanto, só deve ser usada quando a distribuição é simétrica ou aproximadamente simétrica.</li>
 </ul>
 <p>Por fim, existe o <strong>coeficiente</strong> de varição (<span class="math inline">\(\text{cv}\)</span>), que é uma medida de dispersão em termos de porcentagem da média: <span class="math display">\[\text{cv} = \frac{s}{\bar{x}}\times 100,\]</span> em que não há unidade de medida e, portanto, serve como métrica de comparação na variação de variáveis diferentes.</p>
-<p>Dentro do R, a função <code>summary()</code> é a chave mestre que calcula quase todas as métricas que foram vistas. Para exemplificar, selecionaremos apenas a variável <code>bill_length</code> do conjunto de dados <code>penguins</code> (<a href="#tbl-summary" class="quarto-xref">Tabela&nbsp;<span>3.4</span></a>).</p>
+<p>Dentro do R, a função <code>summary()</code> é a chave mestre que calcula quase todas as métricas que foram vistas. Para exemplificar, selecionaremos apenas a variável <code>bill_length</code> do conjunto de dados <code>penguins</code> (<a href="#tbl-summary" class="quarto-xref">Tabela&nbsp;<span>4.4</span></a>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm) <span class="sc">%&gt;%</span> </span>
@@ -826,7 +847,7 @@ Tabela&nbsp;3.3: Descrição das principais funções do <code>tidyverse</code>.
 <div id="tbl-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-pos="H">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabela&nbsp;3.4: Saída da função <code>summary()</code>
+Tabela&nbsp;4.4: Saída da função <code>summary()</code>
 </figcaption>
 <div aria-describedby="tbl-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -874,7 +895,7 @@ Tabela&nbsp;3.4: Saída da função <code>summary()</code>
 <li>Em <strong>tabelas</strong> os títulos vem primeiro, em cima da tabela.</li>
 <li>Em <strong>gráficos</strong> os títulos vem por último, embaixo do gráfico.</li>
 </ul>
-<p>Se necessário, notas e fontes vêm embaixo, em ambos os casos. Uma tabela começa e termina com um traço horizontal e traços na vertical devem ser evitados, conforme visto na <a href="#tbl-tabela-resumo1" class="quarto-xref">Tabela&nbsp;<span>3.1</span></a> por exemplo.</p>
+<p>Se necessário, notas e fontes vêm embaixo, em ambos os casos. Uma tabela começa e termina com um traço horizontal e traços na vertical devem ser evitados, conforme visto na <a href="#tbl-tabela-resumo1" class="quarto-xref">Tabela&nbsp;<span>4.1</span></a> por exemplo.</p>
 <p>Uma forma adequada para resumir informações sobre uma variável numa tabela é através da construção de uma <strong>tabela de frequências</strong>, que informa quais valores ou categorias a variável pode tomar, com suas respectivas frequências. Quando a variável é qualitativa, as frequências vão revelar se temos categorias mais comuns (típicas) e categorias raras ou se a distribuição é uniforme/homogênea. Já quando a variável é quantitativa, as frequências revelarão os valores típicos e/ou a distribuição dos valores é simétricas ou assimétrica.</p>
 <p>Existem alguns tipos de frequência que podem ser utilizados para resumir as informações, dentre eles:</p>
 <ul>
@@ -883,12 +904,12 @@ Tabela&nbsp;3.4: Saída da função <code>summary()</code>
 <li>Frequência acumulada (<span class="math inline">\(\text{fa}\)</span>): é a frequência acumulada até um valor específico.</li>
 <li>Frequência acumulada relativa (<span class="math inline">\(\text{far} = \text{fa}/n\)</span>): quando esse valor é multiplicado por <span class="math inline">\(100\)</span>, informa a porcentagem acumulada do aparecimento de uma determinada categoria sobre o número total de contagem.</li>
 </ul>
-<p>A <a href="#tbl-freq-pin" class="quarto-xref">Tabela&nbsp;<span>3.5</span></a> contém as informações sobre as frequências de cada espécie de pinguim existente no conjunto de dados <code>penguins</code>. As informações básicas que podem ser extraídas é que entre as espécies dentro do estudo sobre pinguins 44.2% são <em>Adelie</em>, 36% são <em>Gentoo</em> e 19.8% são <em>Chinstrap</em>.</p>
+<p>A <a href="#tbl-freq-pin" class="quarto-xref">Tabela&nbsp;<span>4.5</span></a> contém as informações sobre as frequências de cada espécie de pinguim existente no conjunto de dados <code>penguins</code>. As informações básicas que podem ser extraídas é que entre as espécies dentro do estudo sobre pinguins 44.2% são <em>Adelie</em>, 36% são <em>Gentoo</em> e 19.8% são <em>Chinstrap</em>.</p>
 <div class="cell" data-tbl-pos="H">
 <div id="tbl-freq-pin" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-pos="H">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-freq-pin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabela&nbsp;3.5: Distribuição de frequências para as espécies de Pinguins.
+Tabela&nbsp;4.5: Distribuição de frequências para as espécies de Pinguins.
 </figcaption>
 <div aria-describedby="tbl-freq-pin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -968,12 +989,12 @@ Tabela&nbsp;3.5: Distribuição de frequências para as espécies de Pinguins.
 1       600</code></pre>
 </div>
 </div>
-<p>A partir da <a href="#tbl-freq-abs-pin" class="quarto-xref">Tabela&nbsp;<span>3.6</span></a> e pela coluna das frequências relativas, observa-se que a distribuição do peso é assimétrica. Em breve, isso será observado graficamente.</p>
+<p>A partir da <a href="#tbl-freq-abs-pin" class="quarto-xref">Tabela&nbsp;<span>4.6</span></a> e pela coluna das frequências relativas, observa-se que a distribuição do peso é assimétrica. Em breve, isso será observado graficamente.</p>
 <div class="cell" data-tbl-pos="H">
 <div id="tbl-freq-abs-pin" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-pos="H">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-freq-abs-pin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabela&nbsp;3.6: Distribuição de frequências para a massa corporal (g) dos pinguins.
+Tabela&nbsp;4.6: Distribuição de frequências para a massa corporal (g) dos pinguins.
 </figcaption>
 <div aria-describedby="tbl-freq-abs-pin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1033,8 +1054,8 @@ Tabela&nbsp;3.6: Distribuição de frequências para a massa corporal (g) dos pi
 </div>
 </div>
 </section>
-<section id="tipos-de-gráficos" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="tipos-de-gráficos"><span class="header-section-number">3.2.2</span> Tipos de gráficos</h3>
+<section id="tipos-de-gráficos" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="tipos-de-gráficos"><span class="header-section-number">4.2.2</span> Tipos de gráficos</h3>
 <p>As distribuições de frequências podem ser representadas em gráficos, que facilitam a interpretação visual do comportamento dos dados. Os gráficos mais comuns, segundo o tipo de variável, são:</p>
 <ul>
 <li>Barras ou colunas: apropriado para variáveis qualitativas e quantitativas discretas.</li>
@@ -1057,8 +1078,8 @@ Tabela&nbsp;3.6: Distribuição de frequências para a massa corporal (g) dos pi
 </div>
 </div>
 <p>A partir deste gráfico vazio, podemos adicionar camadas de pontos, linhas, barras, caixas, entre outros. Dê uma olhada no <a href="https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf">manual de referência</a>. Outros como <a href="https://ggplot2.tidyverse.org/">tidyverse</a>, ou <a href="https://livro.curso-r.com/8-1-o-pacote-ggplot2.html">Curso de R</a> podem ajudar bastante! Explore o máximo.</p>
-<section id="adicionando-layers" class="level4" data-number="3.2.2.1">
-<h4 data-number="3.2.2.1" class="anchored" data-anchor-id="adicionando-layers"><span class="header-section-number">3.2.2.1</span> Adicionando layers</h4>
+<section id="adicionando-layers" class="level4" data-number="4.2.2.1">
+<h4 data-number="4.2.2.1" class="anchored" data-anchor-id="adicionando-layers"><span class="header-section-number">4.2.2.1</span> Adicionando layers</h4>
 <p>De maneira geral, a sintaxe que vamos usar é <code>geom_yyy(data = dados, aes(x = x, y = y))</code>, sendo que iremos substituir <code>yyy</code> por “line” para linhas, “point” para pontos e assim por diante.</p>
 <p>Por exemplo, para criar um plot da massa corporal x e comprimento da nadadeira</p>
 <div class="cell" data-exercise="true">
@@ -1099,8 +1120,8 @@ Tabela&nbsp;3.6: Distribuição de frequências para a massa corporal (g) dos pi
 </div>
 <p>Veremos mais sobre esse tipo de gráfico depois.</p>
 </section>
-<section id="visualizando-uma-única-variável" class="level4" data-number="3.2.2.2">
-<h4 data-number="3.2.2.2" class="anchored" data-anchor-id="visualizando-uma-única-variável"><span class="header-section-number">3.2.2.2</span> Visualizando uma única variável</h4>
+<section id="visualizando-uma-única-variável" class="level4" data-number="4.2.2.2">
+<h4 data-number="4.2.2.2" class="anchored" data-anchor-id="visualizando-uma-única-variável"><span class="header-section-number">4.2.2.2</span> Visualizando uma única variável</h4>
 <p>Para visualizar a distribuição de uma variável contínua como a massa corporal, utiliza-se o histograma com a função <code>geom_histogram()</code>. Como já foi visto, a escolha do número de colunas é arbitrário e pode afetar significativamente a aparência e a interpretação do gráfico.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
@@ -1175,8 +1196,8 @@ Tabela&nbsp;3.6: Distribuição de frequências para a massa corporal (g) dos pi
 </div>
 </div>
 </section>
-<section id="relações-entre-variáveis" class="level4" data-number="3.2.2.3">
-<h4 data-number="3.2.2.3" class="anchored" data-anchor-id="relações-entre-variáveis"><span class="header-section-number">3.2.2.3</span> Relações entre variáveis</h4>
+<section id="relações-entre-variáveis" class="level4" data-number="4.2.2.3">
+<h4 data-number="4.2.2.3" class="anchored" data-anchor-id="relações-entre-variáveis"><span class="header-section-number">4.2.2.3</span> Relações entre variáveis</h4>
 <p>O gráfico de dispersão é a ferramenta clássica para explorar relações entre duas variáveis numéricas. Investigaremos a relação existente entre o comprimento da nadadeira e a massa corporal. A hipótese é que pinguins com nadadeiras maiores também serão mais pesados, uma relação positiva e intuitiva que serve como um excelente parâmetro de partida.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
@@ -1194,13 +1215,13 @@ Tabela&nbsp;3.6: Distribuição de frequências para a massa corporal (g) dos pi
 <img src="03-tidyverse_files/figure-html/fig-dis-peso-nad-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dis-peso-nad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;3.1: Relação entre o tamanho da nadadeira (mm) e o peso corporal (g) dos pinguins.
+Figura&nbsp;4.1: Relação entre o tamanho da nadadeira (mm) e o peso corporal (g) dos pinguins.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>A <a href="#fig-dis-peso-nad" class="quarto-xref">Figura&nbsp;<span>3.1</span></a> informa uma clara tendência positiva entre a nadadeira e o peso corporal dos pinguins. Mas será que esse tendência é a mesma para todas as espécies? Para responder essa pergunta, através da função <code>aes()</code>, é possível adicionar estéticas adicionais como <code>shape</code>, <code>color</code> ou <code>size</code> para distinguir as espécies no gráfico. O argumento a ser utilizado dependerá onde a imagem será utilizada. Por exemplo, em uma revista científica, que solicita gráficos em preto e branco, é aconselhável utilizar <code>shape</code> ou <code>size</code>.</p>
+<p>A <a href="#fig-dis-peso-nad" class="quarto-xref">Figura&nbsp;<span>4.1</span></a> informa uma clara tendência positiva entre a nadadeira e o peso corporal dos pinguins. Mas será que esse tendência é a mesma para todas as espécies? Para responder essa pergunta, através da função <code>aes()</code>, é possível adicionar estéticas adicionais como <code>shape</code>, <code>color</code> ou <code>size</code> para distinguir as espécies no gráfico. O argumento a ser utilizado dependerá onde a imagem será utilizada. Por exemplo, em uma revista científica, que solicita gráficos em preto e branco, é aconselhável utilizar <code>shape</code> ou <code>size</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g, <span class="at">color =</span> species))<span class="sc">+</span></span>
@@ -1219,13 +1240,13 @@ Figura&nbsp;3.1: Relação entre o tamanho da nadadeira (mm) e o peso corporal (
 <img src="03-tidyverse_files/figure-html/fig-dis-esp-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dis-esp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;3.2: Relação entre o tamanho da nadadeira (mm) e o peso corporal (g) por espécie dos pinguins.
+Figura&nbsp;4.2: Relação entre o tamanho da nadadeira (mm) e o peso corporal (g) por espécie dos pinguins.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>A <a href="#fig-dis-esp" class="quarto-xref">Figura&nbsp;<span>3.2</span></a> revela detalhes mais pertinentes, mostrando que a relação entre massa corporal e comprimento da nadadeira mantêm-se positiva (nível de grupo).</p>
+<p>A <a href="#fig-dis-esp" class="quarto-xref">Figura&nbsp;<span>4.2</span></a> revela detalhes mais pertinentes, mostrando que a relação entre massa corporal e comprimento da nadadeira mantêm-se positiva (nível de grupo).</p>
 <p>Para comparar a distribuição de uma variável numérica entre diferentes categorias, o boxplot<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> (<code>geom_boxplot()</code>) é uma excelente ferramenta. Para isso, vamos comparar a distribuição da massa corporal entre as três espécies.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
@@ -1269,12 +1290,12 @@ Figura&nbsp;3.2: Relação entre o tamanho da nadadeira (mm) e o peso corporal (
 </div>
 </section>
 </section>
-<section id="técnicas-avançadas-de-visualização-e-comunicação" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="técnicas-avançadas-de-visualização-e-comunicação"><span class="header-section-number">3.2.3</span> Técnicas avançadas de visualização e comunicação</h3>
+<section id="técnicas-avançadas-de-visualização-e-comunicação" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="técnicas-avançadas-de-visualização-e-comunicação"><span class="header-section-number">4.2.3</span> Técnicas avançadas de visualização e comunicação</h3>
 <p>Com a base da construção de gráficos vista anteriormente, é possível explorar técnicas para criar gráficos mais ricos e informativos, complementando informações descobertas de forma eficaz.</p>
 </section>
-<section id="sub-gráficos-com-facet_wrap" class="level3" data-number="3.2.4">
-<h3 data-number="3.2.4" class="anchored" data-anchor-id="sub-gráficos-com-facet_wrap"><span class="header-section-number">3.2.4</span> Sub-gráficos com <code>facet_wrap()</code></h3>
+<section id="sub-gráficos-com-facet_wrap" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="sub-gráficos-com-facet_wrap"><span class="header-section-number">4.2.4</span> Sub-gráficos com <code>facet_wrap()</code></h3>
 <p>As facetas permitem criar uma matriz de gráficos, dividindo os dados com uma base em uma ou mais variáveis categóricas. Isso é extremamente útil para comparações. Para exemplificar, vamos utilizar o gráfico de dispersão e segmentá-lo para a variável <code>sex</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
@@ -1329,13 +1350,13 @@ Figura&nbsp;3.2: Relação entre o tamanho da nadadeira (mm) e o peso corporal (
 <img src="03-tidyverse_files/figure-html/fig-massa-ilha-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-massa-ilha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;3.3: Distribuição de massa corporal (g) nas ilhas por espécie.
+Figura&nbsp;4.3: Distribuição de massa corporal (g) nas ilhas por espécie.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>A partir da <a href="#fig-massa-ilha" class="quarto-xref">Figura&nbsp;<span>3.3</span></a> é possível reparar que nem todas as espécies estão presentes nas três ilhas simultaneamente. Além disso, a ilha de <code>Biscoe</code> é a que apresenta o maior percentual de massa corporal dos pinguins, isto é, a espécie <code>Gentoo</code> é a predominante.</p>
+<p>A partir da <a href="#fig-massa-ilha" class="quarto-xref">Figura&nbsp;<span>4.3</span></a> é possível reparar que nem todas as espécies estão presentes nas três ilhas simultaneamente. Além disso, a ilha de <code>Biscoe</code> é a que apresenta o maior percentual de massa corporal dos pinguins, isto é, a espécie <code>Gentoo</code> é a predominante.</p>
 
 
 <div id="refs" class="references csl-bib-body" data-entry-spacing="1" role="list" style="display: none">
@@ -1784,12 +1805,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./02-fundamentos.html" class="pagination-link" aria-label="Fundamentos de R">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fundamentos de R</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Fundamentos de R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./04-pratica.html" class="pagination-link" aria-label="Modelo de Classificação">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modelo de Classificação</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modelo de Classificação</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

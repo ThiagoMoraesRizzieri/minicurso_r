@@ -13,19 +13,41 @@ Neste capítulo, vamos aplicar os conceitos de Machine Learning (ML) em R usando
 
 ## Como funcionam os modelos de classificação?
 
-Explicar um pouco mais sobre a ideia da modelagem no geral
+O objetivo de um **modelo de classificação** é prever a qual categoria (ou "classe") uma observação pertence. Diferente da regressão, que prevê um valor numérico contínuo, a classificação trabalha com rótulos discretos, como `A` ou `B`, `doente` ou `saudável` ou espécies de pinguins, que estudamos no capítulo anterior.
 
-Retomar alguns conceitos explicados no cap 1
+A ideia geral da modelagem é encontrar uma **função matemática** que use as características dos nossos dados (as variáveis `x` e `y` no nosso exemplo, ou as medidas do pinguim) para prever a classe. O processo de "treinamento" é exatamente onde o modelo "aprende" a melhor função para realizar essa tarefa.
 
-teste
+Para fazer isso de forma confiável, é crucial aplicar os conceitos de **divisão de treino e teste**, **viés e variância** e **métricas de avaliação**, que foram explicados no Capítulo 1. O objetivo é evitar o **sobreajuste**, garantindo que o modelo não apenas memorize os dados de treino, mas também seja capaz de generalizar e fazer boas previsões em dados novos.
+
+Veremos dois modelos de classificação neste minicurso.
 
 ### Modelo Logístico
 
-Explicar que trata-se de um modelo de regressão linear generalizado
+A **Regressão Logística** é um modelo de classificação que pertence à família dos **Modelos Lineares Generalizados**. Esses modelos "generalizam" a ideia da regressão linear para lidar com variáveis de resposta que não seguem uma distribuição normal ou que não são contínuas.
 
-### Árvore de decisão
+A princípio, a regressão logística foi desenvolvida para problemas de **duas classes** (também conhecidos como classificação binária). Nesses casos, o objetivo é estimar a probabilidade (p) de um dado pertencer a uma das classes com base em suas características. Como a variável de resposta é binária (o evento acontece ou não), sua distribuição de probabilidade é de **Bernoulli**. Por não ser uma distribuição normal, ela requer um modelo linear generalizado, e a **função de ligação canônica** para esse caso é o modelo de Regressão Logística. Essa função de ligação, chamada **logit**, é a ponte matemática que transforma a regressão linear em uma probabilidade.
 
-Falar sobre o modelo
+![Observemos que a função logística leva os valores reais para valores entre 0 e 1.](images/clipboard-3062215730.png){fig-align="center"}
+
+Apesar de ter a palavra "regressão" no nome, seu propósito é a classificação.
+
+O modelo funciona encontrando a melhor linha reta (ou um plano, em mais dimensões) que separa as classes. Ele não prevê a classe diretamente, mas sim a probabilidade de uma observação pertencer a uma determinada classe. Por exemplo, pode prever que um ponto tem 90% de chance de ser da `Classe A` e 10% de ser da `Classe B`.
+
+Se a probabilidade calculada for superior a 50%, o modelo classifica a observação em uma classe; caso contrário, na outra. Isso torna a **fronteira de decisão** (o lugar onde a probabilidade é exatamente 50%) uma linha reta, como veremos a seguir.
+
+Essa abordagem também pode ser estendida para problemas com **múltiplas classes** (três ou mais) através da **Regressão Logística Multinomial**, que irá criar segmentos de reta para separar as diferentes classes.
+
+### Árvore de Decisão
+
+A **Árvore de Decisão** é um modelo de classificação mais intuitivo e poderoso, que não se limita a fronteiras de decisão lineares. Ela opera fazendo uma série de perguntas sobre os dados, uma após a outra. Cada "pergunta" (nó da árvore) divide o conjunto de dados em subconjuntos menores e mais homogêneos. Por exemplo, a primeira pergunta pode ser: "A massa corporal é maior que X gramas?". Dependendo da resposta, o modelo faz uma nova pergunta para refinar a classificação.
+
+A "escolha" das perguntas é baseada em um **critério de informação**, calculado por medidas como a **Entropia da Informação** ou o **Índice de Gini**. A ideia é que cada nó seja o máximo em relação ao ganho de informação, ou seja, que a divisão seja a mais eficaz possível para separar as classes.
+
+O resultado é uma estrutura em forma de árvore, onde cada nó final (folha) representa uma classe. A Árvore de Decisão é excelente para capturar relações complexas e não-lineares, pois sua fronteira de decisão é uma série de segmentos de reta, e não apenas uma única linha.
+
+No entanto, a natureza de dividir os dados em pequenos subconjuntos faz com que a árvore de decisão tenha uma inclinação para o **sobreajuste**. Para evitar que o modelo "memorize" os dados de treino, são necessárias técnicas de regularização como o **poda (pruning)** e a definição do número máximo de divisões. Modelos que utilizam múltiplas árvores, como a **Floresta Aleatória**, também surgiram como uma solução para essa limitação.
+
+
 
 ## Classificação em dados simples
 
@@ -58,6 +80,20 @@ dados_simulados <- bind_rows(data_class_a, data_class_b) %>%
 head(dados_simulados)
 ```
 
+Um ponto imporante aqui, vamos realizar o comando `glimpse()` para entender melhor a estrutura dos dados.
+
+```{r}
+glimpse(dados_simulados)
+```
+
+Observemos que a variável `classe` é do tipo `character`. Para que o modelo de classificação funcione corretamente, precisamos convertê-la para o tipo `factor`. Façamos então:
+
+```{r}
+dados_simulados$classe <- as.factor(dados_simulados$classe)
+glimpse(dados_simulados)
+```
+Agora sim, a variável `classe` está como `factor`, o que é essencial para o modelo de classificação.
+
 Para entender melhor os dados que acabamos de criar, vamos visualizá-los. O gráfico a seguir mostra a distribuição dos pontos no plano cartesiano. Podemos ver que as duas classes formam dois "aglomerados" distintos.
 
 ```{r}
@@ -81,15 +117,7 @@ Antes de treinar o modelo, é uma prática essencial dividir o nosso conjunto de
 -   O conjunto de **teste** é usado para avaliar o desempenho do modelo em dados que ele **nunca viu antes**, garantindo uma avaliação mais realista.
 
 ```{r}
-# 2. Treinar um modelo de regressão logística
-dados_simulados$classe <- as.factor(dados_simulados$classe)
-
-modelo_logistico_simples <- logistic_reg() %>%
-  set_engine("glm") %>%
-  set_mode("classification")
-  
-
-# 3. Dividir os dados em treino e teste
+# 2. Dividir os dados em treino e teste
 split_simulado <- initial_split(dados_simulados, prop = 0.7, strata = classe)
 train_simulado <- training(split_simulado)
 test_simulado <- testing(split_simulado)
@@ -105,10 +133,8 @@ dim(test_simulado)
 Agora, vamos usar a biblioteca `tidymodels` para construir, treinar e avaliar o nosso modelo de **Regressão Logística**, que é um algoritmo de classificação linear.
 
 ```{r}
-# 4. Treinar o modelo de regressão logística nos dados de TREINO
+# 3. Treinar o modelo de regressão logística nos dados de TREINO
 modelo_logistico_simples <- logistic_reg() %>%
-  set_engine("glm") %>%
-  set_mode("classification") %>%
   fit(classe ~ x + y, data = train_simulado)
 
 # Fazer previsões nos dados de TREINO
@@ -199,6 +225,14 @@ recall(preds_test, truth = classe, estimate = .pred_class, event_level = "second
 
 f_meas(preds_test, truth = classe, estimate = .pred_class, event_level = "second")
 ```
+
+```{r}
+minhas_metricas <- metric_set(accuracy, precision, recall, f_meas)
+
+# Calcular e exibir as métricas nos dados de teste
+minhas_metricas(preds_test, truth = classe, estimate = .pred_class)
+```
+
 
 ## 2. Classificação com Dados Não-Lineares (Árvore de Decisão)
 
@@ -434,23 +468,12 @@ rpart.plot(extract_fit_engine(tree_fit$fit$fit, roundint = FALSE))
 
 Agora que você entendeu os conceitos básicos, vamos aplicar o mesmo fluxo de trabalho em um conjunto de dados real: as medições dos pinguins da Antártida. Nosso objetivo será classificar a **espécie** do pinguim com base em suas características físicas.
 
-### **Conheça os pinguins** 🐧
-
-![Obra de \@allison_horst.](images/clipboard-3055016893.png)
-
-Os `palmerpenguins`dados contêm medições de tamanho de três espécies de pinguins observadas em três ilhas no Arquipélago Palmer, na Antártida.
-
-Esses dados foram coletados entre 2007 e 2009 pela Dra. Kristen Gorman com o Programa de Pesquisa Ecológica de Longo Prazo da Estação Palmer , parte da Rede de Pesquisa Ecológica de Longo Prazo dos EUA . Os dados foram importados diretamente do Portal de Dados da Iniciativa de Dados Ambientais (EDI) e estão disponíveis para uso sob licença CC0 (“Sem Direitos Reservados”), de acordo com a Política de Dados da Estação Palmer.
-
-Podemos acessar esses dados instalando a versão lançada do palmerpenguins do CRAN com:
+Utilizaremos os dados de pingAins do arquipélago Palmer, visto no capítulo anterior. Podemos, novamente, acessar esses dados através do pacote `palmerpenguins`.
 
 ```{r}
 library(palmerpenguins)
 glimpse(penguins)
-
 ```
-
-![](images/clipboard-786638237.png){fig-align="center"}
 
 Nosso objetivo será classificar a **espécie** do pinguim com base em suas características físicas.
 
