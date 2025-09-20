@@ -17,6 +17,8 @@ Explicar um pouco mais sobre a ideia da modelagem no geral
 
 Retomar alguns conceitos explicados no cap 1
 
+teste
+
 ### Modelo Logístico
 
 Explicar que trata-se de um modelo de regressão linear generalizado
