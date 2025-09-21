@@ -11,6 +11,16 @@ library(tidymodels)
 
 Neste capítulo, vamos aplicar os conceitos de Machine Learning (ML) em R usando o ecossistema `tidymodels`. Começaremos com dados simples e sintéticos para entender a lógica por trás dos modelos de classificação, e depois aplicaremos esses mesmos conceitos a um conjunto de dados mais realista.
 
+## Conceitos importantes ao aplicar um modelo de Aprendizado de Máquina
+
+-   **Sobreajuste (Overfitting) e Subajuste (Underfitting):** O **sobreajuste** acontece quando o modelo "memoriza" os dados de treinamento em vez de aprender a generalizar os padrões, falhando em novos dados. O **subajuste** acontece quando o modelo é muito simples e não consegue capturar nem mesmo os padrões básicos nos dados.
+
+-   **Dados de treino e dados de teste:** Para avaliar se o modelo está generalizando bem, a base de dados é dividida. O modelo é **treinado** com a maior parte dos dados (dados de treino) e depois é avaliado em uma porção que ele nunca viu antes (dados de teste).
+
+-   **Viés versus variância:** O **viés** é o erro que o modelo comete por ser muito simples (subajuste). A **variância**, neste contexto, reflete a grande variação dos parâmetros estimados de um modelo a pequenas variações nos dados de treinamento (sobreajuste). Encontrar o equilíbrio entre os dois é crucial. Vale ressaltar que o termo "variância" geralmente reflete o sentido estatístico (uma medida de variação dos dados em relação à média dos dados).
+
+-   **Métricas de avaliação:** São usadas para medir o desempenho do modelo nos dados de teste. Dependendo do problema, podem ser usadas métricas como **acurácia** (a proporção de previsões corretas), **precisão** e **revocação**.
+
 ## Como funcionam os modelos de classificação?
 
 O objetivo de um **modelo de classificação** é prever a qual categoria (ou "classe") uma observação pertence. Diferente da regressão, que prevê um valor numérico contínuo, a classificação trabalha com rótulos discretos, como `A` ou `B`, `doente` ou `saudável` ou espécies de pinguins, que estudamos no capítulo anterior.
@@ -46,8 +56,6 @@ A "escolha" das perguntas é baseada em um **critério de informação**, calcul
 O resultado é uma estrutura em forma de árvore, onde cada nó final (folha) representa uma classe. A Árvore de Decisão é excelente para capturar relações complexas e não-lineares, pois sua fronteira de decisão é uma série de segmentos de reta, e não apenas uma única linha.
 
 No entanto, a natureza de dividir os dados em pequenos subconjuntos faz com que a árvore de decisão tenha uma inclinação para o **sobreajuste**. Para evitar que o modelo "memorize" os dados de treino, são necessárias técnicas de regularização como o **poda (pruning)** e a definição do número máximo de divisões. Modelos que utilizam múltiplas árvores, como a **Floresta Aleatória**, também surgiram como uma solução para essa limitação.
-
-
 
 ## Classificação em dados simples
 
@@ -92,6 +100,7 @@ Observemos que a variável `classe` é do tipo `character`. Para que o modelo de
 dados_simulados$classe <- as.factor(dados_simulados$classe)
 glimpse(dados_simulados)
 ```
+
 Agora sim, a variável `classe` está como `factor`, o que é essencial para o modelo de classificação.
 
 Para entender melhor os dados que acabamos de criar, vamos visualizá-los. O gráfico a seguir mostra a distribuição dos pontos no plano cartesiano. Podemos ver que as duas classes formam dois "aglomerados" distintos.
@@ -232,7 +241,6 @@ minhas_metricas <- metric_set(accuracy, precision, recall, f_meas)
 # Calcular e exibir as métricas nos dados de teste
 minhas_metricas(preds_test, truth = classe, estimate = .pred_class)
 ```
-
 
 ## 2. Classificação com Dados Não-Lineares (Árvore de Decisão)
 
@@ -480,6 +488,12 @@ Nosso objetivo será classificar a **espécie** do pinguim com base em suas cara
 ### Preparando os Dados
 
 Antes de modelar, precisamos tratar os valores ausentes (`NA`) e dividir os dados.
+
+```{r}
+# Removendo linhas com valores ausentes (NA)
+penguins <- na.omit(penguins)
+glimpse(penguins)
+```
 
 ### Aplicação de um modelo de classificação
 

@@ -60,16 +60,6 @@ O machine learning impulsiona muitas das tecnologias que usamos diariamente, com
 
 -   **Aprendizado por Reforço:** O modelo aprende através de tentativa e erro, interagindo com um ambiente para maximizar uma recompensa. É a técnica por trás de robôs que aprendem a andar ou de sistemas de IA que jogam xadrez.
 
-### Conceitos importantes ao aplicar um modelo de Aprendizado de Máquina
-
--   **Sobreajuste (Overfitting) e Subajuste (Underfitting):** O **sobreajuste** acontece quando o modelo "memoriza" os dados de treinamento em vez de aprender a generalizar os padrões, falhando em novos dados. O **subajuste** acontece quando o modelo é muito simples e não consegue capturar nem mesmo os padrões básicos nos dados.
-
--   **Dados de treino e dados de teste:** Para avaliar se o modelo está generalizando bem, a base de dados é dividida. O modelo é **treinado** com a maior parte dos dados (dados de treino) e depois é avaliado em uma porção que ele nunca viu antes (dados de teste).
-
--   **Viés versus variância:** O **viés** é o erro que o modelo comete por ser muito simples (subajuste). A **variância** é o erro do modelo por ser muito complexo e sensível a pequenas variações nos dados de treinamento (sobreajuste). Encontrar o equilíbrio entre os dois é crucial.
-
--   **Métricas de avaliação:** São usadas para medir o desempenho do modelo nos dados de teste. Dependendo do problema, podem ser usadas métricas como **acurácia** (a proporção de previsões corretas), **precisão** e **revocação**.
-
 ### Boas práticas para a carreira de Ciência de Dados
 
 Para quem está começando, algumas atitudes podem fazer toda a diferença no mercado de trabalho:
