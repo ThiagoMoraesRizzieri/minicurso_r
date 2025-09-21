@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -91,10 +91,10 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-542cf50e1f395a1c6267587cc8cc3ecf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -790,16 +790,24 @@ Tabela&nbsp;4.3: Descrição das principais funções do <code>tidyverse</code>.
 <p>Se o <code>dplyr</code> é a gramática da manipulação de dados, possuindo funções essenciais para esse trabalho, o <code>ggplot2</code> <span class="citation" data-cites="wickhamGgplot22016">(<a href="references.html#ref-wickhamGgplot22016" role="doc-biblioref">WICKHAM, 2016</a>)</span> é gramática dos gráficos, permitindo construir gráficos por meio de camadas e oferecendo um sistema robusto e flexível para visualização os dados. Nesta seção, continuaremos utilizando os dados dos pinguins para explorar alguns <em>insights</em> visuais, desde gráficos mais simples até os mais elaborados.</p>
 <p>Todo gráfico no <code>ggplot2</code> é constituído por três camadas essenciais:</p>
 <ol type="1">
-<li>Dados (<code>data</code>): O <em>dataframe</em> que contém as informações a serem plotadas.</li>
-<li>Mapeamento Estéticos (<code>aes</code>): A função <code>aes()</code> (de <em>aesthetics</em>) descreve como as variáveis do nosso <em>dataframe</em> são mapeadas para as propriedades visuais do gráfico. As estéticas mais comuns são <code>x</code> e <code>y</code> (os eixos), mas também incluem <code>color</code> (cor), <code>shape</code> (forma), <code>size</code> (tamanho) e <code>alpha</code> (transparência/opacidade).</li>
-<li>Objetos geométricos (<code>geom</code>): Os <code>geoms</code> definem como os dados são representados visualmente. Por exemplo, <code>geom_point()</code> cria um gráfico de dispersão, <code>geom_bar()</code> cria um gráfico de barras, <code>geom_line()</code> cria um gráfico de linhas, e assim por diante.</li>
+<li><strong>Dados (<code>data</code>):</strong> O <em>dataframe</em> que contém as informações a serem plotadas.</li>
+<li><strong>Mapeamento Estéticos (<code>aes</code>):</strong> A função <code>aes()</code> (de <em>aesthetics</em>) descreve como as variáveis do nosso <em>dataframe</em> são mapeadas para as propriedades visuais do gráfico. As estéticas mais comuns são <code>x</code> e <code>y</code> (os eixos), mas também incluem <code>color</code> (cor), <code>shape</code> (forma), <code>size</code> (tamanho) e <code>alpha</code> (transparência/opacidade).</li>
+<li><strong>Camada (<code>layers</code>):</strong> O coração de qualquer gráfico são as camadas . Elas pegam os dados mapeados e os exibem em algo que os humanos possam entender como uma representação dos dados. Nessa parte que inserimos os objetos geométricos (<code>geom</code>): Os <code>geoms</code> definem como os dados são representados visualmente. Por exemplo, <code>geom_point()</code> cria um gráfico de dispersão, <code>geom_bar()</code> cria um gráfico de barras, <code>geom_line()</code> cria um gráfico de linhas, e assim por diante.</li>
 </ol>
-<p>Na imagem, temos todas as camadas que são utilizadas pelo ggplot2, seguindo a ordem debaixo para cima. Além das 3 mais importantes, ainda temos a cama da escala…</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/ggplot2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="452"></p>
+<p><img src="images/ggplot2.png" class="img-fluid figure-img" width="452"></p>
+<figcaption>Na imagem, temos todas as camadas que são utilizadas pelo ggplot2, seguindo a ordem debaixo para cima</figcaption>
 </figure>
 </div>
+<p>Além das três camadas essenciais (dados, mapeamento estético e objetos geométricos), o <code>ggplot2</code> permite adicionar outras camadas para refinar e personalizar seus gráficos:</p>
+<ul>
+<li><p><strong>Camada da Escala (<code>scales</code>)</strong>: Essa camada controla o mapeamento entre os valores dos dados e as propriedades visuais. Por exemplo, ela define a cor, o tamanho e a forma dos objetos, além de permitir a personalização dos eixos (como a definição de limites e rótulos).</p></li>
+<li><p><strong>Camada de Subdivisão (<code>facets</code>)</strong>: As facetas são uma maneira de criar múltiplos gráficos, dividindo seus dados em subgrupos com base em uma ou mais variáveis. Elas são ideais para explorar relações condicionais nos dados. <code>facet_wrap()</code> e <code>facet_grid()</code> são as funções mais comuns para essa finalidade.</p></li>
+<li><p><strong>Camada do Sistema de Coordenadas (<code>coord</code>)</strong>: Esta camada define como os dados são mapeados para a superfície do gráfico. A coordenada padrão é a Cartesiana, mas você pode usar outras, como <code>coord_polar()</code> para gráficos de pizza ou <code>coord_flip()</code> para inverter os eixos x e y.</p></li>
+<li><p><strong>Camada do Tema (<code>theme</code>)</strong>: O tema controla os elementos não relacionados aos dados, como as fontes, as cores de fundo, os rótulos dos eixos e as legendas. É o que permite dar uma aparência mais profissional e personalizada aos seus gráficos.</p></li>
+</ul>
+<p>Ao combinar essas camadas de maneira lógica, o <code>ggplot2</code> oferece um sistema flexível para a construção de gráficos, permitindo que você adicione complexidade gradualmente, mantendo o código organizado e legível.</p>
 <section id="estatística-descritiva" class="level3" data-number="4.2.1">
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="estatística-descritiva"><span class="header-section-number">4.2.1</span> Estatística descritiva</h3>
 <p>Antes de explorar as relações gráficas, é útil enfatizar e entender alguns conceitos essenciais da Estatística Descritiva como os tipos de variáveis, normas para tabelas e as definições de frequências.</p>
@@ -1065,14 +1073,14 @@ Tabela&nbsp;4.6: Distribuição de frequências para a massa corporal (g) dos pi
 <li>Diagrama de dispersão: relaciona duas quantitativas.</li>
 <li>Gráfico de linhas: evolução de quantitativa ao longo do tempo ou espaço.</li>
 </ul>
-<p>Com esse conhecimento em mente podemos prosseguir para as construções dos gráficos utilizando o <code>ggplot2</code></p>
-<p>O ggplot2 funciona com construção de “camadas” (layers). O comando <code>ggplot()</code> inicia um gráfico vazio.</p>
+<p>Com esse conhecimento em mente podemos prosseguir para as construções dos gráficos.</p>
+<p>O pacote <code>ggplot2</code> funciona com construção de “camadas” (layers). O comando <code>ggplot()</code> inicia um gráfico vazio.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1081,10 +1089,10 @@ Tabela&nbsp;4.6: Distribuição de frequências para a massa corporal (g) dos pi
 <section id="adicionando-layers" class="level4" data-number="4.2.2.1">
 <h4 data-number="4.2.2.1" class="anchored" data-anchor-id="adicionando-layers"><span class="header-section-number">4.2.2.1</span> Adicionando layers</h4>
 <p>De maneira geral, a sintaxe que vamos usar é <code>geom_yyy(data = dados, aes(x = x, y = y))</code>, sendo que iremos substituir <code>yyy</code> por “line” para linhas, “point” para pontos e assim por diante.</p>
-<p>Por exemplo, para criar um plot da massa corporal x e comprimento da nadadeira</p>
+<p>Para praticar um pouco, podemos fazer uma visualização da relação entre a <strong>massa corporal</strong> (eixo X) e o <strong>comprimento da nadadeira</strong> (eixo Y):</p>
 <div class="cell" data-exercise="true">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> penguins_completo, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins_completo) <span class="sc">+</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1093,10 +1101,10 @@ Tabela&nbsp;4.6: Distribuição de frequências para a massa corporal (g) dos pi
 </div>
 </div>
 </div>
-<p>Se quisermos que os pontos tenham uma cor em particular, usamos</p>
+<p>Se quisermos que os pontos tenham uma cor em particular, adicionamos a cor dentro de <code>geom_point()</code>.</p>
 <div class="cell" data-exercise="true">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> penguins_completo, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm), <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins_completo) <span class="sc">+</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm), <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1113,24 +1121,37 @@ Tabela&nbsp;4.6: Distribuição de frequências para a massa corporal (g) dos pi
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Veremos mais sobre esse tipo de gráfico depois.</p>
+<p>A cor de cada ponto também pode ser definida por uma variável (como a espécie), mas precisará ser inserida dentro de <code>aes()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>penguins_completo <span class="sc">%&gt;%</span> </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm, <span class="at">color =</span> species))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Com a lógica fundamental do <code>ggplot2</code> em mente, vamos agora explorar algumas visualizações comuns para analisar nossos dados.</p>
 </section>
 <section id="visualizando-uma-única-variável" class="level4" data-number="4.2.2.2">
 <h4 data-number="4.2.2.2" class="anchored" data-anchor-id="visualizando-uma-única-variável"><span class="header-section-number">4.2.2.2</span> Visualizando uma única variável</h4>
 <p>Para visualizar a distribuição de uma variável contínua como a massa corporal, utiliza-se o histograma com a função <code>geom_histogram()</code>. Como já foi visto, a escolha do número de colunas é arbitrário e pode afetar significativamente a aparência e a interpretação do gráfico.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g))<span class="sc">+</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g))<span class="sc">+</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="576"></p>
 <figcaption>Distribuição da massa corporal (g) dos pinguins.</figcaption>
 </figure>
 </div>
@@ -1138,25 +1159,25 @@ Tabela&nbsp;4.6: Distribuição de frequências para a massa corporal (g) dos pi
 </div>
 <p>Mas esse gráfico é muito feio, vamos ver como melhorar.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g))<span class="sc">+</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>,</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2700</span>, <span class="dv">6300</span>, <span class="at">by =</span> <span class="dv">600</span>), </span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">closed =</span> <span class="st">"left"</span>)<span class="sc">+</span></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2700</span>, <span class="dv">6300</span>, <span class="at">by =</span> <span class="dv">600</span>),</span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">2700</span>, <span class="dv">6300</span>, <span class="at">by =</span> <span class="dv">600</span>),</span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">2700</span>, <span class="dv">6300</span>)</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Massa corporal (g)"</span>,</span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Contagem"</span></span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>    ggthemes<span class="sc">::</span><span class="fu">theme_clean</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g))<span class="sc">+</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2700</span>, <span class="dv">6300</span>, <span class="at">by =</span> <span class="dv">600</span>), </span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">closed =</span> <span class="st">"left"</span>)<span class="sc">+</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2700</span>, <span class="dv">6300</span>, <span class="at">by =</span> <span class="dv">600</span>),</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">2700</span>, <span class="dv">6300</span>, <span class="at">by =</span> <span class="dv">600</span>),</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">2700</span>, <span class="dv">6300</span>)</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Massa corporal (g)"</span>,</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Contagem"</span></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>    ggthemes<span class="sc">::</span><span class="fu">theme_clean</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="576"></p>
 <figcaption>Distribuição da massa corporal (g) dos pinguins.</figcaption>
 </figure>
 </div>
@@ -1164,11 +1185,8 @@ Tabela&nbsp;4.6: Distribuição de frequências para a massa corporal (g) dos pi
 </div>
 <p>Observe que a biblioteca <code>ggthemes</code> foi utilizada para melhorar o aspecto estético do gráfico, fornecendo temas adicionais. Portanto, é recomendável instalá-la e carregá-la no espaço de trabalho.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggthemes")</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: pacote 'ggthemes' foi compilado no R versão 4.4.3</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggthemes")</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para variáveis categóricas, como <code>species</code>, usamos o <code>geom_bar()</code> para criar um gráfico de barras que mostra a contagem de observações em cada categoria.</p>
 <div class="cell">
@@ -1176,11 +1194,11 @@ Tabela&nbsp;4.6: Distribuição de frequências para a massa corporal (g) dos pi
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">fill =</span> species))<span class="sc">+</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Espécie"</span>,</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Espécies"</span>,</span>
 <span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Número de Indivíduos"</span></span>
 <span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
 <span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Massa corporal (g)"</span>,</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Espécies"</span>,</span>
 <span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Contagem"</span>,</span>
 <span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="st">"Espécies"</span></span>
 <span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>      )<span class="sc">+</span></span>
@@ -1189,7 +1207,7 @@ Tabela&nbsp;4.6: Distribuição de frequências para a massa corporal (g) dos pi
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="576"></p>
 <figcaption>Distribuição de Pinguins por Espécie.</figcaption>
 </figure>
 </div>
@@ -1198,7 +1216,7 @@ Tabela&nbsp;4.6: Distribuição de frequências para a massa corporal (g) dos pi
 </section>
 <section id="relações-entre-variáveis" class="level4" data-number="4.2.2.3">
 <h4 data-number="4.2.2.3" class="anchored" data-anchor-id="relações-entre-variáveis"><span class="header-section-number">4.2.2.3</span> Relações entre variáveis</h4>
-<p>O gráfico de dispersão é a ferramenta clássica para explorar relações entre duas variáveis numéricas. Investigaremos a relação existente entre o comprimento da nadadeira e a massa corporal. A hipótese é que pinguins com nadadeiras maiores também serão mais pesados, uma relação positiva e intuitiva que serve como um excelente parâmetro de partida.</p>
+<p>O gráfico de dispersão é a ferramenta clássica para explorar relações entre duas variáveis numéricas. Investigaremos a relação existente entre o comprimento da nadadeira e a massa corporal. A hipótese é que pinguins com nadadeiras maiores também serão mais pesados, uma relação positiva e intuitiva que serve como um excelente parâmetro de partida. Como vimos anteriormente, o gráfico dessa relação fica da seguinte forma:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span> </span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g))<span class="sc">+</span></span>
@@ -1262,7 +1280,7 @@ Figura&nbsp;4.2: Relação entre o tamanho da nadadeira (mm) e o peso corporal (
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Boxplot para a massa corporal (g) por espécies de pinguins.</figcaption>
 </figure>
 </div>
@@ -1283,7 +1301,7 @@ Figura&nbsp;4.2: Relação entre o tamanho da nadadeira (mm) e o peso corporal (
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1318,7 +1336,7 @@ Figura&nbsp;4.2: Relação entre o tamanho da nadadeira (mm) e o peso corporal (
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="03-tidyverse_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Distribuição de massa corporal (g) por espécie.</figcaption>
 </figure>
 </div>
@@ -1467,6 +1485,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1577,6 +1597,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

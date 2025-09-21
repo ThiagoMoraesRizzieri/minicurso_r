@@ -49,11 +49,15 @@ Para que você possa importar um arquivo contendo dados, é importante observar 
 No caso, vamos importar um arquivo diretamente do github, então não nos preocuparemos com o diretório de trabalho.
 
 ```{r dados, include=TRUE}
-dados <- read_csv("https://raw.githubusercontent.com/ThiagoMoraesRizzieri/minicurso_r/main/Pokemon_full.csv")
+dados <- read_csv("https://raw.githubusercontent.com/ThiagoMoraesRizzieri/minicurso_r/refs/heads/main/dados/Pokemon_full.csv")
 ```
 
 ```{r}
 head(dados)
+```
+
+```{r}
+glimpse(dados)
 ```
 
 # Criação de gráficos: GGPLOT2
@@ -97,87 +101,200 @@ ggplot()+
   geom_point(data = dados, aes(x = height, y = weight, color = type))
 ```
 
-...
-
-# Classificação: Pinguins do arquipélago Palmer
-
-## **Conheça os pinguins** 🐧
-
-![Obra de \@allison_horst.](images/clipboard-3055016893.png)
-
-Os `palmerpenguins`dados contêm medições de tamanho de três espécies de pinguins observadas em três ilhas no Arquipélago Palmer, na Antártida.
+Para visualizar a distribuição de uma variável contínua como a massa corporal, utiliza-se o histograma com a função `geom_histogram()`. Como já foi visto, a escolha do número de colunas é arbitrário e pode afetar significativamente a aparência e a interpretação do gráfico.
 
 ```{r}
-library(palmerpenguins)
-glimpse(penguins)
+#| warning: false
+#| fig-cap: "Distribuição da massa corporal (g) dos pinguins."
+#| fig-width: 6
+#| fig-height: 2.75
+
+dados %>% 
+  ggplot(mapping = aes(x = height))+
+    geom_histogram()
 
 ```
 
-![](images/clipboard-1302732821.png){fig-align="center" width="445"}
-
-### Usando head()
+Mas esse gráfico é muito feio, vamos ver como melhorar.
 
 ```{r}
-#|echo: true
+#| warning: false
+#| fig-cap: "Distribuição da massa corporal (g) dos pinguins."
+#| fig-width: 6
+#| fig-height: 2.75
+
+dados %>% 
+  ggplot(mapping = aes(x = height))+
+    geom_histogram(color = "white", fill = "steelblue",
+                   breaks = seq(0, 60, by = 5), 
+                   closed = "left")+
+  scale_x_continuous(
+      breaks = seq(0, 60, by = 5),
+      labels = seq(0, 60, by = 5),
+      limits = c(0,60)
+    )+
+    labs(
+      x = "Massa corporal (g)",
+      y = "Contagem"
+    )+
+    ggthemes::theme_clean()
 ```
 
-Usar `head()` pode ser interessante para ter um primeiro olhar para os dados:
+Observe que a biblioteca `ggthemes` foi utilizada para melhorar o aspecto estético do gráfico, fornecendo temas adicionais. Portanto, é recomendável instalá-la e carregá-la no espaço de trabalho.
 
 ```{r}
-head(penguins)
-
+# install.packages("ggthemes")
+library(ggthemes)
 ```
 
-### Usando arrange()
-
-`arrange()` organiza nossos dados em ordem *crescente*, partindo do menor valor da variável de interesse até o maior (ou em caso da variável ver qualitativa, será apresentado em ordem alfabética).
+Para variáveis categóricas, como `types`, usamos o `geom_bar()` para criar um gráfico de barras que mostra a contagem de observações em cada categoria.
 
 ```{r}
-penguins %>%
-  arrange(bill_length_mm) %>%
-  head()
+dados %>% 
+  ggplot(mapping = aes(x = type, fill = type)) +
+    geom_bar() +
+    theme_clean() +
+    theme(
+      legend.position = "none",
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
 ```
 
-### Criando um subconjunto com `subset()`
+#### Relações entre variáveis
 
-### Aplicação de um modelo de classificação
+O gráfico de dispersão é a ferramenta clássica para explorar relações entre duas variáveis numéricas. Investigaremos a relação existente entre o comprimento da nadadeira e a massa corporal. A hipótese é que pinguins com nadadeiras maiores também serão mais pesados, uma relação positiva e intuitiva que serve como um excelente parâmetro de partida.
 
 ```{r}
-# Carregando os pacotes
-library(tidymodels)
+#| warning: false
+#| fig-cap: "Relação entre o tamanho da nadadeira (mm) e o peso corporal (g) dos pinguins."
+#| label: fig-dis-peso-nad
 
-
-
-# Usar o dataset iris, disponível por padrão no R
-data(iris)
-
-# Criar um split treino/teste
-set.seed(123)
-split <- initial_split(iris, prop = 0.8)
-train <- training(split)
-test <- testing(split)
-
-# Definir o modelo (regressão logística multinomial)
-modelo <- multinom_reg() %>%
-  set_engine("nnet") %>%
-  set_mode("classification")
-
-# Criar o workflow
-workflow <- workflow() %>%
-  add_model(modelo) %>%
-  add_formula(Species ~ .)
-
-# Ajustar o modelo
-ajustado <- fit(workflow, data = train)
-
-# Previsão e avaliação
-pred <- predict(ajustado, new_data = test) %>%
-  bind_cols(test)
-
-# Métricas de desempenho
-metrics(pred, truth = Species, estimate = .pred_class)
-
-# Matriz de confusão
-conf_mat(pred, truth = Species, estimate = .pred_class)
-
+dados %>% 
+  ggplot(aes(x = height, y = weight))+
+    geom_point()+
+    labs(
+      x = "Altura",
+      y = "Peso"
+    )+
+  theme_clean()
 ```
+
+\noindent A @fig-dis-peso-nad informa uma clara tendência positiva entre a nadadeira e o peso corporal dos pinguins. Mas será que esse tendência é a mesma para todas as espécies? Para responder essa pergunta, através da função `aes()`, é possível adicionar estéticas adicionais como `shape`, `color` ou `size` para distinguir as espécies no gráfico. O argumento a ser utilizado dependerá onde a imagem será utilizada. Por exemplo, em uma revista científica, que solicita gráficos em preto e branco, é aconselhável utilizar `shape` ou `size`.
+
+```{r}
+#| warning: false
+#| fig-cap: "Relação entre o tamanho da nadadeira (mm) e o peso corporal (g) por espécie dos pinguins."
+#| label: fig-dis-esp
+
+dados %>% 
+  ggplot(aes(x = height, y = weight, color = type))+
+    geom_point()+
+    labs(
+      x = "Comprimento da Nadadeira (mm)",
+      y = "Massa corporal (g)",
+      color = "Espécies"
+    )+
+    theme_clean()+
+    theme(legend.position = "bottom")
+```
+
+\noindent A @fig-dis-esp revela detalhes mais pertinentes, mostrando que a relação entre massa corporal e comprimento da nadadeira mantêm-se positiva (nível de grupo).
+
+Para comparar a distribuição de uma variável numérica entre diferentes categorias, o boxplot[^minicurso_r-1] (`geom_boxplot()`) é uma excelente ferramenta. Para isso, vamos comparar a distribuição da massa corporal entre as três espécies.
+
+[^minicurso_r-1]: Também chamado por gráfico de caixas.
+
+```{r}
+#| warning: false
+#| fig-cap: "Boxplot para a massa corporal (g) por espécies de pinguins."
+
+dados %>% 
+  ggplot(aes(x = type, y = height, fill = type))+
+    geom_boxplot()+
+    labs(
+      x = "Espécies",
+      y = "Massa corporal (g)",
+      fill = "Espécies"
+    )+
+    theme_clean()+
+    theme(
+      legend.position = "none",
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
+```
+
+Uma alternativa ao `geom_boxplot()` é o `geom_violin()`, que traz um detalhamento sobre os dados de uma maneira mais simples. Adicionalmente, podemos utilizar o `geom_jitter()` para evitar a sobreposição dos dados, enriquecendo o visual do gráfico.
+
+```{r}
+#| warning: false
+dados %>% 
+  ggplot(aes(x = type, y = height, fill = type))+
+    geom_violin(alpha = 0.5)+
+    geom_jitter(width = 0.1, alpha = 0.5)+
+    labs(
+      x = "Espécie",
+      y = "Massa corporal (g)"
+    )+
+    theme_clean()+
+    theme(legend.position = "none")
+```
+
+### Técnicas avançadas de visualização e comunicação
+
+Com a base da construção de gráficos vista anteriormente, é possível explorar técnicas para criar gráficos mais ricos e informativos, complementando informações descobertas de forma eficaz.
+
+### Sub-gráficos com `facet_wrap()`
+
+As facetas permitem criar uma matriz de gráficos, dividindo os dados com uma base em uma ou mais variáveis categóricas. Isso é extremamente útil para comparações. Para exemplificar, vamos utilizar o gráfico de dispersão e segmentá-lo para a variável `sex`.
+
+```{r}
+#| warning: false
+#| fig-cap: "Distribuição de massa corporal (g) por espécie."
+
+penguins %>% 
+  filter(!is.na(sex)) %>% 
+  mutate(
+  sex = recode(sex,
+         "female" = "Fêmea",
+         "male" = "Macho")
+  ) %>% 
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g, color = species))+
+    geom_point()+
+    facet_wrap(~ sex)+
+    labs(
+      x = "Comprimento da nadadeira (mm)",
+      y = "Massa corporal (g)",
+      color = "Espécies"
+    )+
+    theme_clean()+
+    theme(legend.position = "bottom")
+```
+
+\noindent Neste gráfico, fica evidente que os pinguins fêmeas possuem menos massa corporal que os machos e, quanto as espécies, `Gentoo` é que concentra a maior massa. Contudo, pode ser do interesse do pesquisador além de verificar a massa corporal por sexo, também incluir a variável `island`.
+
+```{r}
+#| warning: false
+#| fig-cap: "Distribuição de massa corporal (g) nas ilhas por espécie."
+#| label: fig-massa-ilha
+#| fig-height: 5
+
+penguins %>% 
+  filter(!is.na(sex)) %>% 
+  mutate(
+  sex = recode(sex,
+         "female" = "Fêmea",
+         "male" = "Macho")
+  ) %>% 
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g, color = species))+
+    geom_point()+
+    facet_wrap(island ~ sex)+
+    labs(
+      x = "Comprimento da nadadeira (mm)",
+      y = "Massa corporal (g)",
+      color = "Espécies"
+    )+
+    theme_clean()+
+    theme(legend.position = "bottom")
+```
+
+\noindent A partir da @fig-massa-ilha é possível reparar que nem todas as espécies estão presentes nas três ilhas simultaneamente. Além disso, a ilha de `Biscoe` é a que apresenta o maior percentual de massa corporal dos pinguins, isto é, a espécie `Gentoo` é a predominante.

@@ -8,7 +8,7 @@ Nosso percurso inclui:
 
 -   Fundamentos do R: Uma breve revisão dos conceitos essenciais da linguagem.
 
--   Tidyverse: A filosofia por trás de um dos ecossistemas mais populares do R, que simplifica a organização e transformação de dados com uma sintaxe limpa e intuitiva.
+-   Tidyverse: A filosofia por trás de um dos ecossistemas mais populares do R, que simplifica a organização, transformação e visualização de dados com uma sintaxe limpa e intuitiva. 
 
 -   Modelagem de Machine Learning: Uma introdução prática aos modelos de classificação, usando dados sintéticos e reais para ilustrar como eles funcionam e para que servem.
 
