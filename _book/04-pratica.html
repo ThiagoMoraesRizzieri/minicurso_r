@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.8.21">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -66,15 +67,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./references.html" rel="next">
 <link href="./03-tidyverse.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea1d7ac60288e0f1efdbc993fd8432ae.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-542cf50e1f395a1c6267587cc8cc3ecf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f2c6d6e2b784ddc5de38779acc06f37d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -106,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -128,7 +131,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Minicurso: Ciência de Dados com R – Uma Introdução Prática</a> 
     </div>
@@ -186,32 +191,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#como-funcionam-os-modelos-de-classificação" id="toc-como-funcionam-os-modelos-de-classificação" class="nav-link active" data-scroll-target="#como-funcionam-os-modelos-de-classificação"><span class="header-section-number">5.1</span> Como funcionam os modelos de classificação?</a>
+  <li><a href="#conceitos-importantes-ao-aplicar-um-modelo-de-aprendizado-de-máquina" id="toc-conceitos-importantes-ao-aplicar-um-modelo-de-aprendizado-de-máquina" class="nav-link active" data-scroll-target="#conceitos-importantes-ao-aplicar-um-modelo-de-aprendizado-de-máquina"><span class="header-section-number">5.1</span> Conceitos importantes ao aplicar um modelo de Aprendizado de Máquina</a></li>
+  <li><a href="#como-funcionam-os-modelos-de-classificação" id="toc-como-funcionam-os-modelos-de-classificação" class="nav-link" data-scroll-target="#como-funcionam-os-modelos-de-classificação"><span class="header-section-number">5.2</span> Como funcionam os modelos de classificação?</a>
   <ul class="collapse">
-  <li><a href="#modelo-logístico" id="toc-modelo-logístico" class="nav-link" data-scroll-target="#modelo-logístico"><span class="header-section-number">5.1.1</span> Modelo Logístico</a></li>
-  <li><a href="#árvore-de-decisão" id="toc-árvore-de-decisão" class="nav-link" data-scroll-target="#árvore-de-decisão"><span class="header-section-number">5.1.2</span> Árvore de Decisão</a></li>
+  <li><a href="#modelo-logístico" id="toc-modelo-logístico" class="nav-link" data-scroll-target="#modelo-logístico"><span class="header-section-number">5.2.1</span> Modelo Logístico</a></li>
+  <li><a href="#árvore-de-decisão" id="toc-árvore-de-decisão" class="nav-link" data-scroll-target="#árvore-de-decisão"><span class="header-section-number">5.2.2</span> Árvore de Decisão</a></li>
   </ul></li>
-  <li><a href="#classificação-em-dados-simples" id="toc-classificação-em-dados-simples" class="nav-link" data-scroll-target="#classificação-em-dados-simples"><span class="header-section-number">5.2</span> Classificação em dados simples</a>
+  <li><a href="#classificação-em-dados-simples" id="toc-classificação-em-dados-simples" class="nav-link" data-scroll-target="#classificação-em-dados-simples"><span class="header-section-number">5.3</span> Classificação em dados simples</a>
   <ul class="collapse">
-  <li><a href="#preparando-os-dados-para-o-modelo" id="toc-preparando-os-dados-para-o-modelo" class="nav-link" data-scroll-target="#preparando-os-dados-para-o-modelo"><span class="header-section-number">5.2.1</span> Preparando os Dados para o Modelo</a></li>
-  <li><a href="#treinando-e-avaliando-o-modelo-de-regressão-logística" id="toc-treinando-e-avaliando-o-modelo-de-regressão-logística" class="nav-link" data-scroll-target="#treinando-e-avaliando-o-modelo-de-regressão-logística"><span class="header-section-number">5.2.2</span> Treinando e Avaliando o Modelo de Regressão Logística</a></li>
-  <li><a href="#visualizando-a-fronteira-de-decisão" id="toc-visualizando-a-fronteira-de-decisão" class="nav-link" data-scroll-target="#visualizando-a-fronteira-de-decisão"><span class="header-section-number">5.2.3</span> Visualizando a Fronteira de Decisão</a></li>
-  <li><a href="#avaliando-o-desempenho-do-modelo" id="toc-avaliando-o-desempenho-do-modelo" class="nav-link" data-scroll-target="#avaliando-o-desempenho-do-modelo"><span class="header-section-number">5.2.4</span> Avaliando o Desempenho do Modelo</a></li>
+  <li><a href="#preparando-os-dados-para-o-modelo" id="toc-preparando-os-dados-para-o-modelo" class="nav-link" data-scroll-target="#preparando-os-dados-para-o-modelo"><span class="header-section-number">5.3.1</span> Preparando os Dados para o Modelo</a></li>
+  <li><a href="#treinando-e-avaliando-o-modelo-de-regressão-logística" id="toc-treinando-e-avaliando-o-modelo-de-regressão-logística" class="nav-link" data-scroll-target="#treinando-e-avaliando-o-modelo-de-regressão-logística"><span class="header-section-number">5.3.2</span> Treinando e Avaliando o Modelo de Regressão Logística</a></li>
+  <li><a href="#visualizando-a-fronteira-de-decisão" id="toc-visualizando-a-fronteira-de-decisão" class="nav-link" data-scroll-target="#visualizando-a-fronteira-de-decisão"><span class="header-section-number">5.3.3</span> Visualizando a Fronteira de Decisão</a></li>
+  <li><a href="#avaliando-o-desempenho-do-modelo" id="toc-avaliando-o-desempenho-do-modelo" class="nav-link" data-scroll-target="#avaliando-o-desempenho-do-modelo"><span class="header-section-number">5.3.4</span> Avaliando o Desempenho do Modelo</a></li>
   </ul></li>
-  <li><a href="#classificação-com-dados-não-lineares-árvore-de-decisão" id="toc-classificação-com-dados-não-lineares-árvore-de-decisão" class="nav-link" data-scroll-target="#classificação-com-dados-não-lineares-árvore-de-decisão"><span class="header-section-number">5.3</span> 2. Classificação com Dados Não-Lineares (Árvore de Decisão)</a>
+  <li><a href="#classificação-com-dados-não-lineares-árvore-de-decisão" id="toc-classificação-com-dados-não-lineares-árvore-de-decisão" class="nav-link" data-scroll-target="#classificação-com-dados-não-lineares-árvore-de-decisão"><span class="header-section-number">5.4</span> 2. Classificação com Dados Não-Lineares (Árvore de Decisão)</a>
   <ul class="collapse">
-  <li><a href="#gerando-dados-não-lineares" id="toc-gerando-dados-não-lineares" class="nav-link" data-scroll-target="#gerando-dados-não-lineares"><span class="header-section-number">5.3.1</span> Gerando Dados Não-Lineares</a></li>
-  <li><a href="#regressão-logística-em-dados-não-lineares" id="toc-regressão-logística-em-dados-não-lineares" class="nav-link" data-scroll-target="#regressão-logística-em-dados-não-lineares"><span class="header-section-number">5.3.2</span> Regressão Logística em Dados Não-Lineares</a></li>
-  <li><a href="#árvore-de-decisão-em-dados-não-lineares" id="toc-árvore-de-decisão-em-dados-não-lineares" class="nav-link" data-scroll-target="#árvore-de-decisão-em-dados-não-lineares"><span class="header-section-number">5.3.3</span> Árvore de Decisão em Dados Não-Lineares</a></li>
-  <li><a href="#visualizando-as-fronteiras-de-decisão-da-árvore" id="toc-visualizando-as-fronteiras-de-decisão-da-árvore" class="nav-link" data-scroll-target="#visualizando-as-fronteiras-de-decisão-da-árvore"><span class="header-section-number">5.3.4</span> Visualizando as Fronteiras de Decisão da Árvore</a></li>
+  <li><a href="#gerando-dados-não-lineares" id="toc-gerando-dados-não-lineares" class="nav-link" data-scroll-target="#gerando-dados-não-lineares"><span class="header-section-number">5.4.1</span> Gerando Dados Não-Lineares</a></li>
+  <li><a href="#regressão-logística-em-dados-não-lineares" id="toc-regressão-logística-em-dados-não-lineares" class="nav-link" data-scroll-target="#regressão-logística-em-dados-não-lineares"><span class="header-section-number">5.4.2</span> Regressão Logística em Dados Não-Lineares</a></li>
+  <li><a href="#árvore-de-decisão-em-dados-não-lineares" id="toc-árvore-de-decisão-em-dados-não-lineares" class="nav-link" data-scroll-target="#árvore-de-decisão-em-dados-não-lineares"><span class="header-section-number">5.4.3</span> Árvore de Decisão em Dados Não-Lineares</a></li>
+  <li><a href="#visualizando-as-fronteiras-de-decisão-da-árvore" id="toc-visualizando-as-fronteiras-de-decisão-da-árvore" class="nav-link" data-scroll-target="#visualizando-as-fronteiras-de-decisão-da-árvore"><span class="header-section-number">5.4.4</span> Visualizando as Fronteiras de Decisão da Árvore</a></li>
   </ul></li>
-  <li><a href="#classificação-pinguins-do-arquipélago-palmer" id="toc-classificação-pinguins-do-arquipélago-palmer" class="nav-link" data-scroll-target="#classificação-pinguins-do-arquipélago-palmer"><span class="header-section-number">5.4</span> Classificação: Pinguins do arquipélago Palmer</a>
+  <li><a href="#classificação-pinguins-do-arquipélago-palmer" id="toc-classificação-pinguins-do-arquipélago-palmer" class="nav-link" data-scroll-target="#classificação-pinguins-do-arquipélago-palmer"><span class="header-section-number">5.5</span> Classificação: Pinguins do arquipélago Palmer</a>
   <ul class="collapse">
-  <li><a href="#preparando-os-dados" id="toc-preparando-os-dados" class="nav-link" data-scroll-target="#preparando-os-dados"><span class="header-section-number">5.4.1</span> Preparando os Dados</a></li>
-  <li><a href="#aplicação-de-um-modelo-de-classificação" id="toc-aplicação-de-um-modelo-de-classificação" class="nav-link" data-scroll-target="#aplicação-de-um-modelo-de-classificação"><span class="header-section-number">5.4.2</span> Aplicação de um modelo de classificação</a></li>
-  <li><a href="#aplicação-de-um-modelo-de-classificação-regressão-logística-multinomial" id="toc-aplicação-de-um-modelo-de-classificação-regressão-logística-multinomial" class="nav-link" data-scroll-target="#aplicação-de-um-modelo-de-classificação-regressão-logística-multinomial"><span class="header-section-number">5.4.3</span> <strong>Aplicação de um modelo de classificação: Regressão Logística Multinomial</strong></a></li>
-  <li><a href="#treinando-e-avaliando-o-modelo-de-árvore-de-decisão" id="toc-treinando-e-avaliando-o-modelo-de-árvore-de-decisão" class="nav-link" data-scroll-target="#treinando-e-avaliando-o-modelo-de-árvore-de-decisão"><span class="header-section-number">5.4.4</span> Treinando e Avaliando o Modelo de Árvore de Decisão</a></li>
-  <li><a href="#visualizando-a-árvore-de-decisão" id="toc-visualizando-a-árvore-de-decisão" class="nav-link" data-scroll-target="#visualizando-a-árvore-de-decisão"><span class="header-section-number">5.4.5</span> Visualizando a Árvore de Decisão</a></li>
+  <li><a href="#preparando-os-dados" id="toc-preparando-os-dados" class="nav-link" data-scroll-target="#preparando-os-dados"><span class="header-section-number">5.5.1</span> Preparando os Dados</a></li>
+  <li><a href="#aplicação-de-um-modelo-de-classificação" id="toc-aplicação-de-um-modelo-de-classificação" class="nav-link" data-scroll-target="#aplicação-de-um-modelo-de-classificação"><span class="header-section-number">5.5.2</span> Aplicação de um modelo de classificação</a></li>
+  <li><a href="#aplicação-de-um-modelo-de-classificação-regressão-logística-multinomial" id="toc-aplicação-de-um-modelo-de-classificação-regressão-logística-multinomial" class="nav-link" data-scroll-target="#aplicação-de-um-modelo-de-classificação-regressão-logística-multinomial"><span class="header-section-number">5.5.3</span> <strong>Aplicação de um modelo de classificação: Regressão Logística Multinomial</strong></a></li>
+  <li><a href="#treinando-e-avaliando-o-modelo-de-árvore-de-decisão" id="toc-treinando-e-avaliando-o-modelo-de-árvore-de-decisão" class="nav-link" data-scroll-target="#treinando-e-avaliando-o-modelo-de-árvore-de-decisão"><span class="header-section-number">5.5.4</span> Treinando e Avaliando o Modelo de Árvore de Decisão</a></li>
+  <li><a href="#visualizando-a-árvore-de-decisão" id="toc-visualizando-a-árvore-de-decisão" class="nav-link" data-scroll-target="#visualizando-a-árvore-de-decisão"><span class="header-section-number">5.5.5</span> Visualizando a Árvore de Decisão</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -239,14 +245,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Neste capítulo, vamos aplicar os conceitos de Machine Learning (ML) em R usando o ecossistema <code>tidymodels</code>. Começaremos com dados simples e sintéticos para entender a lógica por trás dos modelos de classificação, e depois aplicaremos esses mesmos conceitos a um conjunto de dados mais realista.</p>
-<section id="como-funcionam-os-modelos-de-classificação" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="como-funcionam-os-modelos-de-classificação"><span class="header-section-number">5.1</span> Como funcionam os modelos de classificação?</h2>
+<section id="conceitos-importantes-ao-aplicar-um-modelo-de-aprendizado-de-máquina" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="conceitos-importantes-ao-aplicar-um-modelo-de-aprendizado-de-máquina"><span class="header-section-number">5.1</span> Conceitos importantes ao aplicar um modelo de Aprendizado de Máquina</h2>
+<ul>
+<li><p><strong>Sobreajuste (Overfitting) e Subajuste (Underfitting):</strong> O <strong>sobreajuste</strong> acontece quando o modelo “memoriza” os dados de treinamento em vez de aprender a generalizar os padrões, falhando em novos dados. O <strong>subajuste</strong> acontece quando o modelo é muito simples e não consegue capturar nem mesmo os padrões básicos nos dados.</p></li>
+<li><p><strong>Dados de treino e dados de teste:</strong> Para avaliar se o modelo está generalizando bem, a base de dados é dividida. O modelo é <strong>treinado</strong> com a maior parte dos dados (dados de treino) e depois é avaliado em uma porção que ele nunca viu antes (dados de teste).</p></li>
+<li><p><strong>Viés versus variância:</strong> O <strong>viés</strong> é o erro que o modelo comete por ser muito simples (subajuste). A <strong>variância</strong>, neste contexto, reflete a grande variação dos parâmetros estimados de um modelo a pequenas variações nos dados de treinamento (sobreajuste). Encontrar o equilíbrio entre os dois é crucial. Vale ressaltar que o termo “variância” geralmente reflete o sentido estatístico (uma medida de variação dos dados em relação à média dos dados).</p></li>
+<li><p><strong>Métricas de avaliação:</strong> São usadas para medir o desempenho do modelo nos dados de teste. Dependendo do problema, podem ser usadas métricas como <strong>acurácia</strong> (a proporção de previsões corretas), <strong>precisão</strong> e <strong>revocação</strong>.</p></li>
+</ul>
+</section>
+<section id="como-funcionam-os-modelos-de-classificação" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="como-funcionam-os-modelos-de-classificação"><span class="header-section-number">5.2</span> Como funcionam os modelos de classificação?</h2>
 <p>O objetivo de um <strong>modelo de classificação</strong> é prever a qual categoria (ou “classe”) uma observação pertence. Diferente da regressão, que prevê um valor numérico contínuo, a classificação trabalha com rótulos discretos, como <code>A</code> ou <code>B</code>, <code>doente</code> ou <code>saudável</code> ou espécies de pinguins, que estudamos no capítulo anterior.</p>
 <p>A ideia geral da modelagem é encontrar uma <strong>função matemática</strong> que use as características dos nossos dados (as variáveis <code>x</code> e <code>y</code> no nosso exemplo, ou as medidas do pinguim) para prever a classe. O processo de “treinamento” é exatamente onde o modelo “aprende” a melhor função para realizar essa tarefa.</p>
 <p>Para fazer isso de forma confiável, é crucial aplicar os conceitos de <strong>divisão de treino e teste</strong>, <strong>viés e variância</strong> e <strong>métricas de avaliação</strong>, que foram explicados no Capítulo 1. O objetivo é evitar o <strong>sobreajuste</strong>, garantindo que o modelo não apenas memorize os dados de treino, mas também seja capaz de generalizar e fazer boas previsões em dados novos.</p>
 <p>Veremos dois modelos de classificação neste minicurso.</p>
-<section id="modelo-logístico" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="modelo-logístico"><span class="header-section-number">5.1.1</span> Modelo Logístico</h3>
+<section id="modelo-logístico" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="modelo-logístico"><span class="header-section-number">5.2.1</span> Modelo Logístico</h3>
 <p>A <strong>Regressão Logística</strong> é um modelo de classificação que pertence à família dos <strong>Modelos Lineares Generalizados</strong>. Esses modelos “generalizam” a ideia da regressão linear para lidar com variáveis de resposta que não seguem uma distribuição normal ou que não são contínuas.</p>
 <p>A princípio, a regressão logística foi desenvolvida para problemas de <strong>duas classes</strong> (também conhecidos como classificação binária). Nesses casos, o objetivo é estimar a probabilidade (p) de um dado pertencer a uma das classes com base em suas características. Como a variável de resposta é binária (o evento acontece ou não), sua distribuição de probabilidade é de <strong>Bernoulli</strong>. Por não ser uma distribuição normal, ela requer um modelo linear generalizado, e a <strong>função de ligação canônica</strong> para esse caso é o modelo de Regressão Logística. Essa função de ligação, chamada <strong>logit</strong>, é a ponte matemática que transforma a regressão linear em uma probabilidade.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -260,19 +275,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Se a probabilidade calculada for superior a 50%, o modelo classifica a observação em uma classe; caso contrário, na outra. Isso torna a <strong>fronteira de decisão</strong> (o lugar onde a probabilidade é exatamente 50%) uma linha reta, como veremos a seguir.</p>
 <p>Essa abordagem também pode ser estendida para problemas com <strong>múltiplas classes</strong> (três ou mais) através da <strong>Regressão Logística Multinomial</strong>, que irá criar segmentos de reta para separar as diferentes classes.</p>
 </section>
-<section id="árvore-de-decisão" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="árvore-de-decisão"><span class="header-section-number">5.1.2</span> Árvore de Decisão</h3>
+<section id="árvore-de-decisão" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="árvore-de-decisão"><span class="header-section-number">5.2.2</span> Árvore de Decisão</h3>
 <p>A <strong>Árvore de Decisão</strong> é um modelo de classificação mais intuitivo e poderoso, que não se limita a fronteiras de decisão lineares. Ela opera fazendo uma série de perguntas sobre os dados, uma após a outra. Cada “pergunta” (nó da árvore) divide o conjunto de dados em subconjuntos menores e mais homogêneos. Por exemplo, a primeira pergunta pode ser: “A massa corporal é maior que X gramas?”. Dependendo da resposta, o modelo faz uma nova pergunta para refinar a classificação.</p>
 <p>A “escolha” das perguntas é baseada em um <strong>critério de informação</strong>, calculado por medidas como a <strong>Entropia da Informação</strong> ou o <strong>Índice de Gini</strong>. A ideia é que cada nó seja o máximo em relação ao ganho de informação, ou seja, que a divisão seja a mais eficaz possível para separar as classes.</p>
 <p>O resultado é uma estrutura em forma de árvore, onde cada nó final (folha) representa uma classe. A Árvore de Decisão é excelente para capturar relações complexas e não-lineares, pois sua fronteira de decisão é uma série de segmentos de reta, e não apenas uma única linha.</p>
 <p>No entanto, a natureza de dividir os dados em pequenos subconjuntos faz com que a árvore de decisão tenha uma inclinação para o <strong>sobreajuste</strong>. Para evitar que o modelo “memorize” os dados de treino, são necessárias técnicas de regularização como o <strong>poda (pruning)</strong> e a definição do número máximo de divisões. Modelos que utilizam múltiplas árvores, como a <strong>Floresta Aleatória</strong>, também surgiram como uma solução para essa limitação.</p>
 </section>
 </section>
-<section id="classificação-em-dados-simples" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="classificação-em-dados-simples"><span class="header-section-number">5.2</span> Classificação em dados simples</h2>
+<section id="classificação-em-dados-simples" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="classificação-em-dados-simples"><span class="header-section-number">5.3</span> Classificação em dados simples</h2>
 <p>Vamos começar gerando um conjunto de dados bidimensional simples que pode ser separado por uma linha reta. Isso nos permitirá visualizar claramente como um modelo de regressão logística funciona.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Gerar dados sintéticos para duas classes</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Gerar dados sintéticos para duas classes</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Os dados da classe A são gerados por: y = -2 * x + 5 (com algum ruído)</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Os dados da classe B são gerados por: y = -2 * x + 6 (com algum ruído)</span></span>
@@ -295,7 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>dados_simulados <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(data_class_a, data_class_b) <span class="sc">%&gt;%</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_frac</span>(<span class="dv">1</span>)</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados_simulados)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados_simulados)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
       x      y classe
@@ -310,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Um ponto imporante aqui, vamos realizar o comando <code>glimpse()</code> para entender melhor a estrutura dos dados.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dados_simulados)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dados_simulados)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 2,000
 Columns: 3
@@ -321,8 +336,8 @@ $ classe &lt;chr&gt; "A", "B", "B", "A", "B", "A", "B", "A", "B", "A", "A", "B",
 </div>
 <p>Observemos que a variável <code>classe</code> é do tipo <code>character</code>. Para que o modelo de classificação funcione corretamente, precisamos convertê-la para o tipo <code>factor</code>. Façamos então:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dados_simulados<span class="sc">$</span>classe <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dados_simulados<span class="sc">$</span>classe)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dados_simulados)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dados_simulados<span class="sc">$</span>classe <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dados_simulados<span class="sc">$</span>classe)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dados_simulados)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 2,000
 Columns: 3
@@ -334,8 +349,8 @@ $ classe &lt;fct&gt; A, B, B, A, B, A, B, A, B, A, A, B, B, A, A, B, B, B, B, A,
 <p>Agora sim, a variável <code>classe</code> está como <code>factor</code>, o que é essencial para o modelo de classificação.</p>
 <p>Para entender melhor os dados que acabamos de criar, vamos visualizá-los. O gráfico a seguir mostra a distribuição dos pontos no plano cartesiano. Podemos ver que as duas classes formam dois “aglomerados” distintos.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_simulados, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_simulados, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -346,8 +361,8 @@ $ classe &lt;fct&gt; A, B, B, A, B, A, B, A, B, A, A, B, B, A, A, B, B, B, B, A,
 </div>
 <p>Nesse próximo gráfico, podemos observar cada uma das classes sendo representadas por uma cor. De fato, a diferença de aglomerados visto no gráfico anterior sugere a diferença entre os dois grupos.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_simulados, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> classe)) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_simulados, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> classe)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -356,48 +371,48 @@ $ classe &lt;fct&gt; A, B, B, A, B, A, B, A, B, A, A, B, B, A, A, B, B, B, B, A,
 </div>
 </div>
 </div>
-<section id="preparando-os-dados-para-o-modelo" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="preparando-os-dados-para-o-modelo"><span class="header-section-number">5.2.1</span> Preparando os Dados para o Modelo</h3>
+<section id="preparando-os-dados-para-o-modelo" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="preparando-os-dados-para-o-modelo"><span class="header-section-number">5.3.1</span> Preparando os Dados para o Modelo</h3>
 <p>Antes de treinar o modelo, é uma prática essencial dividir o nosso conjunto de dados em dois subconjuntos: <strong>treino</strong> e <strong>teste</strong>.</p>
 <ul>
 <li><p>O conjunto de <strong>treino</strong> é usado para “ensinar” o modelo a identificar padrões.</p></li>
 <li><p>O conjunto de <strong>teste</strong> é usado para avaliar o desempenho do modelo em dados que ele <strong>nunca viu antes</strong>, garantindo uma avaliação mais realista.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Dividir os dados em treino e teste</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Dividir os dados em treino e teste</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>split_simulado <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(dados_simulados, <span class="at">prop =</span> <span class="fl">0.7</span>, <span class="at">strata =</span> classe)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>train_simulado <span class="ot">&lt;-</span> <span class="fu">training</span>(split_simulado)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>test_simulado <span class="ot">&lt;-</span> <span class="fu">testing</span>(split_simulado)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>test_simulado <span class="ot">&lt;-</span> <span class="fu">testing</span>(split_simulado)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(train_simulado)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(train_simulado)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1400    3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(test_simulado)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(test_simulado)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 600   3</code></pre>
 </div>
 </div>
 </section>
-<section id="treinando-e-avaliando-o-modelo-de-regressão-logística" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="treinando-e-avaliando-o-modelo-de-regressão-logística"><span class="header-section-number">5.2.2</span> Treinando e Avaliando o Modelo de Regressão Logística</h3>
+<section id="treinando-e-avaliando-o-modelo-de-regressão-logística" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="treinando-e-avaliando-o-modelo-de-regressão-logística"><span class="header-section-number">5.3.2</span> Treinando e Avaliando o Modelo de Regressão Logística</h3>
 <p>Agora, vamos usar a biblioteca <code>tidymodels</code> para construir, treinar e avaliar o nosso modelo de <strong>Regressão Logística</strong>, que é um algoritmo de classificação linear.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Treinar o modelo de regressão logística nos dados de TREINO</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Treinar o modelo de regressão logística nos dados de TREINO</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>modelo_logistico_simples <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(classe <span class="sc">~</span> x <span class="sc">+</span> y, <span class="at">data =</span> train_simulado)</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Fazer previsões nos dados de TREINO</span></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>preds_train <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_logistico_simples, <span class="at">new_data =</span> train_simulado) <span class="sc">%&gt;%</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(train_simulado)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(train_simulado)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="visualizando-a-fronteira-de-decisão" class="level3" data-number="5.2.3">
-<h3 data-number="5.2.3" class="anchored" data-anchor-id="visualizando-a-fronteira-de-decisão"><span class="header-section-number">5.2.3</span> Visualizando a Fronteira de Decisão</h3>
+<section id="visualizando-a-fronteira-de-decisão" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="visualizando-a-fronteira-de-decisão"><span class="header-section-number">5.3.3</span> Visualizando a Fronteira de Decisão</h3>
 <p>A grande vantagem de usar dados sintéticos é que podemos visualizar a “fronteira de decisão” que o modelo encontrou para separar as duas classes. A <strong>Regressão Logística</strong> sempre encontrará uma linha reta para fazer essa separação.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Fazer previsões nos dados de TESTE}</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Fazer previsões nos dados de TESTE}</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>preds_test <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_logistico_simples, <span class="at">new_data =</span> test_simulado) <span class="sc">%&gt;%</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(test_simulado)</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -424,7 +439,7 @@ $ classe &lt;fct&gt; A, B, B, A, B, A, B, A, B, A, A, B, B, A, A, B, B, B, B, A,
 <span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Classe"</span></span>
 <span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 ℹ Please use `linewidth` instead.</code></pre>
@@ -438,8 +453,8 @@ $ classe &lt;fct&gt; A, B, B, A, B, A, B, A, B, A, A, B, B, A, A, B, B, B, B, A,
 </div>
 </div>
 </section>
-<section id="avaliando-o-desempenho-do-modelo" class="level3" data-number="5.2.4">
-<h3 data-number="5.2.4" class="anchored" data-anchor-id="avaliando-o-desempenho-do-modelo"><span class="header-section-number">5.2.4</span> Avaliando o Desempenho do Modelo</h3>
+<section id="avaliando-o-desempenho-do-modelo" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="avaliando-o-desempenho-do-modelo"><span class="header-section-number">5.3.4</span> Avaliando o Desempenho do Modelo</h3>
 <p>Uma das ferramentas mais importantes para avaliar um modelo de classificação é a <strong>Matriz de Confusão</strong>. Ela mostra o quão bem o modelo classificou as amostras, comparando as classes previstas com as classes reais.</p>
 <ul>
 <li><p><strong>Verdadeiros Positivos (TP):</strong> Predições corretas da classe positiva.</p></li>
@@ -448,18 +463,18 @@ $ classe &lt;fct&gt; A, B, B, A, B, A, B, A, B, A, A, B, B, A, A, B, B, B, B, A,
 <li><p><strong>Falsos Negativos (FN):</strong> Erro tipo II. Predições incorretas da classe negativa.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. Calcular a matriz de confusão</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. Calcular a matriz de confusão</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>matriz_confusao <span class="ot">&lt;-</span> <span class="fu">conf_mat</span>(preds_train, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>matriz_confusao</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>matriz_confusao</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          Truth
 Prediction   A   B
          A 682  22
          B  18 678</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>matriz_confusao_teste <span class="ot">&lt;-</span> <span class="fu">conf_mat</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>matriz_confusao_teste</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>matriz_confusao_teste <span class="ot">&lt;-</span> <span class="fu">conf_mat</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>matriz_confusao_teste</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          Truth
 Prediction   A   B
@@ -468,8 +483,8 @@ Prediction   A   B
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(matriz_confusao_teste, <span class="at">type =</span> <span class="st">"heatmap"</span>) <span class="sc">+</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Matriz de Confusão (Dados de Teste)"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(matriz_confusao_teste, <span class="at">type =</span> <span class="st">"heatmap"</span>) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Matriz de Confusão (Dados de Teste)"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -486,28 +501,28 @@ Prediction   A   B
 <li><p><strong>F1-Score:</strong> Média harmônica de Precisão e Recall.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric  .estimator .estimate
   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
 1 accuracy binary         0.958</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precision</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precision</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric   .estimator .estimate
   &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;
 1 precision binary         0.945</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">recall</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">recall</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric .estimator .estimate
   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
 1 recall  binary         0.973</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f_meas</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f_meas</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric .estimator .estimate
@@ -516,10 +531,10 @@ Prediction   A   B
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>minhas_metricas <span class="ot">&lt;-</span> <span class="fu">metric_set</span>(accuracy, precision, recall, f_meas)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>minhas_metricas <span class="ot">&lt;-</span> <span class="fu">metric_set</span>(accuracy, precision, recall, f_meas)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular e exibir as métricas nos dados de teste</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">minhas_metricas</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">minhas_metricas</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
   .metric   .estimator .estimate
@@ -532,13 +547,13 @@ Prediction   A   B
 </div>
 </section>
 </section>
-<section id="classificação-com-dados-não-lineares-árvore-de-decisão" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="classificação-com-dados-não-lineares-árvore-de-decisão"><span class="header-section-number">5.3</span> 2. Classificação com Dados Não-Lineares (Árvore de Decisão)</h2>
+<section id="classificação-com-dados-não-lineares-árvore-de-decisão" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="classificação-com-dados-não-lineares-árvore-de-decisão"><span class="header-section-number">5.4</span> 2. Classificação com Dados Não-Lineares (Árvore de Decisão)</h2>
 <p>E se os dados não puderem ser separados por uma linha reta? Vamos gerar um novo conjunto de dados onde as classes se “cruzam” e testar a Regressão Logística novamente, para então compará-la com um modelo mais flexível: a <strong>Árvore de Decisão</strong>.</p>
-<section id="gerando-dados-não-lineares" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="gerando-dados-não-lineares"><span class="header-section-number">5.3.1</span> Gerando Dados Não-Lineares</h3>
+<section id="gerando-dados-não-lineares" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="gerando-dados-não-lineares"><span class="header-section-number">5.4.1</span> Gerando Dados Não-Lineares</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Gerar dados sintéticos para duas classes</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Gerar dados sintéticos para duas classes</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>n_obs <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
@@ -559,7 +574,7 @@ Prediction   A   B
 <span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>dados_simulados <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(data_class_a, data_class_b) <span class="sc">%&gt;%</span></span>
 <span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_frac</span>(<span class="dv">1</span>)</span>
 <span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados_simulados)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados_simulados)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
       x     y classe
@@ -574,8 +589,8 @@ Prediction   A   B
 </div>
 <p>Vamos plotar esses novos dados.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_simulados, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_simulados, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -586,8 +601,8 @@ Prediction   A   B
 </div>
 <p>Agora colorindo cada uma das classes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_simulados, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> classe)) <span class="sc">+</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_simulados, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> classe)) <span class="sc">+</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -598,30 +613,30 @@ Prediction   A   B
 </div>
 <p>Perceba que as classes A e B não são separáveis por uma única linha reta.</p>
 </section>
-<section id="regressão-logística-em-dados-não-lineares" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="regressão-logística-em-dados-não-lineares"><span class="header-section-number">5.3.2</span> Regressão Logística em Dados Não-Lineares</h3>
+<section id="regressão-logística-em-dados-não-lineares" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="regressão-logística-em-dados-não-lineares"><span class="header-section-number">5.4.2</span> Regressão Logística em Dados Não-Lineares</h3>
 <p>Agora, vamos tentar aplicar o mesmo modelo de Regressão Logística. A fronteira de decisão será uma linha reta, mas veremos que ela não conseguirá separar bem as classes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Treinar um modelo de regressão logística</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Treinar um modelo de regressão logística</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>dados_simulados<span class="sc">$</span>classe <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(dados_simulados<span class="sc">$</span>classe)</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Dividir os dados em treino e teste</span></span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>split_simulado <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(dados_simulados, <span class="at">prop =</span> <span class="fl">0.7</span>, <span class="at">strata =</span> classe)</span>
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>train_simulado <span class="ot">&lt;-</span> <span class="fu">training</span>(split_simulado)</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>test_simulado <span class="ot">&lt;-</span> <span class="fu">testing</span>(split_simulado)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>test_simulado <span class="ot">&lt;-</span> <span class="fu">testing</span>(split_simulado)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(train_simulado)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(train_simulado)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1400    3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(test_simulado)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(test_simulado)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 600   3</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Treinar o modelo de regressão logística nos dados de TREINO</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Treinar o modelo de regressão logística nos dados de TREINO</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>modelo_logistico_simples <span class="ot">&lt;-</span> <span class="fu">logistic_reg</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>) <span class="sc">%&gt;%</span></span>
@@ -658,7 +673,7 @@ Prediction   A   B
 <span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Classe"</span></span>
 <span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -668,18 +683,18 @@ Prediction   A   B
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. Calcular a matriz de confusão</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. Calcular a matriz de confusão</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>matriz_confusao <span class="ot">&lt;-</span> <span class="fu">conf_mat</span>(preds_train, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>matriz_confusao</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>matriz_confusao</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          Truth
 Prediction   A   B
          A 480 238
          B 220 462</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>matriz_confusao <span class="ot">&lt;-</span> <span class="fu">conf_mat</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>matriz_confusao</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>matriz_confusao <span class="ot">&lt;-</span> <span class="fu">conf_mat</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>matriz_confusao</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          Truth
 Prediction   A   B
@@ -688,7 +703,7 @@ Prediction   A   B
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(matriz_confusao, <span class="at">type =</span> <span class="st">"heatmap"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(matriz_confusao, <span class="at">type =</span> <span class="st">"heatmap"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -699,28 +714,28 @@ Prediction   A   B
 </div>
 <p>Vamos ver algumas métricas, como acurácia, precisão, recall e F1-score.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric  .estimator .estimate
   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
 1 accuracy binary          0.65</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precision</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precision</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric   .estimator .estimate
   &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;
 1 precision binary         0.660</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">recall</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">recall</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric .estimator .estimate
   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
 1 recall  binary          0.62</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f_meas</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f_meas</span>(preds_test, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric .estimator .estimate
@@ -730,11 +745,11 @@ Prediction   A   B
 </div>
 <p>Como esperado, a matriz de confusão e as métricas de desempenho mostram que o modelo teve dificuldade em separar os dados.</p>
 </section>
-<section id="árvore-de-decisão-em-dados-não-lineares" class="level3" data-number="5.3.3">
-<h3 data-number="5.3.3" class="anchored" data-anchor-id="árvore-de-decisão-em-dados-não-lineares"><span class="header-section-number">5.3.3</span> Árvore de Decisão em Dados Não-Lineares</h3>
+<section id="árvore-de-decisão-em-dados-não-lineares" class="level3" data-number="5.4.3">
+<h3 data-number="5.4.3" class="anchored" data-anchor-id="árvore-de-decisão-em-dados-não-lineares"><span class="header-section-number">5.4.3</span> Árvore de Decisão em Dados Não-Lineares</h3>
 <p>Agora, vamos usar uma <strong>Árvore de Decisão</strong>, um modelo de classificação que não é restrito a fronteiras lineares.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Definir o modelo de árvore de decisão (rpart)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Definir o modelo de árvore de decisão (rpart)</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>tree_model <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"rpart"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span>
@@ -752,7 +767,7 @@ Prediction   A   B
 <span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(test_simulado)</span>
 <span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Gerar a matriz de confusão</span></span>
-<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a><span class="fu">conf_mat</span>(tree_pred, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a><span class="fu">conf_mat</span>(tree_pred, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          Truth
 Prediction   A   B
@@ -761,12 +776,12 @@ Prediction   A   B
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fazer previsões nos dados de TREINO</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fazer previsões nos dados de TREINO</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>tree_pred_train <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree_fit, <span class="at">new_data =</span> train_simulado) <span class="sc">%&gt;%</span></span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(train_simulado)</span>
 <span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Gerar a matriz de confusão para os dados de TREINO</span></span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="fu">conf_mat</span>(tree_pred_train, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="fu">conf_mat</span>(tree_pred_train, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          Truth
 Prediction   A   B
@@ -775,28 +790,28 @@ Prediction   A   B
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(tree_pred, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">accuracy</span>(tree_pred, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric  .estimator .estimate
   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
 1 accuracy binary         0.862</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precision</span>(tree_pred, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">precision</span>(tree_pred, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric   .estimator .estimate
   &lt;chr&gt;     &lt;chr&gt;          &lt;dbl&gt;
 1 precision binary         0.851</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">recall</span>(tree_pred, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">recall</span>(tree_pred, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric .estimator .estimate
   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
 1 recall  binary         0.877</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f_meas</span>(tree_pred, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f_meas</span>(tree_pred, <span class="at">truth =</span> classe, <span class="at">estimate =</span> .pred_class, <span class="at">event_level =</span> <span class="st">"second"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   .metric .estimator .estimate
@@ -806,11 +821,11 @@ Prediction   A   B
 </div>
 <p>Perceba que a acurácia do modelo de Árvore de Decisão foi significativamente maior! Isso acontece porque ele pode criar fronteiras de decisão complexas, que não são apenas linhas retas.</p>
 </section>
-<section id="visualizando-as-fronteiras-de-decisão-da-árvore" class="level3" data-number="5.3.4">
-<h3 data-number="5.3.4" class="anchored" data-anchor-id="visualizando-as-fronteiras-de-decisão-da-árvore"><span class="header-section-number">5.3.4</span> Visualizando as Fronteiras de Decisão da Árvore</h3>
+<section id="visualizando-as-fronteiras-de-decisão-da-árvore" class="level3" data-number="5.4.4">
+<h3 data-number="5.4.4" class="anchored" data-anchor-id="visualizando-as-fronteiras-de-decisão-da-árvore"><span class="header-section-number">5.4.4</span> Visualizando as Fronteiras de Decisão da Árvore</h3>
 <p>Para entender como a Árvore de Decisão classificou os dados, vamos plotar as regiões de decisão. O resultado é uma área segmentada em retângulos, onde cada retângulo representa a previsão de uma classe.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Criar uma grade de pontos para o plano 2D (x e y)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Criar uma grade de pontos para o plano 2D (x e y)</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Definimos os limites da grade com base nos valores mínimos e máximos dos dados</span></span>
 <span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
 <span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="fu">min</span>(dados_simulados<span class="sc">$</span>x) <span class="sc">-</span> <span class="dv">1</span>, <span class="fu">max</span>(dados_simulados<span class="sc">$</span>x) <span class="sc">+</span> <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">100</span>),</span>
@@ -837,7 +852,7 @@ Prediction   A   B
 <span id="cb67-25"><a href="#cb67-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Classe Real"</span></span>
 <span id="cb67-26"><a href="#cb67-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb67-27"><a href="#cb67-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb67-28"><a href="#cb67-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb67-28"><a href="#cb67-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -848,12 +863,9 @@ Prediction   A   B
 </div>
 <p>Podemos visualizar a árvore com as perguntas feitas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># O pacote rpart.plot ajuda a visualizar a árvore</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># O pacote rpart.plot ajuda a visualizar a árvore</span></span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("rpart.plot")</span></span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: pacote 'rpart.plot' foi compilado no R versão 4.4.3</code></pre>
-</div>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Carregando pacotes exigidos: rpart</code></pre>
 </div>
@@ -866,7 +878,7 @@ Anexando pacote: 'rpart'</code></pre>
 
     prune</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(<span class="fu">extract_fit_engine</span>(tree_fit<span class="sc">$</span>fit<span class="sc">$</span>fit, <span class="at">roundint =</span> <span class="cn">FALSE</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(<span class="fu">extract_fit_engine</span>(tree_fit<span class="sc">$</span>fit<span class="sc">$</span>fit, <span class="at">roundint =</span> <span class="cn">FALSE</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Cannot retrieve the data used to build the model (so cannot determine roundint and is.binary for the variables).
 To silence this warning:
@@ -883,15 +895,12 @@ To silence this warning:
 </div>
 </section>
 </section>
-<section id="classificação-pinguins-do-arquipélago-palmer" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="classificação-pinguins-do-arquipélago-palmer"><span class="header-section-number">5.4</span> Classificação: Pinguins do arquipélago Palmer</h2>
+<section id="classificação-pinguins-do-arquipélago-palmer" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="classificação-pinguins-do-arquipélago-palmer"><span class="header-section-number">5.5</span> Classificação: Pinguins do arquipélago Palmer</h2>
 <p>Agora que você entendeu os conceitos básicos, vamos aplicar o mesmo fluxo de trabalho em um conjunto de dados real: as medições dos pinguins da Antártida. Nosso objetivo será classificar a <strong>espécie</strong> do pinguim com base em suas características físicas.</p>
 <p>Utilizaremos os dados de pingAins do arquipélago Palmer, visto no capítulo anterior. Podemos, novamente, acessar esses dados através do pacote <code>palmerpenguins</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: pacote 'palmerpenguins' foi compilado no R versão 4.4.3</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Anexando pacote: 'palmerpenguins'</code></pre>
@@ -901,7 +910,12 @@ Anexando pacote: 'palmerpenguins'</code></pre>
 
     penguins</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(penguins)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Os seguintes objetos são mascarados por 'package:datasets':
+
+    penguins, penguins_raw</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(penguins)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 344
 Columns: 8
@@ -916,135 +930,152 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 </div>
 </div>
 <p>Nosso objetivo será classificar a <strong>espécie</strong> do pinguim com base em suas características físicas.</p>
-<section id="preparando-os-dados" class="level3" data-number="5.4.1">
-<h3 data-number="5.4.1" class="anchored" data-anchor-id="preparando-os-dados"><span class="header-section-number">5.4.1</span> Preparando os Dados</h3>
+<section id="preparando-os-dados" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="preparando-os-dados"><span class="header-section-number">5.5.1</span> Preparando os Dados</h3>
 <p>Antes de modelar, precisamos tratar os valores ausentes (<code>NA</code>) e dividir os dados.</p>
-</section>
-<section id="aplicação-de-um-modelo-de-classificação" class="level3" data-number="5.4.2">
-<h3 data-number="5.4.2" class="anchored" data-anchor-id="aplicação-de-um-modelo-de-classificação"><span class="header-section-number">5.4.2</span> Aplicação de um modelo de classificação</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar um split treino/teste</span></span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(penguins, <span class="at">prop =</span> <span class="fl">0.7</span>, <span class="at">strata =</span> species)</span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">training</span>(split)</span>
-<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">testing</span>(split)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(train)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Removendo linhas com valores ausentes (NA)</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(penguins)</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(penguins)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 239   8</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(test)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 105   8</code></pre>
+<pre><code>Rows: 333
+Columns: 8
+$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…
+$ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…
+$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2, 41.1, 38.6…
+$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, 19.3, 20.6, 17.8, 19.6, 17.6, 21.2…
+$ flipper_length_mm &lt;int&gt; 181, 186, 195, 193, 190, 181, 195, 182, 191, 198, 18…
+$ body_mass_g       &lt;int&gt; 3750, 3800, 3250, 3450, 3650, 3625, 4675, 3200, 3800…
+$ sex               &lt;fct&gt; male, female, female, female, male, female, male, fe…
+$ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…</code></pre>
 </div>
 </div>
 </section>
-<section id="aplicação-de-um-modelo-de-classificação-regressão-logística-multinomial" class="level3" data-number="5.4.3">
-<h3 data-number="5.4.3" class="anchored" data-anchor-id="aplicação-de-um-modelo-de-classificação-regressão-logística-multinomial"><span class="header-section-number">5.4.3</span> <strong>Aplicação de um modelo de classificação: Regressão Logística Multinomial</strong></h3>
+<section id="aplicação-de-um-modelo-de-classificação" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="aplicação-de-um-modelo-de-classificação"><span class="header-section-number">5.5.2</span> Aplicação de um modelo de classificação</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar um split treino/teste</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(penguins, <span class="at">prop =</span> <span class="fl">0.7</span>, <span class="at">strata =</span> species)</span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">training</span>(split)</span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">testing</span>(split)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(train)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 232   8</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(test)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 101   8</code></pre>
+</div>
+</div>
+</section>
+<section id="aplicação-de-um-modelo-de-classificação-regressão-logística-multinomial" class="level3" data-number="5.5.3">
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="aplicação-de-um-modelo-de-classificação-regressão-logística-multinomial"><span class="header-section-number">5.5.3</span> <strong>Aplicação de um modelo de classificação: Regressão Logística Multinomial</strong></h3>
 <p>Vamos agora aplicar a <strong>regressão logística multinomial</strong> aos dados dos pinguins. Este modelo é uma extensão da regressão logística binária, que permite classificar dados em três ou mais categorias.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Definir o modelo de regressão logística multinomial</span></span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="co"># O 'set_engine("nnet")' especifica o pacote que será usado para o cálculo</span></span>
-<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>modelo_multinomial <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"nnet"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span>
-<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Criar o workflow (fluxo de trabalho)</span></span>
-<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a><span class="co"># O 'add_formula(species ~ .)' diz ao modelo para usar todas as outras variáveis</span></span>
-<span id="cb86-9"><a href="#cb86-9" aria-hidden="true" tabindex="-1"></a><span class="co"># para prever a espécie (species)</span></span>
-<span id="cb86-10"><a href="#cb86-10" aria-hidden="true" tabindex="-1"></a>workflow_multinomial <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb86-11"><a href="#cb86-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(modelo_multinomial) <span class="sc">%&gt;%</span></span>
-<span id="cb86-12"><a href="#cb86-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_formula</span>(species <span class="sc">~</span> .)</span>
-<span id="cb86-13"><a href="#cb86-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-14"><a href="#cb86-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Ajustar (treinar) o modelo com os dados de TREINO</span></span>
-<span id="cb86-15"><a href="#cb86-15" aria-hidden="true" tabindex="-1"></a><span class="co"># O 'fit()' executa o treinamento do modelo</span></span>
-<span id="cb86-16"><a href="#cb86-16" aria-hidden="true" tabindex="-1"></a>ajustado_multinomial <span class="ot">&lt;-</span> <span class="fu">fit</span>(workflow_multinomial, <span class="at">data =</span> train)</span>
-<span id="cb86-17"><a href="#cb86-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-18"><a href="#cb86-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fazer previsões nos dados de TESTE</span></span>
-<span id="cb86-19"><a href="#cb86-19" aria-hidden="true" tabindex="-1"></a><span class="co"># O 'predict()' usa o modelo treinado para prever a espécie nos dados de teste</span></span>
-<span id="cb86-20"><a href="#cb86-20" aria-hidden="true" tabindex="-1"></a>pred_multinomial <span class="ot">&lt;-</span> <span class="fu">predict</span>(ajustado_multinomial, <span class="at">new_data =</span> test) <span class="sc">%&gt;%</span></span>
-<span id="cb86-21"><a href="#cb86-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(test)</span>
-<span id="cb86-22"><a href="#cb86-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-23"><a href="#cb86-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Avaliar o desempenho com a Matriz de Confusão</span></span>
-<span id="cb86-24"><a href="#cb86-24" aria-hidden="true" tabindex="-1"></a><span class="co"># A 'conf_mat()' compara as previsões (.pred_class) com a realidade (species)</span></span>
-<span id="cb86-25"><a href="#cb86-25" aria-hidden="true" tabindex="-1"></a>matriz_confusao_multinomial <span class="ot">&lt;-</span> <span class="fu">conf_mat</span>(pred_multinomial, <span class="at">truth =</span> species, <span class="at">estimate =</span> .pred_class)</span>
-<span id="cb86-26"><a href="#cb86-26" aria-hidden="true" tabindex="-1"></a>matriz_confusao_multinomial</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Definir o modelo de regressão logística multinomial</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="co"># O 'set_engine("nnet")' especifica o pacote que será usado para o cálculo</span></span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>modelo_multinomial <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"nnet"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Criar o workflow (fluxo de trabalho)</span></span>
+<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a><span class="co"># O 'add_formula(species ~ .)' diz ao modelo para usar todas as outras variáveis</span></span>
+<span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a><span class="co"># para prever a espécie (species)</span></span>
+<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a>workflow_multinomial <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb87-11"><a href="#cb87-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(modelo_multinomial) <span class="sc">%&gt;%</span></span>
+<span id="cb87-12"><a href="#cb87-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_formula</span>(species <span class="sc">~</span> .)</span>
+<span id="cb87-13"><a href="#cb87-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-14"><a href="#cb87-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Ajustar (treinar) o modelo com os dados de TREINO</span></span>
+<span id="cb87-15"><a href="#cb87-15" aria-hidden="true" tabindex="-1"></a><span class="co"># O 'fit()' executa o treinamento do modelo</span></span>
+<span id="cb87-16"><a href="#cb87-16" aria-hidden="true" tabindex="-1"></a>ajustado_multinomial <span class="ot">&lt;-</span> <span class="fu">fit</span>(workflow_multinomial, <span class="at">data =</span> train)</span>
+<span id="cb87-17"><a href="#cb87-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-18"><a href="#cb87-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fazer previsões nos dados de TESTE</span></span>
+<span id="cb87-19"><a href="#cb87-19" aria-hidden="true" tabindex="-1"></a><span class="co"># O 'predict()' usa o modelo treinado para prever a espécie nos dados de teste</span></span>
+<span id="cb87-20"><a href="#cb87-20" aria-hidden="true" tabindex="-1"></a>pred_multinomial <span class="ot">&lt;-</span> <span class="fu">predict</span>(ajustado_multinomial, <span class="at">new_data =</span> test) <span class="sc">%&gt;%</span></span>
+<span id="cb87-21"><a href="#cb87-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(test)</span>
+<span id="cb87-22"><a href="#cb87-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-23"><a href="#cb87-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Avaliar o desempenho com a Matriz de Confusão</span></span>
+<span id="cb87-24"><a href="#cb87-24" aria-hidden="true" tabindex="-1"></a><span class="co"># A 'conf_mat()' compara as previsões (.pred_class) com a realidade (species)</span></span>
+<span id="cb87-25"><a href="#cb87-25" aria-hidden="true" tabindex="-1"></a>matriz_confusao_multinomial <span class="ot">&lt;-</span> <span class="fu">conf_mat</span>(pred_multinomial, <span class="at">truth =</span> species, <span class="at">estimate =</span> .pred_class)</span>
+<span id="cb87-26"><a href="#cb87-26" aria-hidden="true" tabindex="-1"></a>matriz_confusao_multinomial</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           Truth
 Prediction  Adelie Chinstrap Gentoo
-  Adelie        44         0      0
-  Chinstrap      0        21      2
-  Gentoo         0         0     34</code></pre>
+  Adelie        43         0      0
+  Chinstrap      1        21      0
+  Gentoo         0         0     36</code></pre>
 </div>
 </div>
 <p>A matriz de confusão acima mostra o desempenho do modelo em prever a espécie de pinguim. Cada linha representa a espécie real, e cada coluna representa a espécie prevista. Os valores na diagonal mostram o número de acertos do modelo para cada espécie.</p>
 <p>Para uma avaliação mais completa, também podemos verificar as principais métricas de classificação.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Métricas de desempenho</span></span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">metrics</span>(pred_multinomial, <span class="at">truth =</span> species, <span class="at">estimate =</span> .pred_class)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Métricas de desempenho</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">metrics</span>(pred_multinomial, <span class="at">truth =</span> species, <span class="at">estimate =</span> .pred_class)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   .metric  .estimator .estimate
   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
-1 accuracy multiclass     0.980
-2 kap      multiclass     0.969</code></pre>
+1 accuracy multiclass     0.990
+2 kap      multiclass     0.985</code></pre>
 </div>
 </div>
 </section>
-<section id="treinando-e-avaliando-o-modelo-de-árvore-de-decisão" class="level3" data-number="5.4.4">
-<h3 data-number="5.4.4" class="anchored" data-anchor-id="treinando-e-avaliando-o-modelo-de-árvore-de-decisão"><span class="header-section-number">5.4.4</span> Treinando e Avaliando o Modelo de Árvore de Decisão</h3>
+<section id="treinando-e-avaliando-o-modelo-de-árvore-de-decisão" class="level3" data-number="5.5.4">
+<h3 data-number="5.5.4" class="anchored" data-anchor-id="treinando-e-avaliando-o-modelo-de-árvore-de-decisão"><span class="header-section-number">5.5.4</span> Treinando e Avaliando o Modelo de Árvore de Decisão</h3>
 <p>Vamos usar uma <strong>Árvore de Decisão</strong> para este exemplo, pois ela é intuitiva e a visualização da árvore ajuda a entender o processo de tomada de decisão.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo com Árvore de Decisão (mais visual para iniciantes)</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Definir o modelo de árvore de decisão (rpart)</span></span>
-<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>tree_model <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"rpart"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span>
-<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb90-8"><a href="#cb90-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Criar o workflow</span></span>
-<span id="cb90-9"><a href="#cb90-9" aria-hidden="true" tabindex="-1"></a>tree_workflow <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb90-10"><a href="#cb90-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(tree_model) <span class="sc">%&gt;%</span></span>
-<span id="cb90-11"><a href="#cb90-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_formula</span>(species <span class="sc">~</span> .)</span>
-<span id="cb90-12"><a href="#cb90-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb90-13"><a href="#cb90-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Ajustar (treinar) o modelo</span></span>
-<span id="cb90-14"><a href="#cb90-14" aria-hidden="true" tabindex="-1"></a>tree_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(tree_workflow, <span class="at">data =</span> train)</span>
-<span id="cb90-15"><a href="#cb90-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb90-16"><a href="#cb90-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fazer previsões</span></span>
-<span id="cb90-17"><a href="#cb90-17" aria-hidden="true" tabindex="-1"></a>tree_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree_fit, <span class="at">new_data =</span> test) <span class="sc">%&gt;%</span></span>
-<span id="cb90-18"><a href="#cb90-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(test)</span>
-<span id="cb90-19"><a href="#cb90-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb90-20"><a href="#cb90-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Gerar a matriz de confusão</span></span>
-<span id="cb90-21"><a href="#cb90-21" aria-hidden="true" tabindex="-1"></a><span class="fu">conf_mat</span>(tree_pred, <span class="at">truth =</span> species, <span class="at">estimate =</span> .pred_class)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo com Árvore de Decisão (mais visual para iniciantes)</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Definir o modelo de árvore de decisão (rpart)</span></span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>tree_model <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"rpart"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span>
+<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Criar o workflow</span></span>
+<span id="cb91-9"><a href="#cb91-9" aria-hidden="true" tabindex="-1"></a>tree_workflow <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb91-10"><a href="#cb91-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(tree_model) <span class="sc">%&gt;%</span></span>
+<span id="cb91-11"><a href="#cb91-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_formula</span>(species <span class="sc">~</span> .)</span>
+<span id="cb91-12"><a href="#cb91-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-13"><a href="#cb91-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Ajustar (treinar) o modelo</span></span>
+<span id="cb91-14"><a href="#cb91-14" aria-hidden="true" tabindex="-1"></a>tree_fit <span class="ot">&lt;-</span> <span class="fu">fit</span>(tree_workflow, <span class="at">data =</span> train)</span>
+<span id="cb91-15"><a href="#cb91-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-16"><a href="#cb91-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fazer previsões</span></span>
+<span id="cb91-17"><a href="#cb91-17" aria-hidden="true" tabindex="-1"></a>tree_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(tree_fit, <span class="at">new_data =</span> test) <span class="sc">%&gt;%</span></span>
+<span id="cb91-18"><a href="#cb91-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(test)</span>
+<span id="cb91-19"><a href="#cb91-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-20"><a href="#cb91-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Gerar a matriz de confusão</span></span>
+<span id="cb91-21"><a href="#cb91-21" aria-hidden="true" tabindex="-1"></a><span class="fu">conf_mat</span>(tree_pred, <span class="at">truth =</span> species, <span class="at">estimate =</span> .pred_class)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           Truth
 Prediction  Adelie Chinstrap Gentoo
-  Adelie        45         0      1
-  Chinstrap      1        21      1
-  Gentoo         0         0     36</code></pre>
+  Adelie        42         1      0
+  Chinstrap      2        16      0
+  Gentoo         0         4     36</code></pre>
 </div>
 </div>
 <p>Você também pode extrair as métricas de desempenho:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metrics</span>(tree_pred, <span class="at">truth =</span> species, <span class="at">estimate =</span> .pred_class)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metrics</span>(tree_pred, <span class="at">truth =</span> species, <span class="at">estimate =</span> .pred_class)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   .metric  .estimator .estimate
   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
-1 accuracy multiclass     0.971
-2 kap      multiclass     0.955</code></pre>
+1 accuracy multiclass     0.931
+2 kap      multiclass     0.891</code></pre>
 </div>
 </div>
 </section>
-<section id="visualizando-a-árvore-de-decisão" class="level3" data-number="5.4.5">
-<h3 data-number="5.4.5" class="anchored" data-anchor-id="visualizando-a-árvore-de-decisão"><span class="header-section-number">5.4.5</span> Visualizando a Árvore de Decisão</h3>
+<section id="visualizando-a-árvore-de-decisão" class="level3" data-number="5.5.5">
+<h3 data-number="5.5.5" class="anchored" data-anchor-id="visualizando-a-árvore-de-decisão"><span class="header-section-number">5.5.5</span> Visualizando a Árvore de Decisão</h3>
 <p>A beleza da Árvore de Decisão é que podemos visualizar o conjunto de regras que ela aprendeu. Cada nó representa uma decisão baseada em uma variável (por exemplo, <code>flipper_length_mm</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># O pacote rpart.plot ajuda a visualizar a árvore</span></span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("rpart.plot")</span></span>
-<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
-<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(<span class="fu">extract_fit_engine</span>(tree_fit<span class="sc">$</span>fit<span class="sc">$</span>fit, <span class="at">roundint =</span> <span class="cn">FALSE</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># O pacote rpart.plot ajuda a visualizar a árvore</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("rpart.plot")</span></span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(<span class="fu">extract_fit_engine</span>(tree_fit<span class="sc">$</span>fit<span class="sc">$</span>fit, <span class="at">roundint =</span> <span class="cn">FALSE</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Cannot retrieve the data used to build the model (so cannot determine roundint and is.binary for the variables).
 To silence this warning:
@@ -1054,7 +1085,7 @@ To silence this warning:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="04-pratica_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="04-pratica_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1068,236 +1099,242 @@ To silence this warning:
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copiada");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copiada");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1305,185 +1342,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./03-tidyverse.html" class="pagination-link" aria-label="Tidyverse">

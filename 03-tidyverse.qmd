@@ -68,9 +68,9 @@ Uma vez apresentada a filosofia e a estrutura de dados do `tidyverse`, o foco se
 
 O `dplyr` é um pacote do `tidyverse` que fornece um conjunto de ferramentas robustas e intuitivas para manipulação de dados. Os comandos oferecidos soam um tanto quanto intuitivos, correspondendo ações comuns na área de análise de dados. Para explorar as principais funções será utilizado o *dataset* `penguins`, focando em processos de filtragem, organização, transformação e resumos dos dados, permitindo responder a perguntas básicas sobre a biologia e ecologia dos pinguins.
 
-### **Conheça os pinguins** 🐧
+Conhecendo os pinguins 🐧
 
-![Obra de \@allison_horst.](images/clipboard-3055016893.png)
+![Obra de @allisonhorst.](images/clipboard-3055016893.png)
 
 Os dados `palmerpenguins` contêm medições de tamanho de três espécies de pinguins observadas em três ilhas no arquipélago Palmer, na Antártida.
 
@@ -247,7 +247,7 @@ penguins %>%
 \noindent Podemos fazer agrupamentos por múltiplas variáveis para investigações mais profundas. Por exemplo, considere que um pesquisador deseja explorar o dimorfismo sexual. Para isso, estatísticas por espécie e sexo serão calculadas.
 
 ```{r}
-#| results: hide
+#| echo: false
 tabela_resumo <- penguins %>% 
   drop_na(sex) %>% 
   group_by(species, sex) %>% 
@@ -275,7 +275,6 @@ tabela_resumo %>%
                   "Comprimento médio do bico (mm)"),
     align = c(rep("l", 2), rep("c", 4)),
     booktabs = TRUE,
-    format = "latex",
     digits = 2
   ) %>% 
   kable_styling(
@@ -577,9 +576,13 @@ penguins %>%
   {
     brks <- seq(2700, 6300, by = 600)
     brks[length(brks)] <- brks[length(brks)] + 1e-8
-    labs <- sprintf("%d $\\vdash$ %d", 
-                    seq(2700, 6300 - 600, by = 600),
-                    seq(2700 + 600, 6300, by = 600))
+    
+    labs <- sprintf(
+      "%d %s %d", 
+      seq(2700, 6300 - 600, by = 600),
+      if (knitr::is_latex_output()) "$\\vdash$" else "⊢",
+      seq(2700 + 600, 6300, by = 600)
+    )
 
     cut(x = .$body_mass_g,
         breaks = brks,
@@ -588,11 +591,22 @@ penguins %>%
       as_tibble_col(column_name = "Intervalo") %>% 
       count(Intervalo, name = "freq", .drop = FALSE) %>% 
       mutate(
-        fr = paste0(round(freq / sum(freq) * 100, 2), "\\%"),
-        far = paste0(round(cumsum(freq) / sum(freq) * 100, 2), "\\%")
+        fr = paste0(
+          round(freq / sum(freq) * 100, 2),
+          if (knitr::is_latex_output()) "\\%" else "%"
+        ),
+        far = paste0(
+          round(cumsum(freq) / sum(freq) * 100, 2),
+          if (knitr::is_latex_output()) "\\%" else "%"
+        )
       ) %>% 
       kable(
-        col.names = c("Massa corporal (g)", "Frequência", "f.r. (\\%)", "f.a.r. (\\%)"),
+        col.names = c(
+          "Massa corporal (g)", 
+          "Frequência", 
+          paste0("f.r. (", if (knitr::is_latex_output()) "\\%" else "%", ")"),
+          paste0("f.a.r. (", if (knitr::is_latex_output()) "\\%" else "%", ")")
+),
         booktabs = TRUE,
         align = c("lccc"),
         escape = FALSE
@@ -617,6 +631,10 @@ Com esse conhecimento em mente podemos prosseguir para as construções dos grá
 O pacote `ggplot2` funciona com construção de "camadas" (layers). O comando `ggplot()` inicia um gráfico vazio.
 
 ```{r}
+#| fig-width: 6
+#| fig-height: 2.75
+#| fig-align: "center"
+
 ggplot()
 ```
 
@@ -626,9 +644,12 @@ A partir deste gráfico vazio, podemos adicionar camadas de pontos, linhas, barr
 
 De maneira geral, a sintaxe que vamos usar é `geom_yyy(data = dados, aes(x = x, y = y))`, sendo que iremos substituir `yyy` por "line" para linhas, "point" para pontos e assim por diante.
 
-Para praticar um pouco, podemos fazer uma visualização da relação entre a **massa corporal** (eixo X) e o **comprimento da nadadeira** (eixo Y):
+Para praticar um pouco, podemos fazer uma visualização da relação entre a **massa corporal** (eixo $X$) e o **comprimento da nadadeira** (eixo $Y$):
 
 ```{r plot2, exercise=TRUE}
+#| fig-width: 6
+#| fig-height: 2.75
+#| fig-align: "center"
 ggplot(penguins_completo) +
   geom_point(aes(x = body_mass_g, y = flipper_length_mm))
 ```
@@ -636,6 +657,9 @@ ggplot(penguins_completo) +
 Se quisermos que os pontos tenham uma cor em particular, adicionamos a cor dentro de `geom_point()`.
 
 ```{r plot3, exercise=TRUE}
+#| fig-width: 6
+#| fig-height: 2.75
+#| fig-align: "center"
 ggplot(data = penguins_completo) +
   geom_point(aes(x = body_mass_g, y = flipper_length_mm), color = "blue")
 ```
@@ -643,6 +667,9 @@ ggplot(data = penguins_completo) +
 Ou ainda, podemos utilizar a lógica do tidyverse e aplicar um pipe para criar nosso gráfico.
 
 ```{r}
+#| fig-width: 6
+#| fig-height: 2.75
+#| fig-align: "center"
 penguins_completo %>% 
   ggplot() +
   geom_point(aes(x = body_mass_g, y = flipper_length_mm), color = "blue")
@@ -651,6 +678,9 @@ penguins_completo %>%
 A cor de cada ponto também pode ser definida por uma variável (como a espécie), mas precisará ser inserida dentro de `aes()`.
 
 ```{r}
+#| fig-width: 6
+#| fig-height: 2.75
+#| fig-align: "center"
 penguins_completo %>% 
   ggplot() +
   geom_point(aes(x = body_mass_g, y = flipper_length_mm, color = species))
@@ -674,7 +704,7 @@ penguins %>%
 
 ```
 
-Mas esse gráfico é muito feio, vamos ver como melhorar.
+Mas esse gráfico não fornece informações úteis, pois contém muitas colunas, além disso não está esteticamente apresentável. Vamos aprimorá-lo.
 
 ```{r}
 #| warning: false
@@ -712,6 +742,7 @@ Para variáveis categóricas, como `species`, usamos o `geom_bar()` para criar u
 #| fig-cap: "Distribuição de Pinguins por Espécie."
 #| fig-width: 6
 #| fig-height: 2.75
+#| fig-align: "center"
 
 penguins %>% 
   ggplot(mapping = aes(x = species, fill = species))+
@@ -737,6 +768,8 @@ O gráfico de dispersão é a ferramenta clássica para explorar relações entr
 #| warning: false
 #| fig-cap: "Relação entre o tamanho da nadadeira (mm) e o peso corporal (g) dos pinguins."
 #| label: fig-dis-peso-nad
+#| fig-width: 6
+#| fig-height: 2.75
 
 penguins %>% 
   ggplot(aes(x = flipper_length_mm, y = body_mass_g))+
@@ -754,6 +787,8 @@ penguins %>%
 #| warning: false
 #| fig-cap: "Relação entre o tamanho da nadadeira (mm) e o peso corporal (g) por espécie dos pinguins."
 #| label: fig-dis-esp
+#| fig-width: 6
+#| fig-height: 2.75
 
 penguins %>% 
   ggplot(aes(x = flipper_length_mm, y = body_mass_g, color = species))+
@@ -769,13 +804,13 @@ penguins %>%
 
 \noindent A @fig-dis-esp revela detalhes mais pertinentes, mostrando que a relação entre massa corporal e comprimento da nadadeira mantêm-se positiva (nível de grupo).
 
-Para comparar a distribuição de uma variável numérica entre diferentes categorias, o boxplot[^03-tidyverse-3] (`geom_boxplot()`) é uma excelente ferramenta. Para isso, vamos comparar a distribuição da massa corporal entre as três espécies.
-
-[^03-tidyverse-3]: Também chamado por gráfico de caixas.
+Para comparar a distribuição de uma variável numérica entre diferentes categorias, o boxplot^[Também chamado por gráfico de caixas.] (`geom_boxplot()`) é uma excelente ferramenta. Para isso, vamos comparar a distribuição da massa corporal entre as três espécies.
 
 ```{r}
 #| warning: false
 #| fig-cap: "Boxplot para a massa corporal (g) por espécies de pinguins."
+#| fig-width: 6
+#| fig-height: 2.75
 
 penguins %>% 
   ggplot(aes(x = species, y = body_mass_g, fill = species))+
@@ -793,6 +828,10 @@ Uma alternativa ao `geom_boxplot()` é o `geom_violin()`, que traz um detalhamen
 
 ```{r}
 #| warning: false
+#| fig-width: 6
+#| fig-height: 2.75
+#| fig-align: "center"
+
 penguins %>% 
   ggplot(aes(x = species, y = body_mass_g, fill = species))+
     geom_violin(alpha = 0.5)+
@@ -816,6 +855,8 @@ As facetas permitem criar uma matriz de gráficos, dividindo os dados com uma ba
 ```{r}
 #| warning: false
 #| fig-cap: "Distribuição de massa corporal (g) por espécie."
+#| fig-width: 6
+#| fig-height: 2.75
 
 penguins %>% 
   filter(!is.na(sex)) %>% 
